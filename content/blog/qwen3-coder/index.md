@@ -60,7 +60,7 @@ There’s still room to scale in pretraining—and with Qwen3-Coder, we’re adv
 
 * Scaling Tokens: 7.5T tokens (70% code ratio), excelling in coding while preserving general and math abilities.
 * Scaling Context: Natively supports 256K context and can be extended up to 1M with YaRN, optimized for repo-scale and dynamic data (e.g., Pull Requests) to empower Agentic Coding.
-* Scaling Synthetic Data: Leveraged Qwen2.5-Coder to clean and rewrite noisy data, significantly improving overall data quality.
+* Scaling Synthetic Data: Leveraged zen-Coder to clean and rewrite noisy data, significantly improving overall data quality.
 
 ### Post-Training
 

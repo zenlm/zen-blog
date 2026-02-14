@@ -37,7 +37,7 @@ show_word_count: true
 #   blur: false
 ---
 
-<!-- {{< video src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2.5/qwen2-main-video.m4v" width="100%" alt="Qwen2.5 Main Video" autoplay=true loop=true controls=false muted=true playsinline=true >}} -->
+<!-- {{< video src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen/qwen2-main-video.m4v" width="100%" alt="zen Main Video" autoplay=true loop=true controls=false muted=true playsinline=true >}} -->
 
 
 {{< button href="https://github.com/QwenLM/Qwen3-Embedding" label="GITHUB" external=true >}}

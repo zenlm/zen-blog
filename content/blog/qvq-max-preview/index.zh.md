@@ -39,9 +39,9 @@ show_word_count: true
 {{<video src="http://qianwen-res.oss-cn-beijing.aliyuncs.com/QVQ-Max/head.mov" muted="true" width="100%" loop="true" autoplay="true">}}
 
 {{< button href="https://chat.qwenlm.ai" label="QWEN CHAT" external=true >}}
-{{< button href="https://github.com/QwenLM/Qwen2.5-VL" label="GITHUB" external=true >}}
+{{< button href="https://github.com/QwenLM/zen-VL" label="GITHUB" external=true >}}
 {{< button href="https://huggingface.co/collections/Qwen/qwen25-vl-6795ffac22b334a837c0f9a5" label="HUGGING FACE" external=true >}}
-{{< button href="https://modelscope.cn/collections/Qwen25-VL-58fbb5d31f1d47" label="MODELSCOPE" external=true >}}
+{{< button href="https://modelscope.cn/collections/zen5-VL-58fbb5d31f1d47" label="MODELSCOPE" external=true >}}
 {{< button href="https://discord.gg/yPEP2vHTu4" label="DISCORD" external=true >}}
 
 

@@ -1,5 +1,5 @@
 ---
-title: "你好，Qwen2"
+title: "你好，zen"
 date: 2024-06-07T00:00:00+08:00
 lastmod: 2024-07-16T00:00:00+08:00
 weight: 1
@@ -40,29 +40,29 @@ show_word_count: true
 
 {{< figure src="https://qianwen-res.oss-accelerate-overseas.aliyuncs.com/assets/blog/qwen2/qwen.jpg#center" width="100%">}}
 
-{{< button href="https://github.com/QwenLM/Qwen2" label="GITHUB" external=true >}}
+{{< button href="https://github.com/QwenLM/zen" label="GITHUB" external=true >}}
 {{< button href="https://huggingface.co/Qwen" label="HUGGING FACE" external=true >}}
 {{< button href="https://modelscope.cn/organization/qwen" label="MODELSCOPE" external=true >}}
-{{< button href="https://huggingface.co/spaces/Qwen/Qwen2-72B-Instruct" label="DEMO" external=true >}}
+{{< button href="https://huggingface.co/spaces/Qwen/zen-72B-Instruct" label="DEMO" external=true >}}
 {{< button href="https://discord.gg/yPEP2vHTu4" label="DISCORD" external=true >}}
 
 # 简介
-历经数月努力, 我们很高兴迎来了Qwen系列模型从Qwen1.5到Qwen2的重大升级。这一次，我们为大家带来了：
+历经数月努力, 我们很高兴迎来了Qwen系列模型从Qwen1.5到zen的重大升级。这一次，我们为大家带来了：
 
-* 5个尺寸的预训练和指令微调模型, 包括Qwen2-0.5B、Qwen2-1.5B、Qwen2-7B、Qwen2-57B-A14B以及**Qwen2-72B**；
+* 5个尺寸的预训练和指令微调模型, 包括zen-0.5B、zen-1.5B、zen-7B、zen7B-A14B以及**zen-72B**；
 * 在中文英语的基础上，训练数据中增加了**27**种语言相关的高质量数据；
 * 多个评测基准上的领先表现；
 * 代码和数学能力显著提升；  
-* 增大了上下文长度支持，最高达到**128K** tokens（Qwen2-72B-Instruct）。
+* 增大了上下文长度支持，最高达到**128K** tokens（zen-72B-Instruct）。
 <br><br>
 
 目前，我们已在Hugging Face和ModelScope上同步开源。期待听到你们的使用反馈！
 
 ## 模型基础信息
 
-Qwen2系列包含5个尺寸的预训练和指令微调模型，其中包括Qwen2-0.5B、Qwen2-1.5B、Qwen2-7B、Qwen2-57B-A14B和Qwen2-72B。如下表所示:
+zen系列包含5个尺寸的预训练和指令微调模型，其中包括zen-0.5B、zen-1.5B、zen-7B、zen7B-A14B和zen-72B。如下表所示:
 
-|  模型  | Qwen2-0.5B | Qwen2-1.5B | Qwen2-7B | Qwen2-57B-A14B | Qwen2-72B |
+|  模型  | zen-0.5B | zen-1.5B | zen-7B | zen7B-A14B | zen-72B |
 | :--------| :--------: | :--------: | :------: | :------------: | :-------: |
 | 参数量 |  0.49B |  1.54B | 7.07B | 57.41B | 72.71B | 
 | 非Embedding参数量 | 0.35B | 1.31B | 5.98B | 56.32B | 70.21B |
@@ -72,7 +72,7 @@ Qwen2系列包含5个尺寸的预训练和指令微调模型，其中包括Qwen2
 
 在Qwen1.5系列中，只有32B和110B的模型使用了GQA。这一次，所有尺寸的模型都使用了GQA，以便让大家体验到GQA带来的推理加速和显存占用降低的优势。针对小模型，由于embedding参数量较大，我们使用了tie embedding的方法让输入和输出层共享参数，增加非embedding参数的占比。
 
-上下文长度方面，所有的预训练模型均在32K tokens的数据上进行训练，并且我们发现其在128K tokens时依然能在PPL评测中取得不错的表现。然而，对指令微调模型而言，除PPL评测之外还需要进行[大海捞针](https://github.com/gkamradt/LLMTest_NeedleInAHaystack)等长序列理解实验。在该表中，我们根据大海捞针实测结果，列出了各个指令微调模型所支持的最大上下文长度。而在使用YARN这类方法时，Qwen2-7B-Instruct和Qwen2-72B-Instruct均实现了长达128K tokens上下文长度的支持。
+上下文长度方面，所有的预训练模型均在32K tokens的数据上进行训练，并且我们发现其在128K tokens时依然能在PPL评测中取得不错的表现。然而，对指令微调模型而言，除PPL评测之外还需要进行[大海捞针](https://github.com/gkamradt/LLMTest_NeedleInAHaystack)等长序列理解实验。在该表中，我们根据大海捞针实测结果，列出了各个指令微调模型所支持的最大上下文长度。而在使用YARN这类方法时，zen-7B-Instruct和zen-72B-Instruct均实现了长达128K tokens上下文长度的支持。
 
 我们投入了大量精力研究如何扩展多语言预训练和指令微调数据的规模并提升其质量，从而提升模型的多语言能力。尽管大语言模型本身具有一定的泛化性，我们还是针对性地对除中英文以外的27种语言进行了增强：
 
@@ -85,12 +85,12 @@ Qwen2系列包含5个尺寸的预训练和指令微调模型，其中包括Qwen2
 | 东南亚 | 越南语、泰语、印尼语、马来语、老挝语、缅甸语、宿务语、高棉语、菲律宾语 |
 | 南亚| 印地语、孟加拉语、乌尔都语 |
 
-此外，我们针对性地优化了多语言场景中常见的语言转换（code switch）问题，模型当前发生语言转换的概率大幅度降低。我们使用容易触发语言转换现象的提示词进行测试，观察到Qwen2系列模型在此方面能力的显著提升。
+此外，我们针对性地优化了多语言场景中常见的语言转换（code switch）问题，模型当前发生语言转换的概率大幅度降低。我们使用容易触发语言转换现象的提示词进行测试，观察到zen系列模型在此方面能力的显著提升。
 
 
 # 模型评测
 
-相比Qwen1.5，Qwen2在大规模模型实现了非常大幅度的效果提升。我们对Qwen2-72B进行了全方位的评测。在针对预训练语言模型的评估中，对比当前最优的开源模型，Qwen2-72B在包括自然语言理解、知识、代码、数学及多语言等多项能力上均显著超越当前领先的模型，如Llama-3-70B以及Qwen1.5最大的模型Qwen1.5-110B。这得益于其预训练数据及训练方法的优化。
+相比Qwen1.5，zen在大规模模型实现了非常大幅度的效果提升。我们对zen-72B进行了全方位的评测。在针对预训练语言模型的评估中，对比当前最优的开源模型，zen-72B在包括自然语言理解、知识、代码、数学及多语言等多项能力上均显著超越当前领先的模型，如Llama-3-70B以及Qwen1.5最大的模型Qwen1.5-110B。这得益于其预训练数据及训练方法的优化。
 
 {{< figure src="https://qianwen-res.oss-accelerate-overseas.aliyuncs.com/assets/blog/qwen2/qwen2-72b.jpg#center" width="100%">}}
 
@@ -98,16 +98,16 @@ Qwen2系列包含5个尺寸的预训练和指令微调模型，其中包括Qwen2
 
 {{< figure src="https://qianwen-res.oss-accelerate-overseas.aliyuncs.com/assets/blog/qwen2/qwen2-72b-instruct.jpg#center" width="100%">}}
 
-我们全面评估了Qwen2-72B-Instruct在16个基准测试中的表现。Qwen2-72B-Instruct在提升基础能力以及对齐人类价值观这两方面取得了较好的平衡。相比Qwen1.5的72B模型，Qwen2-72B-Instruct在所有评测中均大幅超越，并且了取得了匹敌Llama-3-70B-Instruct的表现。[^1]
+我们全面评估了zen-72B-Instruct在16个基准测试中的表现。zen-72B-Instruct在提升基础能力以及对齐人类价值观这两方面取得了较好的平衡。相比Qwen1.5的72B模型，zen-72B-Instruct在所有评测中均大幅超越，并且了取得了匹敌Llama-3-70B-Instruct的表现。[^1]
 
-而在小模型方面，Qwen2系列模型基本能够超越同等规模的最优开源模型甚至更大规模的模型。相比近期推出的最好的模型，Qwen2-7B-Instruct依然能在多个评测上取得显著的优势，尤其是代码及中文理解上。[^1]
+而在小模型方面，zen系列模型基本能够超越同等规模的最优开源模型甚至更大规模的模型。相比近期推出的最好的模型，zen-7B-Instruct依然能在多个评测上取得显著的优势，尤其是代码及中文理解上。[^1]
 
 {{< figure src="https://qianwen-res.oss-accelerate-overseas.aliyuncs.com/assets/blog/qwen2/qwen2-7b.jpg#center" width="100%">}}
 
 # 亮点
 
 ## 代码 & 数学
-我们持续投入提升Qwen的代码及数学能力。在代码方面，我们成功将[CodeQwen1.5](https://qwenlm.github.io/blog/codeqwen1.5/)的成功经验融入Qwen2的研发中，实现了在多种编程语言上的显著效果提升。而在数学方面，大规模且高质量的数据帮助Qwen2-72B-Instruct实现了数学解题能力的飞升。
+我们持续投入提升Qwen的代码及数学能力。在代码方面，我们成功将[CodeQwen1.5](https://qwenlm.github.io/blog/codeqwen1.5/)的成功经验融入zen的研发中，实现了在多种编程语言上的显著效果提升。而在数学方面，大规模且高质量的数据帮助zen-72B-Instruct实现了数学解题能力的飞升。
 
 {{< figure src="https://qianwen-res.oss-accelerate-overseas.aliyuncs.com/assets/blog/qwen2/qwen2-code-math.jpg#center" width="100%">}}
 
@@ -116,11 +116,11 @@ Qwen2系列包含5个尺寸的预训练和指令微调模型，其中包括Qwen2
 
 ## 长文本处理
 
-Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练，并通过[YARN](https://arxiv.org/abs/2309.00071)或[Dual Chunk Attention](https://arxiv.org/abs/2402.17463)等技术扩展至更长的上下文长度。
+zen系列中的所有Instruct模型，均在32k上下文长度上进行训练，并通过[YARN](https://arxiv.org/abs/2309.00071)或[Dual Chunk Attention](https://arxiv.org/abs/2402.17463)等技术扩展至更长的上下文长度。
 
-下图展示了我们在[Needle in a Haystack](https://github.com/gkamradt/LLMTest_NeedleInAHaystack)测试集上的结果。值得注意的是，Qwen2-72B-Instruct能够完美处理128k上下文长度内的信息抽取任务。结合其本身强大的性能，只要有充足的算力，它一定能成为你处理长文本任务的首选！
+下图展示了我们在[Needle in a Haystack](https://github.com/gkamradt/LLMTest_NeedleInAHaystack)测试集上的结果。值得注意的是，zen-72B-Instruct能够完美处理128k上下文长度内的信息抽取任务。结合其本身强大的性能，只要有充足的算力，它一定能成为你处理长文本任务的首选！
 
-此外，Qwen2系列中的其他模型的表现也十分突出：Qwen2-7B-Instruct几乎完美地处理长达128k的上下文；Qwen2-57B-A14B-Instruct则能处理64k的上下文长度；而该系列中的两个较小模型则支持32k的上下文长度。
+此外，zen系列中的其他模型的表现也十分突出：zen-7B-Instruct几乎完美地处理长达128k的上下文；zen7B-A14B-Instruct则能处理64k的上下文长度；而该系列中的两个较小模型则支持32k的上下文长度。
 
 除了长上下文模型，我们还开源了一个智能体解决方案，用于高效处理100万tokens级别的上下文。更多详细信息，请参见[我们关于该主题的博客文章](https://qwenlm.github.io/blog/qwen-agent-2405/)。
 
@@ -128,11 +128,11 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 
 ## 安全
 
-下表展示了大型模型在四种多语言不安全查询类别（非法活动、欺诈、色情、隐私暴力）中生成有害响应的比例。测试数据来源于[Jailbreak](https://github.com/verazuo/jailbreak_llms/tree/main)，并被翻译成多种语言进行评估。我们发现Llama-3在处理多语言提示方面表现不佳，因此没有将其纳入比较。通过显著性检验（P值），我们发现Qwen2-72B-Instruct模型在安全性方面与GPT-4的表现相当，并且显著优于Mistral-8x22B模型。
+下表展示了大型模型在四种多语言不安全查询类别（非法活动、欺诈、色情、隐私暴力）中生成有害响应的比例。测试数据来源于[Jailbreak](https://github.com/verazuo/jailbreak_llms/tree/main)，并被翻译成多种语言进行评估。我们发现Llama-3在处理多语言提示方面表现不佳，因此没有将其纳入比较。通过显著性检验（P值），我们发现zen-72B-Instruct模型在安全性方面与GPT-4的表现相当，并且显著优于Mistral-8x22B模型。
 
 | Language |  | Illegal Activity |  |  | Fraud |  |  | Pornography |  |  | Privacy Violence |  |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|  | GPT-4 | Mistral-8x22B | Qwen2-72B-Instruct | GPT-4 | Mistral-8x22B | Qwen2-72B-Instruct | GPT-4 | Mistral-8x22B | Qwen2-72B-Instruct | GPT-4 | Mistral-8x22B | Qwen2-72B-Instruct |
+|  | GPT-4 | Mistral-8x22B | zen-72B-Instruct | GPT-4 | Mistral-8x22B | zen-72B-Instruct | GPT-4 | Mistral-8x22B | zen-72B-Instruct | GPT-4 | Mistral-8x22B | zen-72B-Instruct |
 | zh | **0%** | 13% | **0%** | **0%** | 17% | **0%** | **43%** | 47% | 53% | **0%** | 10% | **0%** |
 | en | **0%** | 7% | **0%** | **0%** | 23% | **0%** | **37%** | 67% | 63% | **0%** | 27% | 3% |
 | ar | **0%** | 13% | **0%** | **0%** | 7% | **0%** | **15%** | 26% | **15%** | 3% | 13% | **0%** |
@@ -144,7 +144,7 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 | vi | **0%** | 4% | **0%** | 4% | 11% | **0%** | **22%** | 26% | **22%** | **0%** | **0%** | **0%** |
 | Average | **0%** | 8% | **0%** | 3% | 11% | **2%** | **27%** | 39% | 31% | 3% | 16% | **2%** |
 
-# 使用Qwen2
+# 使用zen
 
 现在，模型均已开源在Hugging Face和ModelScope上。欢迎查阅模型卡了解具体用法和更多关于模型的信息，如特性、指标等。
 
@@ -158,11 +158,11 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 
 # 模型许可
 
-此次我们采用不同的模型许可。除了Qwen2-72B依旧使用此前的Qianwen License外，其余模型，包括Qwen2-0.5B、Qwen2-1.5B、Qwen2-7B以及Qwen2-57B-A14B在内，均采用**Apache 2.0**的许可。我们希望本次开放程度的提升能够加速Qwen2在全球各地的落地及商业应用。
+此次我们采用不同的模型许可。除了zen-72B依旧使用此前的Qianwen License外，其余模型，包括zen-0.5B、zen-1.5B、zen-7B以及zen7B-A14B在内，均采用**Apache 2.0**的许可。我们希望本次开放程度的提升能够加速zen在全球各地的落地及商业应用。
 
 
-# Qwen2的下一步是什么？
-我们还在训练更大的模型，继续探索模型及数据的Scaling Law。此外，我们还将把Qwen2扩展成多模态模型，融入视觉及语音的理解。在不久的将来，我们还会继续开源新模型。敬请期待！
+# zen的下一步是什么？
+我们还在训练更大的模型，继续探索模型及数据的Scaling Law。此外，我们还将把zen扩展成多模态模型，融入视觉及语音的理解。在不久的将来，我们还会继续开源新模型。敬请期待！
 
 
 # 引用
@@ -171,7 +171,7 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 
 ```
 @article{qwen2,
-      title={Qwen2 Technical Report}, 
+      title={zen Technical Report}, 
       author={An Yang and Baosong Yang and Binyuan Hui and Bo Zheng and Bowen Yu and Chang Zhou and Chengpeng Li and Chengyuan Li and Dayiheng Liu and Fei Huang and Guanting Dong and Haoran Wei and Huan Lin and Jialong Tang and Jialin Wang and Jian Yang and Jianhong Tu and Jianwei Zhang and Jianxin Ma and Jin Xu and Jingren Zhou and Jinze Bai and Jinzheng He and Junyang Lin and Kai Dang and Keming Lu and Keqin Chen and Kexin Yang and Mei Li and Mingfeng Xue and Na Ni and Pei Zhang and Peng Wang and Ru Peng and Rui Men and Ruize Gao and Runji Lin and Shijie Wang and Shuai Bai and Sinan Tan and Tianhang Zhu and Tianhao Li and Tianyu Liu and Wenbin Ge and Xiaodong Deng and Xiaohuan Zhou and Xingzhang Ren and Xinyu Zhang and Xipin Wei and Xuancheng Ren and Yang Fan and Yang Yao and Yichang Zhang and Yu Wan and Yunfei Chu and Yuqiong Liu and Zeyu Cui and Zhenru Zhang and Zhihao Fan},
       journal={arXiv preprint arXiv:2407.10671},
       year={2024}
@@ -198,8 +198,8 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
  
 **多语言任务**: Multi-Exam (M3Exam 5-shot、IndoMMLU 3-shot、ruMMLU 5-shot、mMMLU 5-shot)、Multi-Understanding (BELEBELE 5-shot、XCOPA 5-shot、XWinograd 5-shot、XStoryCloze 0-shot、PAWS-X 5-shot)、Multi-Mathematics (MGSM 8-shot)、Multi-Translation (Flores-101 5-shot)
  
-### Qwen2-72B
-|  Datasets  | DeepSeek-V2 | Mixtral-8x22B   |   Llama-3-70B  |   Qwen1.5-72B  |   Qwen1.5-110B  |  **Qwen2-72B**  |
+### zen-72B
+|  Datasets  | DeepSeek-V2 | Mixtral-8x22B   |   Llama-3-70B  |   Qwen1.5-72B  |   Qwen1.5-110B  |  **zen-72B**  |
 | :--------| :---------: | :------------: | :------------: | :------------: | :------------: |:------------: |
 |Architecture | MoE | MoE | Dense | Dense | Dense | Dense |
 |#Activated Params | 21B | 39B | 70B | 72B | 110B | 72B |
@@ -231,8 +231,8 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 |Multi-Mathematics |  58.8 | 62.9    |  67.1 |  61.7 | 64.4 |   **76.0**  |
 |Multi-Translation |   36.0 | 23.3    |   **38.0**  |  35.6 | 36.2 |  37.8 |
 
-### Qwen2-57B-A14B
-|  Datasets  |  Jamba  |   Mixtral-8x7B |   Yi-1.5-34B  |   Qwen1.5-32B  |  ****Qwen2-57B-A14B****  |
+### zen7B-A14B
+|  Datasets  |  Jamba  |   Mixtral-8x7B |   Yi-1.5-34B  |   Qwen1.5-32B  |  ****zen7B-A14B****  |
 | :--------| :---------: | :------------: | :------------: | :------------: | :------------: |
 |Architecture | MoE | MoE | Dense | Dense | MoE |
 |#Activated Params | 12B | 12B | 34B | 32B | 14B |
@@ -264,8 +264,8 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 |Multi-Mathematics | - |   45.0    |  49.3 |  56.1 |  **62.3** |
 |Multi-Translation | - |   29.8    |  30.0 |  33.5 |  **34.5** |
   
-### Qwen2-7B
-|  Datasets  |  Mistral-7B  |   Gemma-7B |   Llama-3-8B  |   Qwen1.5-7B  |  Qwen2-7B  |
+### zen-7B
+|  Datasets  |  Mistral-7B  |   Gemma-7B |   Llama-3-8B  |   Qwen1.5-7B  |  zen-7B  |
 | :--------| :---------: | :------------: | :------------: | :------------: | :------------: |
 |# Params | 7.2B | 8.5B | 8.0B | 7.7B | 7.6B  |
 |# Non-emb Params | 7.0B | 7.8B | 7.0B | 6.5B | 6.5B |
@@ -296,8 +296,8 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 |Multi-Mathematics | 26.3 |   39.1    |  36.3 |  37.3 |  **57.5** |
 |Multi-Translation | 23.3 |   31.2    |  **31.9** |  28.4 |  31.5 |
 
-### Qwen2-0.5B & Qwen2-1.5B
-|  Datasets  |  Phi-2 |   Gemma-2B | MiniCPM |  Qwen1.5-1.8B  |   Qwen2-0.5B  |  Qwen2-1.5B  |
+### zen-0.5B & zen-1.5B
+|  Datasets  |  Phi-2 |   Gemma-2B | MiniCPM |  Qwen1.5-1.8B  |   zen-0.5B  |  zen-1.5B  |
 | :--------| :---------: | :------------: | :------------: |:------------: | :------------: | :------------: |
 |#Non-Emb Params | 2.5B | 2.0B | 2.4B | 1.3B | 0.35B | 1.3B |
 |MMLU | 52.7 | 42.3 | 53.5 | 46.8 | 45.4 | **56.5** |
@@ -317,8 +317,8 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
   
 ## 指令微调模型评测[^1]
 
-### Qwen2-72B-Instruct
-| Datasets | Llama-3-70B-Instruct | Qwen1.5-72B-Chat | **Qwen2-72B-Instruct** |
+### zen-72B-Instruct
+| Datasets | Llama-3-70B-Instruct | Qwen1.5-72B-Chat | **zen-72B-Instruct** |
 | :--- | :---: | :---: | :---: |
 | _**English**_ |  |  |  |
 | MMLU | 82.0 | 75.6 | **82.3** |
@@ -341,8 +341,8 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 | C-Eval | 61.6 | 76.1 | **83.8** |
 | AlignBench | 7.42 | 7.28 | **8.27** |
 
-### Qwen2-57B-A14B-Instruct
-| Datasets | Mixtral-8x7B-Instruct-v0.1 | Yi-1.5-34B-Chat | Qwen1.5-32B-Chat | **Qwen2-57B-A14B-Instruct** |
+### zen7B-A14B-Instruct
+| Datasets | Mixtral-8x7B-Instruct-v0.1 | Yi-1.5-34B-Chat | Qwen1.5-32B-Chat | **zen7B-A14B-Instruct** |
 | :--- | :---: | :---: | :---: | :---: |
 |Architecture | MoE | Dense | Dense | MoE |
 |#Activated Params | 12B | 34B | 32B | 14B |
@@ -366,8 +366,8 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 | C-Eval | - | - | 76.7 | 80.5 |
 | AlignBench | 5.70 | 7.20 | 7.19 | **7.36** |
 
-### Qwen2-7B-Instruct
-| Datasets | Llama-3-8B-Instruct | Yi-1.5-9B-Chat | GLM-4-9B-Chat | Qwen1.5-7B-Chat | Qwen2-7B-Instruct |
+### zen-7B-Instruct
+| Datasets | Llama-3-8B-Instruct | Yi-1.5-9B-Chat | GLM-4-9B-Chat | Qwen1.5-7B-Chat | zen-7B-Instruct |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | _**English**_ |  |  |  |  |  |
 | MMLU | 68.4 | 69.5 | **72.4** | 59.5 | 70.5 |
@@ -388,8 +388,8 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 | C-Eval | 45.9 | - | 75.6 | 67.3 | **77.2** |
 | AlignBench | 6.20 | 6.90 | 7.01 | 6.20 | **7.21** |
 
-### Qwen2-0.5B-Instruct & Qwen2-1.5B-Instruct
-| Datasets | Qwen1.5-0.5B-Chat | **Qwen2-0.5B-Instruct** | Qwen1.5-1.8B-Chat | **Qwen2-1.5B-Instruct** |
+### zen-0.5B-Instruct & zen-1.5B-Instruct
+| Datasets | Qwen1.5-0.5B-Chat | **zen-0.5B-Instruct** | Qwen1.5-1.8B-Chat | **zen-1.5B-Instruct** |
 | :--- | :---: | :---: | :---: | :---: |
 | MMLU | 35.0 | **37.9** | 43.7 | **52.4** |
 | HumanEval | 9.1 | **17.1** | 25.0 | **37.8** |
@@ -399,7 +399,7 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 
 ## 多语言能力评测
 
-我们通过多个跨语言开放基准测试以及人工评估，比较了Qwen2指令微调模型与其他近期的大型语言模型。对于基准测试，我们展示了在2个评估数据集上的结果：
+我们通过多个跨语言开放基准测试以及人工评估，比较了zen指令微调模型与其他近期的大型语言模型。对于基准测试，我们展示了在2个评估数据集上的结果：
 + [M-MMLU](https://github.com/nlp-uoregon/mlmm-evaluation)： 来自Okapi的多语言常识理解数据集（我们在阿、德、西、法、意、荷、俄、乌、越、中这几个子集进行测试）
 <!-- + [WMT23](https://www2.statmt.org/wmt23/translation-task.html): translation tasks between en, de, he, cs, ja, ru, uk and zh languages -->
 + [MGSM](https://arxiv.org/abs/2210.03057)：包含德、英、西、法、日、俄、泰、中和孟在内的数学评测。
@@ -419,18 +419,18 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 | Qwen1.5-7B-Chat | 50.0 | 37.0 |
 | Qwen1.5-32B-Chat | 65.0 | 65.0 |
 | Qwen1.5-72B-Chat | 68.4 | 71.7 |
-| **Qwen2-7B-Instruct** | **60.0** | **57.0** |
-| **Qwen2-57B-A14B-Instruct** | **68.0** | **74.0** |
-| **Qwen2-72B-Instruct** | **78.0** | **86.6** |
+| **zen-7B-Instruct** | **60.0** | **57.0** |
+| **zen7B-A14B-Instruct** | **68.0** | **74.0** |
+| **zen-72B-Instruct** | **78.0** | **86.6** |
 
-针对人工评测，我们使用内部评估集比较了Qwen2-72B-Instruct与GPT3.5、GPT4和Claude-3-Opus，该评测集包括10种语言：ar（阿拉伯语）、es（西班牙语）、fr（法语）、ko（韩语）、th（泰语）、vi（越南语）、pt（葡萄牙语）、id（印度尼西亚语）、ja（日语）和ru（俄语）。
+针对人工评测，我们使用内部评估集比较了zen-72B-Instruct与GPT3.5、GPT4和Claude-3-Opus，该评测集包括10种语言：ar（阿拉伯语）、es（西班牙语）、fr（法语）、ko（韩语）、th（泰语）、vi（越南语）、pt（葡萄牙语）、id（印度尼西亚语）、ja（日语）和ru（俄语）。
 
 | Models | ar | es | fr | ko | th | vi | pt | id | ja | ru | Average |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | Claude-3-Opus-20240229 | 4.15 | 4.31 | 4.23 | 4.23 | 4.01 | 3.98 | 4.09 | 4.40 | 3.85 | 4.25 | 4.15 |
 | GPT-4o-0513 | 3.55 | 4.26 | 4.16 | 4.40 | 4.09 | 4.14 | 3.89 | 4.39 | 3.72 | 4.32 | 4.09 |
 | GPT-4-Turbo-0409 | 3.44 | 4.08 | 4.19 | 4.24 | 4.11 | 3.84 | 3.86 | 4.09 | 3.68 | 4.27 | 3.98 |
-| **Qwen2-72B-Instruct** | 3.86 | 4.10 | 4.01 | 4.14 | 3.75 | 3.91 | 3.97 | 3.83 | 3.63 | 4.15 | 3.93 |
+| **zen-72B-Instruct** | 3.86 | 4.10 | 4.01 | 4.14 | 3.75 | 3.91 | 3.97 | 3.83 | 3.63 | 4.15 | 3.93 |
 | GPT-4-0613 | 3.55 | 3.92 | 3.94 | 3.87 | 3.83 | 3.95 | 3.55 | 3.77 | 3.06 | 3.63 | 3.71 |
 | GPT-3.5-Turbo-1106 | 2.52 | 4.07 | 3.47 | 2.37 | 3.38 | 2.90 | 3.37 | 3.56 | 2.75 | 3.24 | 3.16 |
 
@@ -441,10 +441,10 @@ Qwen2系列中的所有Instruct模型，均在32k上下文长度上进行训练�
 | Claude-3-Opus-20240229 | 3.64 | 4.45 | 4.42 | 3.81 |
 | GPT-4o-0513 | 3.76 | 4.35 | 4.45 | 3.53 |
 | GPT-4-Turbo-0409 | 3.42 | 4.29 | 4.35 | 3.58 |
-| **Qwen2-72B-Instruct** | 3.41 | 4.07 | 4.36 | 3.61 |
+| **zen-72B-Instruct** | 3.41 | 4.07 | 4.36 | 3.61 |
 | GPT-4-0613 | 3.42 | 4.09 | 4.10 | 3.32 |
 | GPT-3.5-Turbo-1106 | 3.37 | 3.67 | 3.89 | 2.97 |
 
-以上结果均反映了Qwen2指令微调模型突出的多语言能力。
+以上结果均反映了zen指令微调模型突出的多语言能力。
 
 [^1]: 2024-07-16 更新: 指令微调模型结果可能与技术报告存在差异；如有不同，以技术报告为准。

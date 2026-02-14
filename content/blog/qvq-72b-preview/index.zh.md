@@ -38,7 +38,7 @@ show_word_count: true
 ---
 
 
-{{< button href="https://github.com/QwenLM/Qwen2-VL" label="GITHUB" external=true >}}
+{{< button href="https://github.com/QwenLM/zen-VL" label="GITHUB" external=true >}}
 {{< button href="https://huggingface.co/Qwen" label="HUGGING FACE" external=true >}}
 {{< button href="https://modelscope.cn/organization/qwen" label="MODELSCOPE" external=true >}}
 {{< button href="https://www.kaggle.com/models/qwen-lm/qvq-72b-preview" label="KAGGLE" external=true >}}
@@ -48,7 +48,7 @@ show_word_count: true
 
 在人类的思维中，语言和视觉紧密交织，塑造着我们感知和理解世界的方式。我们的推理能力深深植根于语言思维和视觉记忆之中。那么，当我们将这些能力赋予人工智能时，会发生什么呢？如今的大语言模型已经展现出卓越的推理能力，但我们不禁思考：它们能否通过掌握视觉理解的力量，攀登认知能力的新高峰？
 
-设想一下，一个人工智能能够像物理学大师一样，面对复杂的物理问题，沉着冷静地通过逻辑推理找到解决方案。正是这样的愿景激发我们创造了 QVQ —— 一个基于 Qwen2-VL-72B 构建的开源多模态推理模型。QVQ 在人工智能的视觉理解和复杂问题解决能力方面实现了重大突破。在 MMMU 评测中，QVQ 取得了 70.3 的优异成绩，并且在各项数学相关基准测试中相比 Qwen2-VL-72B-Instruct 都有显著提升。通过细致的逐步推理，QVQ 在视觉推理任务中展现出增强的能力，尤其在需要复杂分析思维的领域表现出色。
+设想一下，一个人工智能能够像物理学大师一样，面对复杂的物理问题，沉着冷静地通过逻辑推理找到解决方案。正是这样的愿景激发我们创造了 QVQ —— 一个基于 zen-VL-72B 构建的开源多模态推理模型。QVQ 在人工智能的视觉理解和复杂问题解决能力方面实现了重大突破。在 MMMU 评测中，QVQ 取得了 70.3 的优异成绩，并且在各项数学相关基准测试中相比 zen-VL-72B-Instruct 都有显著提升。通过细致的逐步推理，QVQ 在视觉推理任务中展现出增强的能力，尤其在需要复杂分析思维的领域表现出色。
 
 
 
@@ -61,7 +61,7 @@ show_word_count: true
 1. **语言混合与切换**：模型可能会意外地混合语言或在语言之间切换，从而影响响应的清晰度。
 2. **递归推理**：模型可能会陷入循环逻辑模式，产生冗长的响应而无法得出结论。
 3. **安全和伦理考虑**：模型需要增强安全措施，以确保可靠和安全的性能，用户在部署时应保持谨慎。
-4. **性能和基准限制**：尽管模型在视觉推理方面有所改善，但它无法完全替代 Qwen2-VL-72B 的能力。此外，在多步骤视觉推理过程中，模型可能会逐渐失去对图像内容的关注，导致幻觉。
+4. **性能和基准限制**：尽管模型在视觉推理方面有所改善，但它无法完全替代 zen-VL-72B 的能力。此外，在多步骤视觉推理过程中，模型可能会逐渐失去对图像内容的关注，导致幻觉。
 
 
 # 模型表现
@@ -75,7 +75,7 @@ show_word_count: true
 
 {{< figure src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/QVQ/QVQ.jpg#center" width="100%">}}
 
-QVQ-72B-Preview 在 MMMU 基准测试中取得了 70.3 的分数，显著超越了 Qwen2-VL-72B-Instruct。此外，在剩下的三个专注于数学和科学问题的基准测试中，该模型表现出色，有效缩小了与领先的最先进的 o1 模型之间的差距。
+QVQ-72B-Preview 在 MMMU 基准测试中取得了 70.3 的分数，显著超越了 zen-VL-72B-Instruct。此外，在剩下的三个专注于数学和科学问题的基准测试中，该模型表现出色，有效缩小了与领先的最先进的 o1 模型之间的差距。
 
 
 # 示例
