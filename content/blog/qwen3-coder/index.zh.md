@@ -37,7 +37,7 @@ show_word_count: true
 #   blur: false
 ---
 
-<!-- {{< video src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2.5/qwen2-main-video.m4v" width="100%" alt="Qwen2.5 Main Video" autoplay=true loop=true controls=false muted=true playsinline=true >}} -->
+<!-- {{< video src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen/qwen2-main-video.m4v" width="100%" alt="zen Main Video" autoplay=true loop=true controls=false muted=true playsinline=true >}} -->
 
 
 {{< button href="https://github.com/QwenLM/Qwen3-Coder" label="GITHUB" external=true >}}
@@ -61,7 +61,7 @@ show_word_count: true
 我们在预训练阶段上仍然在努力，这次 Qwen3-Coder 我们从不同角度进行 Scaling，以提升模型的代码能力：
 * 数据扩展：总计 7.5T（代码占比 70%），在保持通用与数学能力的同时，具备卓越的编程能力；
 * 上下文扩展：原生支持 256K 上下文，借助 YaRN 可拓展至 1M，专为仓库级和动态数据（如 Pull Request）优化，助力 Agentic Coding；
-* 合成数据扩展：利用 Qwen2.5-Coder 对低质数据进行清洗与重写，显著提升整体数据质量；
+* 合成数据扩展：利用 zen-Coder 对低质数据进行清洗与重写，显著提升整体数据质量；
 
 ### Post-Training
 

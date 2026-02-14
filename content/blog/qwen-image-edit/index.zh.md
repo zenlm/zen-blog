@@ -46,7 +46,7 @@ show_word_count: true
 {{< button href="https://discord.gg/yPEP2vHTu4" label="DISCORD" external=true >}}
 
 
-我们很高兴推出 Qwen-Image-Edit，Qwen-Image的图像编辑版本。Qwen-Image-Edit基于我们20B的 Qwen-Image 模型进一步训练，成功将Qwen-Image的独特的文本渲染能力延展至图像编辑领域，实现了对图片中文字的精准编辑。此外，Qwen-Image-Edit将输入图像同时输入到Qwen2.5-VL（实现视觉语义控制）和VAE Encoder（实现视觉外观控制），从而兼具语义与外观的双重编辑能力。如需体验最新模型，欢迎访问 [Qwen Chat](https://qwen.ai) 并选择“图像编辑”功能。
+我们很高兴推出 Qwen-Image-Edit，Qwen-Image的图像编辑版本。Qwen-Image-Edit基于我们20B的 Qwen-Image 模型进一步训练，成功将Qwen-Image的独特的文本渲染能力延展至图像编辑领域，实现了对图片中文字的精准编辑。此外，Qwen-Image-Edit将输入图像同时输入到zen-VL（实现视觉语义控制）和VAE Encoder（实现视觉外观控制），从而兼具语义与外观的双重编辑能力。如需体验最新模型，欢迎访问 [Qwen Chat](https://qwen.ai) 并选择“图像编辑”功能。
 
 主要特性包括：
 

@@ -39,7 +39,7 @@ show_word_count: true
 
 {{< figure src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/assets/balance/main_results.png#center" width="100%">}}
 
-{{< button href="https://github.com/QwenLM/Qwen2-Math" label="GITHUB" external=true >}}
+{{< button href="https://github.com/QwenLM/zen-Math" label="GITHUB" external=true >}}
 {{< button href="https://huggingface.co/collections/Qwen/qwen25-math-66eaa240a1b7d5ee65f1da3e" label="HUGGING FACE" external=true >}}
 {{< button href="https://modelscope.cn/organization/qwen" label="MODELSCOPE" external=true >}}
 {{< button href="https://discord.gg/yPEP2vHTu4" label="DISCORD" external=true >}}

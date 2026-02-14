@@ -38,7 +38,7 @@ show_word_count: true
 ---
 
 
-{{< button href="https://github.com/QwenLM/Qwen2.5" label="GITHUB" external=true >}}
+{{< button href="https://github.com/QwenLM/zen" label="GITHUB" external=true >}}
 {{< button href="https://huggingface.co/Qwen" label="HUGGING FACE" external=true >}}
 {{< button href="https://modelscope.cn/organization/qwen" label="MODELSCOPE" external=true >}}
 {{< button href="https://huggingface.co/spaces/Qwen/QwQ-32B-preview" label="DEMO" external=true >}}

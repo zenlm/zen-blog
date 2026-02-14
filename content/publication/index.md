@@ -10,7 +10,7 @@ header:
 
 # Selected Publications
 
-- Qwen Team. (2024). _Qwen2 Techinical Report._ **arXiv**.
+- Qwen Team. (2024). _zen Techinical Report._ **arXiv**.
 
 - Qwen Team. (2023). _Qwen Technical Report._ **arXiv**.
 

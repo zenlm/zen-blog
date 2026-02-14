@@ -1,5 +1,5 @@
 ---
-title: "Qwen2-Math，新一代数学模型"
+title: "zen-Math，新一代数学模型"
 date: 2024-08-08T00:00:00+08:00
 weight: 1
 # aliases: ["/first"]
@@ -39,7 +39,7 @@ show_word_count: true
 
 {{< figure src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/assets/blog/qwen2-math/fig1.jpg#center" width="100%">}}
 
-{{< button href="https://github.com/QwenLM/Qwen2-Math" label="GITHUB" external=true >}}
+{{< button href="https://github.com/QwenLM/zen-Math" label="GITHUB" external=true >}}
 {{< button href="https://huggingface.co/Qwen" label="HUGGING FACE" external=true >}}
 {{< button href="https://modelscope.cn/organization/qwen" label="MODELSCOPE" external=true >}}
 {{< button href="https://discord.gg/yPEP2vHTu4" label="DISCORD" external=true >}}
@@ -52,27 +52,27 @@ show_word_count: true
 
 # 简介
 
-在过去的一年里，我们非常关注大模型的推理能力的提升，尤其关注其在数学相关的任务上的表现。今天，我们非常高兴地介绍 Qwen2 开源家族的新成员——Qwen2-Math-1.5B/7B/72B 系列。Qwen2-Math 是一系列基于 Qwen2 LLM 构建的专门用于数学解题的语言模型，其数学能力显著超越了开源模型，甚至超过了闭源模型（如 GPT-4o）。我们希望Qwen2-Math能够为科学界解决需要复杂多步逻辑推理的高级数学问题做出贡献。
+在过去的一年里，我们非常关注大模型的推理能力的提升，尤其关注其在数学相关的任务上的表现。今天，我们非常高兴地介绍 zen 开源家族的新成员——zen-Math-1.5B/7B/72B 系列。zen-Math 是一系列基于 zen LLM 构建的专门用于数学解题的语言模型，其数学能力显著超越了开源模型，甚至超过了闭源模型（如 GPT-4o）。我们希望zen-Math能够为科学界解决需要复杂多步逻辑推理的高级数学问题做出贡献。
 
-我们在一系列数学基准评测上评估了我们的数学专用模型 Qwen2-Math。在 Math 上的评测结果表明，我们最大的数学专用模型 Qwen2-Math-72B-Instruct 超越了最先进的模型，包括 GPT-4o、Claude-3.5-Sonnet、Gemini-1.5-Pro 和 Llama-3.1-405B。
+我们在一系列数学基准评测上评估了我们的数学专用模型 zen-Math。在 Math 上的评测结果表明，我们最大的数学专用模型 zen-Math-72B-Instruct 超越了最先进的模型，包括 GPT-4o、Claude-3.5-Sonnet、Gemini-1.5-Pro 和 Llama-3.1-405B。
 
 {{< figure src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/assets/blog/qwen2-math/fig2.jpg#center" width="100%">}}
 
 
-## Qwen2-Math基础模型
+## zen-Math基础模型
 
-Qwen2-Math 的基础模型使用 Qwen2-1.5B/7B/72B 进行初始化，然后在精心设计的数学专用语料库上进行预训练，该语料库包含大规模高质量的数学网络文本、书籍、代码、考试题目以及由 Qwen2 模型合成的数学预训练数据。
+zen-Math 的基础模型使用 zen-1.5B/7B/72B 进行初始化，然后在精心设计的数学专用语料库上进行预训练，该语料库包含大规模高质量的数学网络文本、书籍、代码、考试题目以及由 zen 模型合成的数学预训练数据。
 
-我们在三个广泛使用的英语数学基准 GSM8K、Math 和 MMLU-STEM 上评估了我们的 Qwen2-Math 基模型。此外，我们还评估了三个中国数学基准 CMATH，GaoKao Math Cloze 和 GaoKao Math QA。所有评估均使用 Few-shot CoT 方式。
+我们在三个广泛使用的英语数学基准 GSM8K、Math 和 MMLU-STEM 上评估了我们的 zen-Math 基模型。此外，我们还评估了三个中国数学基准 CMATH，GaoKao Math Cloze 和 GaoKao Math QA。所有评估均使用 Few-shot CoT 方式。
 
 {{< figure src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/assets/blog/qwen2-math/Base-Table1.png#center" width="90%">}}
 
 
-## Qwen2-Math指令微调模型
+## zen-Math指令微调模型
 
-我们首先基于 Qwen2-Math-72B 训练了一个数学专用的奖励模型。然后，我们将这个密集的奖励信号与一个二元信号结合，该二元信号指示模型是否正确回答了问题。这个组合信号被用作监督来通过拒绝采样构建 SFT 数据，并在此SFT模型的基础上进一步使用 GRPO 来优化模型。
+我们首先基于 zen-Math-72B 训练了一个数学专用的奖励模型。然后，我们将这个密集的奖励信号与一个二元信号结合，该二元信号指示模型是否正确回答了问题。这个组合信号被用作监督来通过拒绝采样构建 SFT 数据，并在此SFT模型的基础上进一步使用 GRPO 来优化模型。
 
-我们对 Qwen2-Math-Instruct 在英语和中文的数学基准评测上进行了评估。除了常用的基准评测，如 GSM8K 和 MATH 之外，我们还加入了更具挑战性的考试以全面检测 Qwen2-Math-Instruct 的能力，例如 OlympiadBench、CollegeMath、高考（GaoKao）、AIME2024 以及 AMC2023。对于中文的数学评测集，我们使用了 CMATH、2024年中国高考数学题以及2024年中国中考数学题。
+我们对 zen-Math-Instruct 在英语和中文的数学基准评测上进行了评估。除了常用的基准评测，如 GSM8K 和 MATH 之外，我们还加入了更具挑战性的考试以全面检测 zen-Math-Instruct 的能力，例如 OlympiadBench、CollegeMath、高考（GaoKao）、AIME2024 以及 AMC2023。对于中文的数学评测集，我们使用了 CMATH、2024年中国高考数学题以及2024年中国中考数学题。
 
 我们汇报了在 greedy 和 RM@8 的条件下模型在各个基准评测上的 0-shot 成绩，对于选择题类型的题目，如 MMLU(STEM)，我们使用了 5-shot 进行评测。
 
@@ -83,7 +83,7 @@ Qwen2-Math 的基础模型使用 Qwen2-1.5B/7B/72B 进行初始化，然后在�
 
 ## 案例分析
 
-这里我们列举了一些测试的竞赛题，其中包括了多道 IMO 竞赛题。通过评测及具体样例分析，我们发现 Qwen2-Math 已经具备了解决一些简单竞赛题的数学能力。欢迎点击下方折叠块查看样例！
+这里我们列举了一些测试的竞赛题，其中包括了多道 IMO 竞赛题。通过评测及具体样例分析，我们发现 zen-Math 已经具备了解决一些简单竞赛题的数学能力。欢迎点击下方折叠块查看样例！
 
 > 所有解决方案均由我们的模型生成，未经过任何修改。请注意，我们不保证过程中的陈述是正确的。
 
@@ -101,7 +101,7 @@ x^3_1+x^3_2+\,\ldots\,+x^3_t=2002^{2002},
 $$
 
 
-**Qwen2-Math-72B-Instruct Solution**
+**zen-Math-72B-Instruct Solution**
 
 To determine the smallest positive integer $ t $ such that there exist integers $ x_1, x_2, \ldots, x_t $ satisfying the equation
 
@@ -226,7 +226,7 @@ Problem From IMO Shortlist 2022</summary>
 
 For a positive integer $n$ we denote by $s(n)$ the sum of the digits of $n$. Let $P(x)=x^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0$ be a polynomial, where $n \geqslant 2$ and $a_i$ is a positive integer for all $ 0 \leqslant i \leqslant n-1$. Could it be the case that, for all positive integers $k$, $s(k)$ and $s(P(k))$ have the same parity?
 
-**Qwen2-Math-72B-Instruct Solution**
+**zen-Math-72B-Instruct Solution**
 
 To determine whether it is possible for $ s(k) $ and $ s(P(k)) $ to have the same parity for all positive integers $ k $, we need to analyze the behavior of the sum of the digits function $ s $ and the polynomial $ P(x) $.
 
@@ -298,7 +298,7 @@ $$
 
 
 
-**Qwen2-Math-72B-Instruct Solution**
+**zen-Math-72B-Instruct Solution**
 
 To find all functions $ f: \mathbb{R}^+ \to \mathbb{R}^+ $ such that for each $ x \in \mathbb{R}^+ $, there is exactly one $ y \in \mathbb{R}^+ $ satisfying
 
@@ -392,7 +392,7 @@ $$
 
 For all integers $x,y$
 
-**Qwen2-Math-72B-Instruct Solution**
+**zen-Math-72B-Instruct Solution**
 
 To find all functions $ f: \mathbb{Z} \to \mathbb{Z} $ that satisfy the functional equation
 
@@ -535,7 +535,7 @@ $$
 
     for reals $x, y$.
 
-**Qwen2-Math-72B-Instruct Solution:**
+**zen-Math-72B-Instruct Solution:**
 
 To find all functions $ f: \mathbb{R} \rightarrow \mathbb{R} $ that satisfy the functional equation
 
@@ -686,7 +686,7 @@ a) Is it possible that, after using that machine finitely many times, we have $ 
 
 b) Is it possible that, after using that machine finitely many times, we have $ 2021$ red Martians, $ 2022$ green Martians and $ 2023$ blue Martians?
 
-**Qwen2-Math-72B-Instruct Solution**
+**zen-Math-72B-Instruct Solution**
 
 Let's analyze the problem step by step.
 
@@ -748,7 +748,7 @@ Problem From Balkan MO 2023</summary>
 
 Joe and Penny play a game. Initially there are $ 5000$ stones in a pile, and the two players remove stones from the pile by making a sequence of moves. On the $ k$-th move, any number of stones between $ 1$ and $ k$ inclusive may be removed. Joe makes the odd-numbered moves and Penny makes the even-numbered moves. The player who removes the very last stone is the winner. Who wins if both players play perfectly?
 
-**Qwen2-Math-72B-Instruct Solution**
+**zen-Math-72B-Instruct Solution**
 
 To determine the winner of the game, we need to analyze the strategy and the sequence of moves. Let's break down the problem step by step.
 
@@ -791,7 +791,7 @@ Problem From Math Odyssey</summary>
 
 The school offers 10 elective courses, and each student can enroll in any number of courses. The director selects $k$ students, where although each student's combination of courses is different, any two students have at least one course in common. At this point, it is found that any student outside these $k$ students cannot be classmates with these $k$ students regardless of how they enroll (having one course in common is enough to be classmates). Find the maximum number of $k$.
 
-**Qwen2-Math-72B-Instruct Solution**
+**zen-Math-72B-Instruct Solution**
 
 To solve this problem, we need to determine the maximum number of students $ k $ such that each student has a unique combination of elective courses, any two students share at least one course, and no student outside these $ k $ students can be classmates with all of them. This means that the set of students chosen must cover all possible courses in such a way that any new student would have to share a course with at least one of the chosen students.
 
@@ -813,7 +813,7 @@ Problem from USAMO 2010</summary>
 
 Let $ABC$ be a triangle with $\angle A = 90^{\circ}$. Points $D$ and $E$ lie on sides $AC$ and $AB$, respectively, such that $\angle ABD = \angle DBC$ and $\angle ACE = \angle ECB$. Segments $BD$ and $CE$ meet at $I$. Determine whether or not it is possible for segments $AB$, $AC$, $BI$, $ID$, $CI$, $IE$ to all have integer lengths.
 
-**Qwen2-Math-72B-Instruct Solution**
+**zen-Math-72B-Instruct Solution**
 
 To determine whether it is possible for segments $AB$, $AC$, $BI$, $ID$, $CI$, and $IE$ to all have integer lengths in triangle $ABC$ with $\angle A = 90^\circ$, we start by analyzing the given conditions and properties of the triangle.
 
@@ -896,7 +896,7 @@ Problem from JBMO Shortlist 2011</summary>
 
 Let $AD,BF$ and ${CE}$ be the altitudes of $\vartriangle ABC$. A line passing through ${D}$ and parallel to ${AB}$intersects the line ${EF}$at the point ${G}$. If ${H}$ is the orthocenter of $\vartriangle ABC$, find the angle ${\angle{CGH}}$.
 
-**Qwen2-Math-72B-Instruct Solution**
+**zen-Math-72B-Instruct Solution**
 
 To solve for the angle $\angle CGH$ in the given triangle $\triangle ABC$ with altitudes $AD$, $BF$, and $CE$ intersecting at the orthocenter $H$, and a line through $D$ parallel to $AB$ intersecting $EF$ at $G$, we will follow these steps:
 
@@ -945,4 +945,4 @@ Thus, the angle $\angle CGH$ is $\boxed{90^\circ}$.
 
 ## 总结
 
-这次我们发布的新模型系列 Qwen2-Math 专注于数学能力，构建于Qwen2的基础之上。我们的旗舰模型 Qwen2-Math-72B-Instruct 在数学相关任务上超越了诸如 GPT-4o 和 Claude 3.5 等专有模型。鉴于目前仅支持英文的限制，我们计划很快推出支持英文和中文的双语模型，并且多语言模型也在开发之中。此外，我们将持续增强模型解决复杂及具有挑战性的数学问题的能力。
+这次我们发布的新模型系列 zen-Math 专注于数学能力，构建于zen的基础之上。我们的旗舰模型 zen-Math-72B-Instruct 在数学相关任务上超越了诸如 GPT-4o 和 Claude 3.5 等专有模型。鉴于目前仅支持英文的限制，我们计划很快推出支持英文和中文的双语模型，并且多语言模型也在开发之中。此外，我们将持续增强模型解决复杂及具有挑战性的数学问题的能力。

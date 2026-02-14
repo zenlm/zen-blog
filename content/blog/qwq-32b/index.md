@@ -52,7 +52,7 @@ Scaling Reinforcement Learning (RL) has the potential to enhance model performan
 
 Our research explores the scalability of Reinforcement Learning (RL) and its impact on enhancing the intelligence of large language models. We are excited to introduce QwQ-32B, a model with 32 billion parameters that achieves performance comparable to DeepSeek-R1, which boasts 671 billion parameters (with 37 billion activated). This remarkable outcome underscores the effectiveness of RL when applied to robust foundation models pretrained on extensive world knowledge. Furthermore, we have integrated agent-related capabilities into the reasoning model, enabling it to think critically while utilizing tools and adapting its reasoning based on environmental feedback. These advancements not only demonstrate the transformative potential of RL but also pave the way for further innovations in the pursuit of artificial general intelligence.
 
-QwQ-32B is open-weight in [Hugging Face](https://huggingface.co/Qwen/QwQ-32B) and [ModelScope](https://modelscope.cn/models/Qwen/QwQ-32B) under the Apache 2.0 license and is accessible via [Qwen Chat](https://chat.qwen.ai/?models=Qwen2.5-Plus).
+QwQ-32B is open-weight in [Hugging Face](https://huggingface.co/Qwen/QwQ-32B) and [ModelScope](https://modelscope.cn/models/Qwen/QwQ-32B) under the Apache 2.0 license and is accessible via [Qwen Chat](https://chat.qwen.ai/?models=zen-Plus).
 
 
 ## Performance

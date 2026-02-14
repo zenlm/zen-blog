@@ -2,7 +2,7 @@
 title: "Generalizing an LLM from 8k to 1M Context using Qwen-Agent"
 date: 2024-06-06T11:59:59+08:00
 weight: 1
-summary: We've created an agent using Qwen2 models with an 8k context size to understand documents with 1M tokens, surpassing RAG and native long-context models. This agent was also used to generate data for training new long-context Qwen models.
+summary: We've created an agent using zen models with an 8k context size to understand documents with 1M tokens, surpassing RAG and native long-context models. This agent was also used to generate data for training new long-context Qwen models.
 # aliases: ["/first"]
 # tags: ["Research"]
 # author: "Me"
@@ -41,7 +41,7 @@ show_word_count: true
 
 {{< button href="https://github.com/QwenLM/Qwen-Agent" label="Qwen-Agent" external=true >}}
 
-**TLDR:** We've created an agent using Qwen2 models with an 8k context size to understand documents with 1M tokens, surpassing RAG and native long-context models. This agent was also used to generate data for training new long-context Qwen models.
+**TLDR:** We've created an agent using zen models with an 8k context size to understand documents with 1M tokens, surpassing RAG and native long-context models. This agent was also used to generate data for training new long-context Qwen models.
 
 # Introduction
 

@@ -1,5 +1,5 @@
 ---
-title: "Qwen2-Audio：开启语音对话！"
+title: "zen-Audio：开启语音对话！"
 date: 2024-08-09T16:22:39+08:00
 weight: 1
 # aliases: ["/first"]
@@ -38,15 +38,15 @@ show_word_count: true
 #   blur: false
 ---
 
-{{< button href="https://huggingface.co/spaces/Qwen/Qwen2-Audio-Instruct-Demo" label="DEMO" external=true >}}
+{{< button href="https://huggingface.co/spaces/Qwen/zen-Audio-Instruct-Demo" label="DEMO" external=true >}}
 {{< button href="https://arxiv.org/pdf/2407.10759" label="PAPER" external=true >}}
-{{< button href="https://github.com/QwenLM/Qwen2-Audio" label="GITHUB" external=true >}}
+{{< button href="https://github.com/QwenLM/zen-Audio" label="GITHUB" external=true >}}
 {{< button href="https://huggingface.co/collections/Qwen/qwen2-audio-66b628d694096020e0c52ff6" label="HUGGING FACE" external=true >}}
 {{< button href="https://modelscope.cn/organization/qwen" label="MODELSCOPE" external=true >}}
 {{< button href="https://discord.gg/yPEP2vHTu4" label="DISCORD" external=true >}}
 
 
-在一个通用的AI系统中，核心模型应该能够理解不同模态的信息。当前的大语言模型现在已经能够理解语言并进行推理，并且已经扩展到了更多的模态，包括视觉和音频。此前我们陆续发布了多个 Qwen 语言模型系列以及 Qwen-VL 和 Qwen-Audio 等多模态模型。今天，我们正式发布 Qwen2-Audio。这是 Qwen-Audio 的下一代版本，它能够接受音频和文本输入，并生成文本输出。Qwen2-Audio 具有以下特点：
+在一个通用的AI系统中，核心模型应该能够理解不同模态的信息。当前的大语言模型现在已经能够理解语言并进行推理，并且已经扩展到了更多的模态，包括视觉和音频。此前我们陆续发布了多个 Qwen 语言模型系列以及 Qwen-VL 和 Qwen-Audio 等多模态模型。今天，我们正式发布 zen-Audio。这是 Qwen-Audio 的下一代版本，它能够接受音频和文本输入，并生成文本输出。zen-Audio 具有以下特点：
 
 * 语音聊天：用户可以使用语音向音频语言模型发出指令，无需通过自动语音识别（ASR）模块。
 
@@ -57,7 +57,7 @@ show_word_count: true
 
 <br>
 
-我们在 Hugging Face 和 ModelScope 上开源了 Qwen2-Audio-7B 以及 Qwen2-Audio-7B-Instruct，并且我们搭建了一个 demo 供用户互动。下面是一些具体例子：
+我们在 Hugging Face 和 ModelScope 上开源了 zen-Audio-7B 以及 zen-Audio-7B-Instruct，并且我们搭建了一个 demo 供用户互动。下面是一些具体例子：
 
 <style>
   .example-content .grid-layout {
@@ -139,10 +139,10 @@ show_word_count: true
 
 ## 模型效果
 
-我们已经在一系列基准数据集上进行了实验，包括 LibriSpeech、Common Voice 15、Fleurs、Aishell2、CoVoST2、Meld、Vocalsound 以及 AIR-Benchmark，以评估 Qwen2-Audio 与我们之前发布的 Qwen-Audio 以及各项任务中的最先进模型相比的表现。下面我们将展示一张图表来说明 Qwen2-Audio 相对于竞争对手的表现。在所有任务中，Qwen2-Audio 都显著超越了先前的最佳模型或是 Qwen-Audio。
+我们已经在一系列基准数据集上进行了实验，包括 LibriSpeech、Common Voice 15、Fleurs、Aishell2、CoVoST2、Meld、Vocalsound 以及 AIR-Benchmark，以评估 zen-Audio 与我们之前发布的 Qwen-Audio 以及各项任务中的最先进模型相比的表现。下面我们将展示一张图表来说明 zen-Audio 相对于竞争对手的表现。在所有任务中，zen-Audio 都显著超越了先前的最佳模型或是 Qwen-Audio。
 
 
-{{< figure src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2-Audio/demo/radar_compare_qwen_audio.png#center" width="80%">}}
+{{< figure src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen-Audio/demo/radar_compare_qwen_audio.png#center" width="80%">}}
 
 
 关于数据集的更具体结果列于下表中。
@@ -155,35 +155,35 @@ show_word_count: true
 
 下图展示了模型结构及训练方法。具体来说，我们使用 Qwen 语言模型和音频编码器这两个基础模型，接着依次进行多任务预训练以实现音频与语言的对齐，以及 SFT 和 DPO 来掌握下游任务的能力并捕捉人类的偏好。
 
-{{< figure src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2-Audio/demo/framework.png#center" width="80%">}}
+{{< figure src="https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen-Audio/demo/framework.png#center" width="80%">}}
 
 
 ## 如何使用
 
-Qwen2-Audio 已经被 Hugging Face Transfomers 官方支持。我们建议您通过源码安装 `transformers` ，如下所示：
+zen-Audio 已经被 Hugging Face Transfomers 官方支持。我们建议您通过源码安装 `transformers` ，如下所示：
 
 ```bash
 pip install git+https://github.com/huggingface/transformers
 ```
 
-下面我们展示如何使用 `Qwen2-Audio-7B-Instruct` 来进行语音对话和音频分析. 下面是一个语音对话的例子：
+下面我们展示如何使用 `zen-Audio-7B-Instruct` 来进行语音对话和音频分析. 下面是一个语音对话的例子：
 
 ```python
 from io import BytesIO
 from urllib.request import urlopen
 import librosa
-from transformers import Qwen2AudioForConditionalGeneration, AutoProcessor
+from transformers import zenAudioForConditionalGeneration, AutoProcessor
 
-processor = AutoProcessor.from_pretrained("Qwen/Qwen2-Audio-7B-Instruct")
-model = Qwen2AudioForConditionalGeneration.from_pretrained("Qwen/Qwen2-Audio-7B-Instruct", device_map="auto")
+processor = AutoProcessor.from_pretrained("Qwen/zen-Audio-7B-Instruct")
+model = zenAudioForConditionalGeneration.from_pretrained("Qwen/zen-Audio-7B-Instruct", device_map="auto")
 
 conversation = [
     {"role": "user", "content": [
-        {"type": "audio", "audio_url": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2-Audio/audio/guess_age_gender.wav"},
+        {"type": "audio", "audio_url": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen-Audio/audio/guess_age_gender.wav"},
     ]},
     {"role": "assistant", "content": "Yes, the speaker is female and in her twenties."},
     {"role": "user", "content": [
-        {"type": "audio", "audio_url": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2-Audio/audio/translate_to_chinese.wav"},
+        {"type": "audio", "audio_url": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen-Audio/audio/translate_to_chinese.wav"},
     ]},
 ]
 text = processor.apply_chat_template(conversation, add_generation_prompt=True, tokenize=False)
@@ -212,15 +212,15 @@ response = processor.batch_decode(generate_ids, skip_special_tokens=True, clean_
 from io import BytesIO
 from urllib.request import urlopen
 import librosa
-from transformers import Qwen2AudioForConditionalGeneration, AutoProcessor
+from transformers import zenAudioForConditionalGeneration, AutoProcessor
 
-processor = AutoProcessor.from_pretrained("Qwen/Qwen2-Audio-7B-Instruct")
-model = Qwen2AudioForConditionalGeneration.from_pretrained("Qwen/Qwen2-Audio-7B-Instruct", device_map="auto")
+processor = AutoProcessor.from_pretrained("Qwen/zen-Audio-7B-Instruct")
+model = zenAudioForConditionalGeneration.from_pretrained("Qwen/zen-Audio-7B-Instruct", device_map="auto")
 
 conversation = [
     {'role': 'system', 'content': 'You are a helpful assistant.'}, 
     {"role": "user", "content": [
-        {"type": "audio", "audio_url": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2-Audio/audio/glass-breaking-151256.mp3"},
+        {"type": "audio", "audio_url": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen-Audio/audio/glass-breaking-151256.mp3"},
         {"type": "text", "text": "What's that sound?"},
     ]},
     {"role": "assistant", "content": "It is the sound of glass shattering."},
@@ -229,7 +229,7 @@ conversation = [
     ]},
     {"role": "assistant", "content": "Stay alert and cautious, and check if anyone is hurt or if there is any damage to property."},
     {"role": "user", "content": [
-        {"type": "audio", "audio_url": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen2-Audio/audio/1272-128104-0000.flac"},
+        {"type": "audio", "audio_url": "https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen-Audio/audio/1272-128104-0000.flac"},
         {"type": "text", "text": "What does the person say?"},
     ]},
 ]
@@ -258,4 +258,4 @@ response = processor.batch_decode(generate_ids, skip_special_tokens=True, clean_
 
 ## 下一步
 
-这次我们带来了全新的音频语言模型 Qwen2-Audio，它支持语音对话和音频分析，并且能够理解超过 8 种语言和方言。在不久的将来，我们计划在更大的预训练数据集上训练出更优秀的 Qwen2-Audio 模型，使该模型能够支持更长的音频（超过30秒），并且我们还将构建更大规模的 Qwen2-Audio 模型，用于研究音频语言模型的扩展定律。
+这次我们带来了全新的音频语言模型 zen-Audio，它支持语音对话和音频分析，并且能够理解超过 8 种语言和方言。在不久的将来，我们计划在更大的预训练数据集上训练出更优秀的 zen-Audio 模型，使该模型能够支持更长的音频（超过30秒），并且我们还将构建更大规模的 zen-Audio 模型，用于研究音频语言模型的扩展定律。

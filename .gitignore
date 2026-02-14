@@ -4,3 +4,10 @@ public
 resources/_gen
 *.log
 .DS_Store
+
+
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+GROK.md
+QWEN.md

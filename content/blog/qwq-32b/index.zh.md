@@ -49,7 +49,7 @@ show_word_count: true
 
 大规模强化学习（RL）有潜力超越传统的预训练和后训练方法来提升模型性能。近期的研究表明，强化学习可以显著提高模型的推理能力。例如，DeepSeek R1 通过整合冷启动数据和多阶段训练，实现了最先进的性能，使其能够进行深度思考和复杂推理。这一次，我们探讨了大规模强化学习（RL）对大语言模型的智能的提升作用，同时很高兴推出我们最新的推理模型 QwQ-32B。这是一款拥有 320 亿参数的模型，其性能可与具备 6710 亿参数（其中 370 亿被激活）的 DeepSeek-R1 媲美。这一成果突显了将强化学习应用于经过大规模预训练的强大基础模型的有效性。此外，我们还在推理模型中集成了与 Agent 相关的能力，使其能够在使用工具的同时进行批判性思考，并根据环境反馈调整推理过程。我们希望我们的一点努力能够证明强大的基础模型叠加大规模强化学习也许是一条通往通用人工智能的可行之路。
 
-QwQ-32B 已在 [Hugging Face](https://huggingface.co/Qwen/QwQ-32B) 和 [ModelScope](https://modelscope.cn/models/Qwen/QwQ-32B) 开源，采用了 Apache 2.0 开源协议。大家可通过 [Qwen Chat](https://chat.qwen.ai/?models=Qwen2.5-Plus) 直接进行体验！
+QwQ-32B 已在 [Hugging Face](https://huggingface.co/Qwen/QwQ-32B) 和 [ModelScope](https://modelscope.cn/models/Qwen/QwQ-32B) 开源，采用了 Apache 2.0 开源协议。大家可通过 [Qwen Chat](https://chat.qwen.ai/?models=zen-Plus) 直接进行体验！
 
 
 ## 模型效果

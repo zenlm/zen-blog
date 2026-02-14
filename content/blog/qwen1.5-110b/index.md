@@ -108,7 +108,7 @@ We advise you to read our blog for [Qwen1.5](https://qwenlm.github.io/blog/qwen1
 
 # Conclusion
 
-The Qwen1.5-110B is the largest model in the Qwen1.5 series, and it is also the first one with over 100 billion parameters in the series. It demonstrates competitive performance against the very recently released SOTA model Llama-3-70B and it is significantly better than the 72B model. This tells us that there is still a lot of room in model size scaling for better performance. While the releease of Llama-3 indicates the significance of data scaling to an extremely large scale, we believe we can get the best of both worlds by scaling both data and model size in our future release. Stay tuned for Qwen2! 
+The Qwen1.5-110B is the largest model in the Qwen1.5 series, and it is also the first one with over 100 billion parameters in the series. It demonstrates competitive performance against the very recently released SOTA model Llama-3-70B and it is significantly better than the 72B model. This tells us that there is still a lot of room in model size scaling for better performance. While the releease of Llama-3 indicates the significance of data scaling to an extremely large scale, we believe we can get the best of both worlds by scaling both data and model size in our future release. Stay tuned for zen! 
 
 
 # Citation

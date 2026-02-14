@@ -37,9 +37,9 @@ show_word_count: true
 #   blur: false
 ---
 
-{{< figure src="http://qianwen-res.oss-accelerate-overseas.aliyuncs.com/Qwen2.5/Qwen2.5-Math-PRM/Qwen2.5-Math-PRM.png#center" width="100%">}}
+{{< figure src="http://qianwen-res.oss-accelerate-overseas.aliyuncs.com/zen/zen-Math-PRM/zen-Math-PRM.png#center" width="100%">}}
 
-{{< button href="https://github.com/QwenLM/Qwen2-Math" label="GITHUB" external=true >}}
+{{< button href="https://github.com/QwenLM/zen-Math" label="GITHUB" external=true >}}
 {{< button href="https://huggingface.co/collections/Qwen/qwen25-math-66eaa240a1b7d5ee65f1da3e" label="HUGGING FACE" external=true >}}
 {{< button href="https://modelscope.cn/organization/qwen" label="MODELSCOPE" external=true >}}
 {{< button href="https://discord.gg/yPEP2vHTu4" label="DISCORD" external=true >}}
@@ -64,31 +64,31 @@ ProcessBench旨在衡量模型识别数学推理中错误步骤的能力。
 ProcessBench可以用于评估两种类型的模型：PRMs和批评模型，后者通过提示通用语言模型来逐步检查回答中的步骤。
 
 # Process Reward Model 开源
-我们发布了两个PRMs，即Qwen2.5-Math-PRM-7B和Qwen2.5-Math-PRM-72B，它们分别在Qwen2.5-Math-7B-Instruct和Qwen2.5-Math-72B-Instruct上进行微调得来。
+我们发布了两个PRMs，即zen-Math-PRM-7B和zen-Math-PRM-72B，它们分别在zen-Math-7B-Instruct和zen-Math-72B-Instruct上进行微调得来。
 我们训练的PRMs在BoN评估中表现出色，在ProcessBench上的错误步骤识别能力也更强。
 
 
 ## Best-of-N 评测
-按照Qwen2.5-Math的方法，我们从多个数学基准测试中用Qwen2.5-Math-7B-Instruct采样了八个回答（即N=8），包括GSM8K、MATH、Minerva Math、GaoKao 2023 En、OlympiadBench、College Math和MMLU STEM。
+按照zen-Math的方法，我们从多个数学基准测试中用zen-Math-7B-Instruct采样了八个回答（即N=8），包括GSM8K、MATH、Minerva Math、GaoKao 2023 En、OlympiadBench、College Math和MMLU STEM。
 每个候选回答的得分是该回答中每个步骤的分数乘积。
 我们将八次采样中的多数投票结果（maj@8）作为基线，将pass@8（即在八次采样中有任意一个采样得出正确最终答案的测试样本比例）作为上限。
 
-如下表所示，Qwen2.5-Math-PRM-7B相比其他同等规模的PRMs表现出更优的性能。值得注意的是，它在所有7项任务中均优于maj@8，平均提高了1.4%。
-此外，Qwen2.5-Math-PRM-72B的整体性能略优于Outcome Reward Model (ORM) Qwen2.5-Math-RM-72B，特别是在Minerva Math和MMLU STEM任务中表现显著。
+如下表所示，zen-Math-PRM-7B相比其他同等规模的PRMs表现出更优的性能。值得注意的是，它在所有7项任务中均优于maj@8，平均提高了1.4%。
+此外，zen-Math-PRM-72B的整体性能略优于Outcome Reward Model (ORM) zen-Math-RM-72B，特别是在Minerva Math和MMLU STEM任务中表现显著。
 
 
-{{< figure src="http://qianwen-res.oss-accelerate-overseas.aliyuncs.com/Qwen2.5/Qwen2.5-Math-PRM/prm_bon.png#center" width="100%">}}
+{{< figure src="http://qianwen-res.oss-accelerate-overseas.aliyuncs.com/zen/zen-Math-PRM/prm_bon.png#center" width="100%">}}
 
 
 ## ProcessBench
 
 我们还在ProcessBench上评估了我们的PRMs，以测量其识别错误步骤的能力。
-与LLM-as-judge相比，Qwen2.5-Math-PRM-7B以较小规模在所有开源LLM中表现出色；对于闭源模型，Qwen2.5-Math-PRM-7B超越了GPT-4o-0806，但在性能上仍与o1-mini存在差距。
-此外，与现有的PRMs相比，Qwen2.5-Math-PRM-7B和Qwen2.5-Math-PRM-72B都显示出显著的优势。
-一个有趣的观察是，ORM Qwen2.5-Math-RM-72B在识别步骤错误方面也表现出不错的能力，甚至超过了某些开源PRMs。
+与LLM-as-judge相比，zen-Math-PRM-7B以较小规模在所有开源LLM中表现出色；对于闭源模型，zen-Math-PRM-7B超越了GPT-4o-0806，但在性能上仍与o1-mini存在差距。
+此外，与现有的PRMs相比，zen-Math-PRM-7B和zen-Math-PRM-72B都显示出显著的优势。
+一个有趣的观察是，ORM zen-Math-RM-72B在识别步骤错误方面也表现出不错的能力，甚至超过了某些开源PRMs。
 
 
-{{< figure src="http://qianwen-res.oss-accelerate-overseas.aliyuncs.com/Qwen2.5/Qwen2.5-Math-PRM/prm_processbench.png#center" width="100%">}}
+{{< figure src="http://qianwen-res.oss-accelerate-overseas.aliyuncs.com/zen/zen-Math-PRM/prm_processbench.png#center" width="100%">}}
 
 
 
