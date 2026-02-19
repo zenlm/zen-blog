@@ -1,0 +1,29 @@
+{
+    "title": "音频分析：混合音频中的歌词识别",
+    "messages": [
+        {
+            "role": "User",
+            "content": "[audio](https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen-Audio/demo/robust_zh_0.wav)"
+        },
+        {
+            "role": "zen-Audio",
+            "content": "The lyrics of the singing are ‘住着我最深爱的你史上最遥远的距离’."
+        },
+        {
+            "role": "User",
+            "content": "[audio](https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen-Audio/demo/robust_zh_1.wav)"
+        },
+        {
+            "role": "zen-Audio",
+            "content": "The lyrics of the singing are ‘住着我最深爱的你史上最遥远的距离’."
+        },
+        {
+            "role": "User",
+            "content": "[audio](https://qianwen-res.oss-cn-beijing.aliyuncs.com/zen-Audio/demo/robust_zh_2.wav)"
+        },
+        {
+            "role": "zen-Audio",
+            "content": "The lyrics of the singing are ‘住着我最深爱的你史上最遥远的距离’."
+        }
+    ]
+}

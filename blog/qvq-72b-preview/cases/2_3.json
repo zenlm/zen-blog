@@ -1,0 +1,14 @@
+{
+    "title": "Example: Information Extraction of High Resolution Images",
+    "messages": [
+                {
+            "role": "User",
+            "content": "Extract all page titles in the screenshot of search result.\n![image](https://qianwen-res.oss-accelerate-overseas.aliyuncs.com/zen-VL/screenshot1.png)"
+        },
+        {
+            "role": "zen-VL",
+            "content": "The page titles in the screenshot of the search result are:\n\n1. 你好，zen\n2. QwenLM/zen\n3. zen - a Qwen Collection\n4. 快速开始\n5. zen-7B\n6. zen-Math，新一代数学模型\n7. Qwen\n8. Qwen/zen-7B-Instruct\n9. [2407.10671] zen Technical Report\n10. qwen2"
+        }
+    ]
+}
+

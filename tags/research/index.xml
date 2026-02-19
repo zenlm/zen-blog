@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Research on Qwen</title>
+    <link>https://qwenlm.github.io/tags/research/</link>
+    <description>Recent content in Research on Qwen</description>
+    <image>
+      <url>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 26 Jun 2023 09:00:00 -0800</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/research/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Proof of AI: Verifiable Machine Learning on Chain</title>
+      <link>https://qwenlm.github.io/blog/proof-of-ai/</link>
+      <pubDate>Mon, 26 Jun 2023 09:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/proof-of-ai/</guid>
+      <description>How we&amp;#39;re bringing cryptographic verification to AI inference, enabling trustless machine learning.</description>
+    </item>
+    
+    <item>
+      <title>Zen Reranker: Two-Stage Retrieval Done Right</title>
+      <link>https://qwenlm.github.io/blog/zen-reranker/</link>
+      <pubDate>Mon, 13 Mar 2023 09:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/zen-reranker/</guid>
+      <description>Introducing the Zen Reranker, a cross-encoder model that dramatically improves retrieval quality in two-stage pipelines.</description>
+    </item>
+    
+    <item>
+      <title>7680-Dimensional Embeddings: More Dimensions, Better Retrieval</title>
+      <link>https://qwenlm.github.io/blog/7680-dim-embeddings/</link>
+      <pubDate>Mon, 05 Dec 2022 10:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/7680-dim-embeddings/</guid>
+      <description>Why we trained embedding models with 7680 dimensions and what we learned about the relationship between dimensionality and retrieval quality.</description>
+    </item>
+    
+    <item>
+      <title>Embedding Spaces at 7680 Dimensions</title>
+      <link>https://qwenlm.github.io/blog/embedding-spaces-7680-dimensions/</link>
+      <pubDate>Mon, 05 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/embedding-spaces-7680-dimensions/</guid>
+      <description>Exploring high-dimensional embedding spaces for semantic search and retrieval.</description>
+    </item>
+    
+    <item>
+      <title>GRPO: Group Relative Policy Optimization</title>
+      <link>https://qwenlm.github.io/blog/grpo/</link>
+      <pubDate>Mon, 19 Sep 2022 09:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/grpo/</guid>
+      <description>Introducing GRPO, a new approach to reinforcement learning from human feedback that improves sample efficiency and alignment stability.</description>
+    </item>
+    
+    <item>
+      <title>GRPO: Group Relative Policy Optimization</title>
+      <link>https://qwenlm.github.io/blog/grpo-group-relative-policy-optimization/</link>
+      <pubDate>Sun, 18 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/grpo-group-relative-policy-optimization/</guid>
+      <description>A companion post to our GRPO paper, explaining group relative policy optimization for language model alignment.</description>
+    </item>
+    
+    <item>
+      <title>Federated Learning Without Compromise</title>
+      <link>https://qwenlm.github.io/blog/federated-learning-without-compromise/</link>
+      <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/federated-learning-without-compromise/</guid>
+      <description>Privacy-preserving machine learning that maintains model quality through novel aggregation protocols.</description>
+    </item>
+    
+    <item>
+      <title>Federated Learning for Open AI</title>
+      <link>https://qwenlm.github.io/blog/federated-learning/</link>
+      <pubDate>Mon, 09 May 2022 10:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/federated-learning/</guid>
+      <description>How federated learning enables collaborative model training while preserving data privacy.</description>
+    </item>
+    
+    <item>
+      <title>Experience Ledgers: Persistent Memory for AI Agents</title>
+      <link>https://qwenlm.github.io/blog/experience-ledgers/</link>
+      <pubDate>Mon, 14 Feb 2022 09:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/experience-ledgers/</guid>
+      <description>Introducing experience ledgers, a framework for giving AI agents persistent, verifiable memory.</description>
+    </item>
+    
+    <item>
+      <title>Training LLMs on Collective Intelligence</title>
+      <link>https://qwenlm.github.io/blog/training-llms-collective-intelligence/</link>
+      <pubDate>Thu, 22 Jul 2021 10:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/training-llms-collective-intelligence/</guid>
+      <description>How we&amp;#39;re approaching training data curation to capture humanity&amp;#39;s collective intelligence.</description>
+    </item>
+    
+  </channel>
+</rss>
