@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Infrastructure on Qwen</title>
+    <link>https://qwenlm.github.io/tags/infrastructure/</link>
+    <description>Recent content in Infrastructure on Qwen</description>
+    <image>
+      <url>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 05 Aug 2024 10:00:00 -0800</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/infrastructure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Decentralized Compute for AI Training</title>
+      <link>https://qwenlm.github.io/blog/decentralized-compute/</link>
+      <pubDate>Mon, 05 Aug 2024 10:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/decentralized-compute/</guid>
+      <description>How we&amp;#39;re building a decentralized compute network for training large AI models.</description>
+    </item>
+    
+    <item>
+      <title>Training Gym: A Platform for Open Model Development</title>
+      <link>https://qwenlm.github.io/blog/training-gym/</link>
+      <pubDate>Mon, 11 Sep 2023 10:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/blog/training-gym/</guid>
+      <description>Announcing Training Gym, our open platform for collaborative large model training.</description>
+    </item>
+    
+  </channel>
+</rss>
