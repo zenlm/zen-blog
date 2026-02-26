@@ -1,16 +1,16 @@
-# Qwen's Blog
+# Zen's Blog
 
 ---
 
 ## Based On
 
-**zen-blog** is based on [Qwen3-4B](https://huggingface.co/Qwen/Qwen3-4B)
+**zen-blog** is based on [Zen 4B](https://huggingface.co/zenlm/Zen 4B)
 
 We are grateful to the original authors for their excellent work and open-source contributions.
 
 ### Upstream Source
-- **Repository**: https://huggingface.co/Qwen/Qwen3-4B
-- **Base Model**: Qwen3-4B
+- **Repository**: https://huggingface.co/zenlm/Zen 4B
+- **Base Model**: Zen 4B
 - **License**: See original repository for license details
 
 ### Changes in Zen LM
@@ -34,4 +34,4 @@ If you use this model, please cite both the original work and Zen LM:
 }
 ```
 
-Please also cite the original upstream work - see https://huggingface.co/Qwen/Qwen3-4B for citation details.
+Please also cite the original upstream work - see https://huggingface.co/zenlm/Zen 4B for citation details.
