@@ -4,13 +4,13 @@
 
 ## Based On
 
-**zen-blog** is based on [Zen 4B](https://huggingface.co/zenlm/Zen 4B)
+**zen-blog** is based on [zen-eco-4b-instruct](https://huggingface.co/zenlm/zen-eco-4b-instruct)
 
 We are grateful to the original authors for their excellent work and open-source contributions.
 
 ### Upstream Source
-- **Repository**: https://huggingface.co/zenlm/Zen 4B
-- **Base Model**: Zen 4B
+- **Repository**: https://huggingface.co/zenlm/zen-eco-4b-instruct
+- **Base Model**: zen-eco-4b-instruct
 - **License**: See original repository for license details
 
 ### Changes in Zen LM
@@ -34,4 +34,4 @@ If you use this model, please cite both the original work and Zen LM:
 }
 ```
 
-Please also cite the original upstream work - see https://huggingface.co/zenlm/Zen 4B for citation details.
+Please also cite the original upstream work - see https://huggingface.co/zenlm/zen-eco-4b-instruct for citation details.
