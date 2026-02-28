@@ -9,7 +9,151 @@
       <link>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 13 Jan 2025 09:00:00 -0800</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Feb 2026 13:00:00 -0800</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Abliteration</title>
+      <link>https://qwenlm.github.io/tags/abliteration/</link>
+      <pubDate>Sat, 28 Feb 2026 13:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/abliteration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GT-QLoRA</title>
+      <link>https://qwenlm.github.io/tags/gt-qlora/</link>
+      <pubDate>Sat, 28 Feb 2026 13:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/gt-qlora/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MoE</title>
+      <link>https://qwenlm.github.io/tags/moe/</link>
+      <pubDate>Sat, 28 Feb 2026 13:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/moe/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Research</title>
+      <link>https://qwenlm.github.io/tags/research/</link>
+      <pubDate>Sat, 28 Feb 2026 13:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/research/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zen4-ultra</title>
+      <link>https://qwenlm.github.io/tags/zen4-ultra/</link>
+      <pubDate>Sat, 28 Feb 2026 13:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/zen4-ultra/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Architecture</title>
+      <link>https://qwenlm.github.io/tags/architecture/</link>
+      <pubDate>Sat, 28 Feb 2026 12:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/architecture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Drop-Upcycling</title>
+      <link>https://qwenlm.github.io/tags/drop-upcycling/</link>
+      <pubDate>Sat, 28 Feb 2026 12:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/drop-upcycling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zen MoDE</title>
+      <link>https://qwenlm.github.io/tags/zen-mode/</link>
+      <pubDate>Sat, 28 Feb 2026 12:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/zen-mode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>BitDelta</title>
+      <link>https://qwenlm.github.io/tags/bitdelta/</link>
+      <pubDate>Sat, 28 Feb 2026 11:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/bitdelta/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Delta Compression</title>
+      <link>https://qwenlm.github.io/tags/delta-compression/</link>
+      <pubDate>Sat, 28 Feb 2026 11:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/delta-compression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Model Serving</title>
+      <link>https://qwenlm.github.io/tags/model-serving/</link>
+      <pubDate>Sat, 28 Feb 2026 11:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/model-serving/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Quantization</title>
+      <link>https://qwenlm.github.io/tags/quantization/</link>
+      <pubDate>Sat, 28 Feb 2026 11:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/quantization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Continual Learning</title>
+      <link>https://qwenlm.github.io/tags/continual-learning/</link>
+      <pubDate>Sat, 28 Feb 2026 10:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/continual-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OPCM</title>
+      <link>https://qwenlm.github.io/tags/opcm/</link>
+      <pubDate>Sat, 28 Feb 2026 10:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/opcm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OPLoRA</title>
+      <link>https://qwenlm.github.io/tags/oplora/</link>
+      <pubDate>Sat, 28 Feb 2026 10:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/oplora/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SuRe</title>
+      <link>https://qwenlm.github.io/tags/sure/</link>
+      <pubDate>Sat, 28 Feb 2026 10:00:00 -0800</pubDate>
+      
+      <guid>https://qwenlm.github.io/tags/sure/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Announcement</title>
       <link>https://qwenlm.github.io/tags/announcement/</link>
@@ -124,15 +268,6 @@
       <pubDate>Mon, 18 Dec 2023 09:00:00 -0800</pubDate>
       
       <guid>https://qwenlm.github.io/tags/nfts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Research</title>
-      <link>https://qwenlm.github.io/tags/research/</link>
-      <pubDate>Mon, 26 Jun 2023 09:00:00 -0800</pubDate>
-      
-      <guid>https://qwenlm.github.io/tags/research/</guid>
       <description></description>
     </item>
     
