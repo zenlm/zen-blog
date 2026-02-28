@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Models on Qwen</title>
-    <link>https://qwenlm.github.io/tags/models/</link>
-    <description>Recent content in Models on Qwen</description>
+    <title>Models on Zen LM</title>
+    <link>https://zenlm.org/tags/models/</link>
+    <description>Recent content in Models on Zen LM</description>
     <image>
-      <url>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 13 Jan 2025 09:00:00 -0800</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/models/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Jan 2025 09:00:00 -0800</lastBuildDate><atom:link href="https://zenlm.org/tags/models/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Zen 3.0: The Next Generation of Open AI</title>
-      <link>https://qwenlm.github.io/blog/zen-3/</link>
+      <link>https://zenlm.org/blog/zen-3/</link>
       <pubDate>Mon, 13 Jan 2025 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/blog/zen-3/</guid>
+      <guid>https://zenlm.org/blog/zen-3/</guid>
       <description>Announcing Zen 3.0, our most capable open model family yet.</description>
     </item>
     

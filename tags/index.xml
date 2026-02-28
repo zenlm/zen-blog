@@ -1,372 +1,372 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Tags on Qwen</title>
-    <link>https://qwenlm.github.io/tags/</link>
-    <description>Recent content in Tags on Qwen</description>
+    <title>Tags on Zen LM</title>
+    <link>https://zenlm.org/tags/</link>
+    <description>Recent content in Tags on Zen LM</description>
     <image>
-      <url>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 28 Feb 2026 13:00:00 -0800</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Feb 2026 13:00:00 -0800</lastBuildDate><atom:link href="https://zenlm.org/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Abliteration</title>
-      <link>https://qwenlm.github.io/tags/abliteration/</link>
+      <link>https://zenlm.org/tags/abliteration/</link>
       <pubDate>Sat, 28 Feb 2026 13:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/abliteration/</guid>
+      <guid>https://zenlm.org/tags/abliteration/</guid>
       <description></description>
     </item>
     
     <item>
       <title>GT-QLoRA</title>
-      <link>https://qwenlm.github.io/tags/gt-qlora/</link>
+      <link>https://zenlm.org/tags/gt-qlora/</link>
       <pubDate>Sat, 28 Feb 2026 13:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/gt-qlora/</guid>
+      <guid>https://zenlm.org/tags/gt-qlora/</guid>
       <description></description>
     </item>
     
     <item>
       <title>MoE</title>
-      <link>https://qwenlm.github.io/tags/moe/</link>
+      <link>https://zenlm.org/tags/moe/</link>
       <pubDate>Sat, 28 Feb 2026 13:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/moe/</guid>
+      <guid>https://zenlm.org/tags/moe/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Research</title>
-      <link>https://qwenlm.github.io/tags/research/</link>
+      <link>https://zenlm.org/tags/research/</link>
       <pubDate>Sat, 28 Feb 2026 13:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/research/</guid>
+      <guid>https://zenlm.org/tags/research/</guid>
       <description></description>
     </item>
     
     <item>
       <title>zen4-ultra</title>
-      <link>https://qwenlm.github.io/tags/zen4-ultra/</link>
+      <link>https://zenlm.org/tags/zen4-ultra/</link>
       <pubDate>Sat, 28 Feb 2026 13:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/zen4-ultra/</guid>
+      <guid>https://zenlm.org/tags/zen4-ultra/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Architecture</title>
-      <link>https://qwenlm.github.io/tags/architecture/</link>
+      <link>https://zenlm.org/tags/architecture/</link>
       <pubDate>Sat, 28 Feb 2026 12:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/architecture/</guid>
+      <guid>https://zenlm.org/tags/architecture/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Drop-Upcycling</title>
-      <link>https://qwenlm.github.io/tags/drop-upcycling/</link>
+      <link>https://zenlm.org/tags/drop-upcycling/</link>
       <pubDate>Sat, 28 Feb 2026 12:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/drop-upcycling/</guid>
+      <guid>https://zenlm.org/tags/drop-upcycling/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Zen MoDE</title>
-      <link>https://qwenlm.github.io/tags/zen-mode/</link>
+      <link>https://zenlm.org/tags/zen-mode/</link>
       <pubDate>Sat, 28 Feb 2026 12:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/zen-mode/</guid>
+      <guid>https://zenlm.org/tags/zen-mode/</guid>
       <description></description>
     </item>
     
     <item>
       <title>BitDelta</title>
-      <link>https://qwenlm.github.io/tags/bitdelta/</link>
+      <link>https://zenlm.org/tags/bitdelta/</link>
       <pubDate>Sat, 28 Feb 2026 11:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/bitdelta/</guid>
+      <guid>https://zenlm.org/tags/bitdelta/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Delta Compression</title>
-      <link>https://qwenlm.github.io/tags/delta-compression/</link>
+      <link>https://zenlm.org/tags/delta-compression/</link>
       <pubDate>Sat, 28 Feb 2026 11:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/delta-compression/</guid>
+      <guid>https://zenlm.org/tags/delta-compression/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Model Serving</title>
-      <link>https://qwenlm.github.io/tags/model-serving/</link>
+      <link>https://zenlm.org/tags/model-serving/</link>
       <pubDate>Sat, 28 Feb 2026 11:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/model-serving/</guid>
+      <guid>https://zenlm.org/tags/model-serving/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Quantization</title>
-      <link>https://qwenlm.github.io/tags/quantization/</link>
+      <link>https://zenlm.org/tags/quantization/</link>
       <pubDate>Sat, 28 Feb 2026 11:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/quantization/</guid>
+      <guid>https://zenlm.org/tags/quantization/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Continual Learning</title>
-      <link>https://qwenlm.github.io/tags/continual-learning/</link>
+      <link>https://zenlm.org/tags/continual-learning/</link>
       <pubDate>Sat, 28 Feb 2026 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/continual-learning/</guid>
+      <guid>https://zenlm.org/tags/continual-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OPCM</title>
-      <link>https://qwenlm.github.io/tags/opcm/</link>
+      <link>https://zenlm.org/tags/opcm/</link>
       <pubDate>Sat, 28 Feb 2026 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/opcm/</guid>
+      <guid>https://zenlm.org/tags/opcm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OPLoRA</title>
-      <link>https://qwenlm.github.io/tags/oplora/</link>
+      <link>https://zenlm.org/tags/oplora/</link>
       <pubDate>Sat, 28 Feb 2026 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/oplora/</guid>
+      <guid>https://zenlm.org/tags/oplora/</guid>
       <description></description>
     </item>
     
     <item>
       <title>SuRe</title>
-      <link>https://qwenlm.github.io/tags/sure/</link>
+      <link>https://zenlm.org/tags/sure/</link>
       <pubDate>Sat, 28 Feb 2026 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/sure/</guid>
+      <guid>https://zenlm.org/tags/sure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Announcement</title>
-      <link>https://qwenlm.github.io/tags/announcement/</link>
+      <link>https://zenlm.org/tags/announcement/</link>
       <pubDate>Mon, 13 Jan 2025 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/announcement/</guid>
+      <guid>https://zenlm.org/tags/announcement/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Models</title>
-      <link>https://qwenlm.github.io/tags/models/</link>
+      <link>https://zenlm.org/tags/models/</link>
       <pubDate>Mon, 13 Jan 2025 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/models/</guid>
+      <guid>https://zenlm.org/tags/models/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Open Source</title>
-      <link>https://qwenlm.github.io/tags/open-source/</link>
+      <link>https://zenlm.org/tags/open-source/</link>
       <pubDate>Mon, 11 Nov 2024 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/open-source/</guid>
+      <guid>https://zenlm.org/tags/open-source/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vision</title>
-      <link>https://qwenlm.github.io/tags/vision/</link>
+      <link>https://zenlm.org/tags/vision/</link>
       <pubDate>Mon, 11 Nov 2024 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/vision/</guid>
+      <guid>https://zenlm.org/tags/vision/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Decentralization</title>
-      <link>https://qwenlm.github.io/tags/decentralization/</link>
+      <link>https://zenlm.org/tags/decentralization/</link>
       <pubDate>Mon, 05 Aug 2024 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/decentralization/</guid>
+      <guid>https://zenlm.org/tags/decentralization/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Infrastructure</title>
-      <link>https://qwenlm.github.io/tags/infrastructure/</link>
+      <link>https://zenlm.org/tags/infrastructure/</link>
       <pubDate>Mon, 05 Aug 2024 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/infrastructure/</guid>
+      <guid>https://zenlm.org/tags/infrastructure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Training</title>
-      <link>https://qwenlm.github.io/tags/training/</link>
+      <link>https://zenlm.org/tags/training/</link>
       <pubDate>Mon, 05 Aug 2024 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/training/</guid>
+      <guid>https://zenlm.org/tags/training/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Governance</title>
-      <link>https://qwenlm.github.io/tags/governance/</link>
+      <link>https://zenlm.org/tags/governance/</link>
       <pubDate>Mon, 20 May 2024 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/governance/</guid>
+      <guid>https://zenlm.org/tags/governance/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ZIPs</title>
-      <link>https://qwenlm.github.io/tags/zips/</link>
+      <link>https://zenlm.org/tags/zips/</link>
       <pubDate>Mon, 20 May 2024 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/zips/</guid>
+      <guid>https://zenlm.org/tags/zips/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Foundation</title>
-      <link>https://qwenlm.github.io/tags/foundation/</link>
+      <link>https://zenlm.org/tags/foundation/</link>
       <pubDate>Mon, 12 Feb 2024 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/foundation/</guid>
+      <guid>https://zenlm.org/tags/foundation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Agents</title>
-      <link>https://qwenlm.github.io/tags/agents/</link>
+      <link>https://zenlm.org/tags/agents/</link>
       <pubDate>Mon, 18 Dec 2023 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/agents/</guid>
+      <guid>https://zenlm.org/tags/agents/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Blockchain</title>
-      <link>https://qwenlm.github.io/tags/blockchain/</link>
+      <link>https://zenlm.org/tags/blockchain/</link>
       <pubDate>Mon, 18 Dec 2023 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/blockchain/</guid>
+      <guid>https://zenlm.org/tags/blockchain/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NFTs</title>
-      <link>https://qwenlm.github.io/tags/nfts/</link>
+      <link>https://zenlm.org/tags/nfts/</link>
       <pubDate>Mon, 18 Dec 2023 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/nfts/</guid>
+      <guid>https://zenlm.org/tags/nfts/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Verification</title>
-      <link>https://qwenlm.github.io/tags/verification/</link>
+      <link>https://zenlm.org/tags/verification/</link>
       <pubDate>Mon, 26 Jun 2023 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/verification/</guid>
+      <guid>https://zenlm.org/tags/verification/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Reranking</title>
-      <link>https://qwenlm.github.io/tags/reranking/</link>
+      <link>https://zenlm.org/tags/reranking/</link>
       <pubDate>Mon, 13 Mar 2023 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/reranking/</guid>
+      <guid>https://zenlm.org/tags/reranking/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Retrieval</title>
-      <link>https://qwenlm.github.io/tags/retrieval/</link>
+      <link>https://zenlm.org/tags/retrieval/</link>
       <pubDate>Mon, 13 Mar 2023 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/retrieval/</guid>
+      <guid>https://zenlm.org/tags/retrieval/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Embeddings</title>
-      <link>https://qwenlm.github.io/tags/embeddings/</link>
+      <link>https://zenlm.org/tags/embeddings/</link>
       <pubDate>Mon, 05 Dec 2022 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/embeddings/</guid>
+      <guid>https://zenlm.org/tags/embeddings/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Alignment</title>
-      <link>https://qwenlm.github.io/tags/alignment/</link>
+      <link>https://zenlm.org/tags/alignment/</link>
       <pubDate>Mon, 19 Sep 2022 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/alignment/</guid>
+      <guid>https://zenlm.org/tags/alignment/</guid>
       <description></description>
     </item>
     
     <item>
       <title>GRPO</title>
-      <link>https://qwenlm.github.io/tags/grpo/</link>
+      <link>https://zenlm.org/tags/grpo/</link>
       <pubDate>Sun, 18 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/grpo/</guid>
+      <guid>https://zenlm.org/tags/grpo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RLHF</title>
-      <link>https://qwenlm.github.io/tags/rlhf/</link>
+      <link>https://zenlm.org/tags/rlhf/</link>
       <pubDate>Sun, 18 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/rlhf/</guid>
+      <guid>https://zenlm.org/tags/rlhf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Federated Learning</title>
-      <link>https://qwenlm.github.io/tags/federated-learning/</link>
+      <link>https://zenlm.org/tags/federated-learning/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/federated-learning/</guid>
+      <guid>https://zenlm.org/tags/federated-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Privacy</title>
-      <link>https://qwenlm.github.io/tags/privacy/</link>
+      <link>https://zenlm.org/tags/privacy/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/privacy/</guid>
+      <guid>https://zenlm.org/tags/privacy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>DeSci</title>
-      <link>https://qwenlm.github.io/tags/desci/</link>
+      <link>https://zenlm.org/tags/desci/</link>
       <pubDate>Mon, 08 Nov 2021 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/desci/</guid>
+      <guid>https://zenlm.org/tags/desci/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Usage</title>
-      <link>https://qwenlm.github.io/tags/usage/</link>
+      <link>https://zenlm.org/tags/usage/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://qwenlm.github.io/tags/usage/</guid>
+      <guid>https://zenlm.org/tags/usage/</guid>
       <description></description>
     </item>
     

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Foundation on Qwen</title>
-    <link>https://qwenlm.github.io/tags/foundation/</link>
-    <description>Recent content in Foundation on Qwen</description>
+    <title>Foundation on Zen LM</title>
+    <link>https://zenlm.org/tags/foundation/</link>
+    <description>Recent content in Foundation on Zen LM</description>
     <image>
-      <url>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 12 Feb 2024 09:00:00 -0800</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/foundation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Feb 2024 09:00:00 -0800</lastBuildDate><atom:link href="https://zenlm.org/tags/foundation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Announcing the Zoo Labs Foundation</title>
-      <link>https://qwenlm.github.io/blog/zoo-foundation-launch/</link>
+      <link>https://zenlm.org/blog/zoo-foundation-launch/</link>
       <pubDate>Mon, 12 Feb 2024 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/blog/zoo-foundation-launch/</guid>
+      <guid>https://zenlm.org/blog/zoo-foundation-launch/</guid>
       <description>Today we formally launch Zoo Labs Foundation, an open research network dedicated to decentralized AI and decentralized science.</description>
     </item>
     
