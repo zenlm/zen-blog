@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>SuRe on Qwen</title>
-    <link>https://qwenlm.github.io/tags/sure/</link>
-    <description>Recent content in SuRe on Qwen</description>
+    <title>SuRe on Zen LM</title>
+    <link>https://zenlm.org/tags/sure/</link>
+    <description>Recent content in SuRe on Zen LM</description>
     <image>
-      <url>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 28 Feb 2026 10:00:00 -0800</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/sure/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Feb 2026 10:00:00 -0800</lastBuildDate><atom:link href="https://zenlm.org/tags/sure/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SuRe &#43; OPCM: Production-Grade Continual Learning for Open Models</title>
-      <link>https://qwenlm.github.io/blog/continual-learning-sure-opcm/</link>
+      <link>https://zenlm.org/blog/continual-learning-sure-opcm/</link>
       <pubDate>Sat, 28 Feb 2026 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/blog/continual-learning-sure-opcm/</guid>
+      <guid>https://zenlm.org/blog/continual-learning-sure-opcm/</guid>
       <description>Deep dive on Surprise-Driven Prioritized Replay (SuRe) and Orthogonal Projection Continual Merging (OPCM) — the two SOTA techniques we use for catastrophic-forgetting-free LLM adaptation in the Zen model family.</description>
     </item>
     

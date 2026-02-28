@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Governance on Qwen</title>
-    <link>https://qwenlm.github.io/tags/governance/</link>
-    <description>Recent content in Governance on Qwen</description>
+    <title>Governance on Zen LM</title>
+    <link>https://zenlm.org/tags/governance/</link>
+    <description>Recent content in Governance on Zen LM</description>
     <image>
-      <url>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 20 May 2024 09:00:00 -0800</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/governance/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 May 2024 09:00:00 -0800</lastBuildDate><atom:link href="https://zenlm.org/tags/governance/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ZIPs: Decentralized Governance for Open AI</title>
-      <link>https://qwenlm.github.io/blog/zips-governance/</link>
+      <link>https://zenlm.org/blog/zips-governance/</link>
       <pubDate>Mon, 20 May 2024 09:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/blog/zips-governance/</guid>
+      <guid>https://zenlm.org/blog/zips-governance/</guid>
       <description>How Zoo Improvement Proposals enable community-driven governance of open AI development.</description>
     </item>
     
     <item>
       <title>The Case for Decentralized Science</title>
-      <link>https://qwenlm.github.io/blog/case-for-decentralized-science/</link>
+      <link>https://zenlm.org/blog/case-for-decentralized-science/</link>
       <pubDate>Mon, 08 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://qwenlm.github.io/blog/case-for-decentralized-science/</guid>
+      <guid>https://zenlm.org/blog/case-for-decentralized-science/</guid>
       <description>A manifesto for decentralized science (DeSci) and its application to AI research.</description>
     </item>
     

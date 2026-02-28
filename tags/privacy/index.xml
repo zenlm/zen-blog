@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Privacy on Qwen</title>
-    <link>https://qwenlm.github.io/tags/privacy/</link>
-    <description>Recent content in Privacy on Qwen</description>
+    <title>Privacy on Zen LM</title>
+    <link>https://zenlm.org/tags/privacy/</link>
+    <description>Recent content in Privacy on Zen LM</description>
     <image>
-      <url>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 30 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/privacy/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://zenlm.org/tags/privacy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Federated Learning Without Compromise</title>
-      <link>https://qwenlm.github.io/blog/federated-learning-without-compromise/</link>
+      <link>https://zenlm.org/blog/federated-learning-without-compromise/</link>
       <pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://qwenlm.github.io/blog/federated-learning-without-compromise/</guid>
+      <guid>https://zenlm.org/blog/federated-learning-without-compromise/</guid>
       <description>Privacy-preserving machine learning that maintains model quality through novel aggregation protocols.</description>
     </item>
     
     <item>
       <title>Federated Learning for Open AI</title>
-      <link>https://qwenlm.github.io/blog/federated-learning/</link>
+      <link>https://zenlm.org/blog/federated-learning/</link>
       <pubDate>Mon, 09 May 2022 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/blog/federated-learning/</guid>
+      <guid>https://zenlm.org/blog/federated-learning/</guid>
       <description>How federated learning enables collaborative model training while preserving data privacy.</description>
     </item>
     

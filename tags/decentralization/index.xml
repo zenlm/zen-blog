@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Decentralization on Qwen</title>
-    <link>https://qwenlm.github.io/tags/decentralization/</link>
-    <description>Recent content in Decentralization on Qwen</description>
+    <title>Decentralization on Zen LM</title>
+    <link>https://zenlm.org/tags/decentralization/</link>
+    <description>Recent content in Decentralization on Zen LM</description>
     <image>
-      <url>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://qwenlm.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://zenlm.org/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 05 Aug 2024 10:00:00 -0800</lastBuildDate><atom:link href="https://qwenlm.github.io/tags/decentralization/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Aug 2024 10:00:00 -0800</lastBuildDate><atom:link href="https://zenlm.org/tags/decentralization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Decentralized Compute for AI Training</title>
-      <link>https://qwenlm.github.io/blog/decentralized-compute/</link>
+      <link>https://zenlm.org/blog/decentralized-compute/</link>
       <pubDate>Mon, 05 Aug 2024 10:00:00 -0800</pubDate>
       
-      <guid>https://qwenlm.github.io/blog/decentralized-compute/</guid>
+      <guid>https://zenlm.org/blog/decentralized-compute/</guid>
       <description>How we&amp;#39;re building a decentralized compute network for training large AI models.</description>
     </item>
     
