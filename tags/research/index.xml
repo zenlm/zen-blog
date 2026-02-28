@@ -47,6 +47,15 @@
     </item>
     
     <item>
+      <title>Zen MoDE: Mixture of Distilled Experts</title>
+      <link>https://zenlm.org/blog/zen-mode-architecture/</link>
+      <pubDate>Fri, 16 Jan 2026 09:00:00 -0800</pubDate>
+      
+      <guid>https://zenlm.org/blog/zen-mode-architecture/</guid>
+      <description>A technical deep dive into Zen MoDE — Mixture of Distilled Experts — the architecture underlying all Zen models.</description>
+    </item>
+    
+    <item>
       <title>Proof of AI: Verifiable Machine Learning on Chain</title>
       <link>https://zenlm.org/blog/proof-of-ai/</link>
       <pubDate>Mon, 26 Jun 2023 09:00:00 -0800</pubDate>

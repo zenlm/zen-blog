@@ -28,5 +28,14 @@
       <description>How Drop-Upcycling (arXiv:2502.19261) transforms dense checkpoints into MoE models at 1/4 training cost, and how it shapes Zen MoDE — our Mixture of Distilled Experts architecture.</description>
     </item>
     
+    <item>
+      <title>Zen MoDE: Mixture of Distilled Experts</title>
+      <link>https://zenlm.org/blog/zen-mode-architecture/</link>
+      <pubDate>Fri, 16 Jan 2026 09:00:00 -0800</pubDate>
+      
+      <guid>https://zenlm.org/blog/zen-mode-architecture/</guid>
+      <description>A technical deep dive into Zen MoDE — Mixture of Distilled Experts — the architecture underlying all Zen models.</description>
+    </item>
+    
   </channel>
 </rss>

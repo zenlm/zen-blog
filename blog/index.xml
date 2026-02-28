@@ -47,6 +47,33 @@
     </item>
     
     <item>
+      <title>Zen4 Ultra: 480B Parameters, 1M Token Context</title>
+      <link>https://zenlm.org/blog/zen4-ultra/</link>
+      <pubDate>Tue, 20 Jan 2026 09:00:00 -0800</pubDate>
+      
+      <guid>https://zenlm.org/blog/zen4-ultra/</guid>
+      <description>Zen4 Ultra is our most capable model: 480B total parameters, 35B active per token, 1M token context window. Benchmark results and use cases.</description>
+    </item>
+    
+    <item>
+      <title>Zen MoDE: Mixture of Distilled Experts</title>
+      <link>https://zenlm.org/blog/zen-mode-architecture/</link>
+      <pubDate>Fri, 16 Jan 2026 09:00:00 -0800</pubDate>
+      
+      <guid>https://zenlm.org/blog/zen-mode-architecture/</guid>
+      <description>A technical deep dive into Zen MoDE — Mixture of Distilled Experts — the architecture underlying all Zen models.</description>
+    </item>
+    
+    <item>
+      <title>Introducing Zen LM: Open Frontier Models from Hanzo AI and Zoo Labs</title>
+      <link>https://zenlm.org/blog/zen-lm-launch/</link>
+      <pubDate>Thu, 15 Jan 2026 09:00:00 -0800</pubDate>
+      
+      <guid>https://zenlm.org/blog/zen-lm-launch/</guid>
+      <description>Announcing the Zen model family: 94&#43; open models built on Zen MoDE architecture, co-developed by Hanzo AI and Zoo Labs Foundation.</description>
+    </item>
+    
+    <item>
       <title>Qwen3Guard: Real-time Safety for Your Token Stream</title>
       <link>https://zenlm.org/blog/qwen3guard/</link>
       <pubDate>Tue, 23 Sep 2025 04:00:00 +0800</pubDate>
