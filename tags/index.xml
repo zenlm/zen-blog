@@ -155,20 +155,47 @@
     </item>
     
     <item>
-      <title>Announcement</title>
-      <link>https://zenlm.org/tags/announcement/</link>
-      <pubDate>Mon, 13 Jan 2025 09:00:00 -0800</pubDate>
+      <title>Flagship</title>
+      <link>https://zenlm.org/tags/flagship/</link>
+      <pubDate>Tue, 20 Jan 2026 09:00:00 -0800</pubDate>
       
-      <guid>https://zenlm.org/tags/announcement/</guid>
+      <guid>https://zenlm.org/tags/flagship/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Models</title>
       <link>https://zenlm.org/tags/models/</link>
-      <pubDate>Mon, 13 Jan 2025 09:00:00 -0800</pubDate>
+      <pubDate>Tue, 20 Jan 2026 09:00:00 -0800</pubDate>
       
       <guid>https://zenlm.org/tags/models/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zen4</title>
+      <link>https://zenlm.org/tags/zen4/</link>
+      <pubDate>Tue, 20 Jan 2026 09:00:00 -0800</pubDate>
+      
+      <guid>https://zenlm.org/tags/zen4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Announcement</title>
+      <link>https://zenlm.org/tags/announcement/</link>
+      <pubDate>Thu, 15 Jan 2026 09:00:00 -0800</pubDate>
+      
+      <guid>https://zenlm.org/tags/announcement/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Zen</title>
+      <link>https://zenlm.org/tags/zen/</link>
+      <pubDate>Thu, 15 Jan 2026 09:00:00 -0800</pubDate>
+      
+      <guid>https://zenlm.org/tags/zen/</guid>
       <description></description>
     </item>
     
