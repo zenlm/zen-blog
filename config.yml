@@ -1,5 +1,5 @@
-baseURL: "https://qwenlm.github.io/"
-title: Qwen
+baseURL: "https://zenlm.org/"
+title: Zen LM
 paginate: 5
 theme: PaperMod
 
@@ -17,13 +17,6 @@ languages:
   en:
     languageName: English
     weight: 1
-  zh:
-    languageName: 简体中文
-    weight: 2
-    params:
-      date_format: "2006年1月2日"
-    disableKinds:
-      - home
 
 
 minify:
@@ -32,10 +25,10 @@ minify:
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: Qwen
-  description: "Qwen"
-  keywords: ["multi-modal", "machine learning", "blog"]
-  author: Qwen Team
+  title: Zen LM
+  description: "Zen LM — Frontier open models from Hanzo AI and Zoo Labs Foundation"
+  keywords: ["Zen LM", "Zen MoDE", "open weights", "large language models", "machine learning", "AI"]
+  author: Zen LM Team
   # author: ["Me", "You"] # multiple authors
   images: ["<link or path of image for opengraph, twitter-cards>"]
 
@@ -48,20 +41,15 @@ params:
   disable_language_switch: true
   displayFullLangName: true
 
-  # for redirect
-  redirect: true
-  redirect_url: https://qwen.ai/research
-  redirect_title: We have a new blog at [qwen.ai](https://qwen.ai/research)!
-  redirect_page: true
-  redirect_page_url_template: https://qwen.ai/blog?id={slug}
-  redirect_page_title_template: We have a new blog!<br>View this page at [qwen.ai]({url}).
+  # redirect disabled — we host canonical content here
+  redirect: false
 
   # custom site and page variables
   show_share_buttons: true
   show_bread_crumbs: true
   hide_meta: false
   math: false
-  
+
   # single page only
   show_code_copy_buttons: true
   show_word_count: true
@@ -71,7 +59,7 @@ params:
   comments: false
   show_reading_time: true
   show_post_nav_links: false
-  
+
   # list page only
   hide_summary: false
   show_rss_button_in_section_term_list: false
@@ -87,61 +75,9 @@ params:
     theme_color: "#615CED"
 
   label:
-    text: "Qwen"
+    text: "Zen LM"
     icon: /img/logo.png
     iconHeight: 30
-
-  # profile-mode
-  # profileMode:
-  #   enabled: false # needs to be explicitly set
-  #   title: ExampleSite
-  #   subtitle: "This is subtitle"
-  #   imageUrl: "<img location>"
-  #   imageWidth: 120
-  #   imageHeight: 120
-  #   imageTitle: my image
-  #   buttons:
-  #     - name: Posts
-  #       url: posts
-  #     - name: Tags
-  #       url: tags
-
-  # home-info mode
-  # home_info_params:
-  #   title: "OFA: Towards Unified AI Models"
-  #   header:
-  #     # background: "linear-gradient(36deg, var(--hero1) 0%, var(--hero2) 80%);"
-  #     background_images: "/image/outpainting-home-right-optimized.jpg"
-  #     gradient: false
-  #   # content: Welcome to my blog
-
-  # social_icons:
-  #   # - name: twitter
-  #   #   url: "https://twitter.com/"
-  #   # - name: stackoverflow
-  #   #   url: "https://stackoverflow.com"
-  #   - name: github
-  #     url: "https://github.com/OFA-Sys"
-
-  # analytics:
-  #   google:
-  #     SiteVerificationTag: "XYZabc"
-  #   bing:
-  #     SiteVerificationTag: "XYZabc"
-  #   yandex:
-  #     SiteVerificationTag: "XYZabc"
-
-  cover:
-    link_full_images: true
-    responsive_images: true
-    hidden: false # hide everywhere but not in structured data
-    hidden_in_list: false # hide on list pages and home
-    hidden_in_single: false # hide on single page
-
-  # edit_post:
-  #   url: "https://github.com/<path_to_repo>/content"
-  #   text: "Suggest Changes" # edit text
-  #   append_file_path: true # to append file path to Edit link
 
   # for search
   # https://fusejs.io/api/options.html
@@ -156,13 +92,9 @@ params:
     ignoreLocation: false
     location: 0
     distance: 1000
-    
+
 menu:
   main:
-    # - identifier: api
-    #   name: Resources
-    #   url: /resources
-    #   weight: 10
     - identifier: blog
       name: Blog
       url: /blog/
@@ -175,22 +107,19 @@ menu:
       name: About
       url: /about
       weight: 40
-    - identifer: qwen-chat
-      name: Try Qwen Chat
-      url: https://chat.qwen.ai
+    - identifier: chat
+      name: Try Zen Chat
+      url: https://hanzo.ai/chat
+    - identifier: hanzo-blog
+      name: hanzo.blog
+      url: https://hanzo.blog
+    - identifier: zoo-blog
+      name: zoo blog
+      url: https://blog.zoo.ngo
+    - identifier: zeekay-blog
+      name: zeekay
+      url: https://zeekay.blog
       weight: 50
-    # - identifier: search
-    #   name: SEARCH
-    #   url: /search
-    #   weight: 50
-    # - identifier: categories
-    #   name: CATEGORIES
-    #   url: /categories/
-    #   weight: 10
-    # - identifier: tags
-    #   name: TAGS
-    #   url: /tags/
-    #   weight: 20
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
