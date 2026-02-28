@@ -2,6 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://qwenlm.github.io/blog/gt-qlora-moe-abliteration/</loc>
+    <lastmod>2026-02-28T13:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/blog/drop-upcycling-zen-mode/</loc>
+    <lastmod>2026-02-28T12:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/blog/bitdelta-behavioral-compression/</loc>
+    <lastmod>2026-02-28T11:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/blog/continual-learning-sure-opcm/</loc>
+    <lastmod>2026-02-28T10:00:00-08:00</lastmod>
+  </url><url>
     <loc>https://qwenlm.github.io/blog/qwen3guard/</loc>
     <lastmod>2025-09-23T04:00:00+08:00</lastmod>
     <xhtml:link
@@ -548,8 +560,11 @@
                 href="https://qwenlm.github.io/blog/ofa/"
                 />
   </url><url>
+    <loc>https://qwenlm.github.io/tags/abliteration/</loc>
+    <lastmod>2026-02-28T13:00:00-08:00</lastmod>
+  </url><url>
     <loc>https://qwenlm.github.io/blog/</loc>
-    <lastmod>2025-09-23T04:00:00+08:00</lastmod>
+    <lastmod>2026-02-28T13:00:00-08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -561,8 +576,14 @@
                 href="https://qwenlm.github.io/blog/"
                 />
   </url><url>
+    <loc>https://qwenlm.github.io/tags/gt-qlora/</loc>
+    <lastmod>2026-02-28T13:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/moe/</loc>
+    <lastmod>2026-02-28T13:00:00-08:00</lastmod>
+  </url><url>
     <loc>https://qwenlm.github.io/</loc>
-    <lastmod>2025-09-23T04:00:00+08:00</lastmod>
+    <lastmod>2026-02-28T13:00:00-08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -574,14 +595,11 @@
                 href="https://qwenlm.github.io/"
                 />
   </url><url>
-    <loc>https://qwenlm.github.io/tags/announcement/</loc>
-    <lastmod>2025-01-13T09:00:00-08:00</lastmod>
-  </url><url>
-    <loc>https://qwenlm.github.io/tags/models/</loc>
-    <lastmod>2025-01-13T09:00:00-08:00</lastmod>
+    <loc>https://qwenlm.github.io/tags/research/</loc>
+    <lastmod>2026-02-28T13:00:00-08:00</lastmod>
   </url><url>
     <loc>https://qwenlm.github.io/tags/</loc>
-    <lastmod>2025-01-13T09:00:00-08:00</lastmod>
+    <lastmod>2026-02-28T13:00:00-08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh"
@@ -592,6 +610,48 @@
                 hreflang="en"
                 href="https://qwenlm.github.io/tags/"
                 />
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/zen4-ultra/</loc>
+    <lastmod>2026-02-28T13:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/architecture/</loc>
+    <lastmod>2026-02-28T12:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/drop-upcycling/</loc>
+    <lastmod>2026-02-28T12:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/zen-mode/</loc>
+    <lastmod>2026-02-28T12:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/bitdelta/</loc>
+    <lastmod>2026-02-28T11:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/delta-compression/</loc>
+    <lastmod>2026-02-28T11:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/model-serving/</loc>
+    <lastmod>2026-02-28T11:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/quantization/</loc>
+    <lastmod>2026-02-28T11:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/continual-learning/</loc>
+    <lastmod>2026-02-28T10:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/opcm/</loc>
+    <lastmod>2026-02-28T10:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/oplora/</loc>
+    <lastmod>2026-02-28T10:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/sure/</loc>
+    <lastmod>2026-02-28T10:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/announcement/</loc>
+    <lastmod>2025-01-13T09:00:00-08:00</lastmod>
+  </url><url>
+    <loc>https://qwenlm.github.io/tags/models/</loc>
+    <lastmod>2025-01-13T09:00:00-08:00</lastmod>
   </url><url>
     <loc>https://qwenlm.github.io/blog/zen-3/</loc>
     <lastmod>2025-01-13T09:00:00-08:00</lastmod>
@@ -648,9 +708,6 @@
     <lastmod>2023-09-11T10:00:00-08:00</lastmod>
   </url><url>
     <loc>https://qwenlm.github.io/blog/proof-of-ai/</loc>
-    <lastmod>2023-06-26T09:00:00-08:00</lastmod>
-  </url><url>
-    <loc>https://qwenlm.github.io/tags/research/</loc>
     <lastmod>2023-06-26T09:00:00-08:00</lastmod>
   </url><url>
     <loc>https://qwenlm.github.io/tags/verification/</loc>
