@@ -1,28 +1,32 @@
-{{- if not (.Param "hide_footer") }}
+{{- if not (.Param "hideFooter") }}
 <footer class="footer">
-    {{- if site.Copyright }}
-    <span>{{ site.Copyright | markdownify }}</span>
-    {{- else }}
-    <span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
+    {{- if not site.Params.footer.hideCopyright }}
+        {{- if site.Copyright }}
+        <span>{{ site.Copyright | markdownify }}</span>
+        {{- else }}
+        <span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ site.Title }}</a></span>
+        {{- end }}
+        {{- print " · "}}
     {{- end }}
+
+    {{- with site.Params.footer.text }}
+        {{ . | markdownify }}
+        {{- print " · "}}
+    {{- end }}
+
     <span>
         Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a>
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 </footer>
 {{- end }}
 
-{{- if (not site.Params.disable_scroll_to_top) }}
+{{- if (not site.Params.disableScrollToTop) }}
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
-    </svg> -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" fill="currentColor">
-        <path d="M 12 8 H 0 l 6 -8 z" />
     </svg>
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-        <path d="m 1.65 5.65 l 0.71 0.71 L 5.5 3.21 V 10 h 1 V 3.21 l 3.15 3.15 l 0.71 -0.71 L 6 1.29 l -4.35 4.35 z" />
-    </svg> -->
 </a>
 {{- end }}
 
@@ -31,10 +35,15 @@
 <script>
     let menu = document.getElementById('menu');
     if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        // Set the scroll position
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
         menu.onscroll = function () {
             localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        };
+        }
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -58,7 +67,7 @@
 
 </script>
 
-{{- if (not site.Params.disable_scroll_to_top) }}
+{{- if (not site.Params.disableScrollToTop) }}
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {
@@ -70,29 +79,19 @@
             mybutton.style.opacity = "0";
         }
     };
-    mybutton.oncontextmenu = (e) => {
-        // right click to show all examples
-        e.preventDefault();
-        document.querySelectorAll(".example-container").forEach((e) => { e.style.backgroundColor = "unset"; });
-        document.querySelectorAll(".example-content").forEach((e) => {
-            e.style.display = "block";
-            e.style.backgroundColor = "var(--code-bg)";
-            e.style.marginBottom = "var(--modal-gap)";
-            e.classList.remove("scroll")
-        });
-        document.querySelectorAll(".next-button").forEach((e) => { e.style.display = "none"; });
-    };
+
 </script>
 {{- end }}
 
-{{- if (not site.Params.disable_theme_toggle) }}
+{{- if (not site.Params.disableThemeToggle) }}
 <script>
     document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
             localStorage.setItem("pref-theme", 'light');
         } else {
-            document.body.classList.add('dark');
+            html.dataset.theme = 'dark';
             localStorage.setItem("pref-theme", 'dark');
         }
     })
@@ -100,7 +99,7 @@
 </script>
 {{- end }}
 
-{{- if (and (eq .Kind "page") (ne .Layout "archives") (ne .Layout "search") (.Param "show_code_copy_buttons")) }}
+{{- if (and (eq .Kind "page") (ne .Layout "archives") (ne .Layout "search") (.Param "ShowCodeCopyButtons")) }}
 <script>
     document.querySelectorAll('pre > code').forEach((codeblock) => {
         const container = codeblock.parentNode.parentNode;

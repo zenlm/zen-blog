@@ -77,22 +77,19 @@ sInput.onkeyup = function (e) {
     // run a search query (for "term") every time a letter is typed
     // in the search box
     if (fuse) {
-        const query = this.value.trim();
-        const results = fuse.search(query); // the actual query being run using fuse.js
+        let results;
+        if (params.fuseOpts) {
+            results = fuse.search(this.value.trim(), {limit: params.fuseOpts.limit}); // the actual query being run using fuse.js along with options
+        } else {
+            results = fuse.search(this.value.trim()); // the actual query being run using fuse.js
+        }
         if (results.length !== 0) {
             // build our html if result exists
             let resultSet = ''; // our results bucket
 
-            let seen = new Set();
-
             for (let item in results) {
-                const uid = results[item].item.permalink;
-                if (seen.has(uid)){
-                    continue
-                }
                 resultSet += `<li class="post-entry"><header class="entry-header">${results[item].item.title}&nbsp;»</header>` +
                     `<a href="${results[item].item.permalink}" aria-label="${results[item].item.title}"></a></li>`
-                seen.add(uid);
             }
 
             resList.innerHTML = resultSet;
@@ -101,11 +98,7 @@ sInput.onkeyup = function (e) {
             last = resList.lastChild;
         } else {
             resultsAvailable = false;
-            if (query.length > 0) {
-                resList.innerHTML = `<li class="post-entry"><header class="entry-header">No Match Found</header></li>`;
-            } else {
-                resList.innerHTML = "";
-            }
+            resList.innerHTML = '';
         }
     }
 }
