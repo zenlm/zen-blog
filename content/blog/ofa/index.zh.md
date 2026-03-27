@@ -21,7 +21,6 @@ show_word_count: true
 # use_hugo_toc: true
 # show_toc: true
 # toc_open: true # default expand all
-lang: zh-CN
 # cover:
 #     image: "ofa_banner.jpg"
 #     # can also paste direct link from external site

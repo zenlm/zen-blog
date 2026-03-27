@@ -1,4 +1,4 @@
-baseURL: "https://zenlm.org/"
+baseURL: "https://blog.zenlm.org/"
 title: Zen LM
 paginate: 5
 theme: PaperMod
