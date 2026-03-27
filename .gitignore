@@ -1,18 +1,38 @@
-.hugo_build.lock
-public
-.vscode
-resources/_gen
-*.log
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+
+# fumadocs
+.source/
+
+# build
+*.tsbuildinfo
+
+# env
+.env
+.env.*
+
+# misc
 .DS_Store
+*.log
+.vscode
 
-
+# AI assistant symlinks
 AGENTS.md
 CLAUDE.md
 GEMINI.md
 GROK.md
 QWEN.md
+
+# model files
 *.safetensors
 *.bin
 *.gguf
 *.pt
 *.pth
+
+# conversion script (not needed after migration)
+convert.sh
