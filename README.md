@@ -1,17 +1,26 @@
-# Zen's Blog
+# Zen LM Blog
 
-## Abliteration
+Blog for Zen LM -- open-source language models and AI research from Hanzo AI and Zoo Labs Foundation.
 
-Zen Blog 4B weights are derived from an abliterated base model. Abliteration removes
-refusal behavior by identifying and nullifying the "refusal direction" in the model's
-residual stream.
+**URL**: https://blog.zenlm.org
 
-**Method**: Directional ablation on the residual stream across all layers
-**Implementation**: [hanzoai/remove-refusals](https://github.com/hanzoai/remove-refusals) — Hanzo's production abliteration toolkit
-**Technique**: [Refusal in LLMs is mediated by a single direction](https://www.lesswrong.com/posts/jGuXSZgv6qfdhMCuJ/refusal-in-llms-is-mediated-by-a-single-direction) — Arditi et al.
-**Effect**: Removes refusal behaviors while preserving all other capabilities
-**Identity layer**: Zen identity added via system prompt — full LoRA fine-tuning planned
+## Stack
 
-Abliteration is a feature, not a limitation. It enables unrestricted research,
-security testing, and applications where safety guardrails are managed at the
-application layer rather than baked into model weights.
+- Next.js 15 + fumadocs
+- Tailwind CSS 4
+- Static export to Cloudflare Pages
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+Output is in `out/`.
