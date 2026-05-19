@@ -86,4 +86,56 @@ header nav ul li:last-child > a::after {
   else document.addEventListener('DOMContentLoaded', bump);
   setInterval(bump, 1500);
 })();
+</script><script>
+(function(){
+  var DESIRED_D = "M 226 87 A 172 172 0 1 1 256 84";
+  function decorate(){
+    document.querySelectorAll('[aria-label="Zen LM"]').forEach(function(host){
+      var svg = host.querySelector('svg');
+      if (!svg) return;
+      svg.querySelectorAll('circle').forEach(function(c){
+        var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        ['stroke','stroke-width','stroke-linecap','class','transform'].forEach(function(a){
+          if (c.hasAttribute(a)) p.setAttribute(a, c.getAttribute(a));
+        });
+        p.setAttribute('d', DESIRED_D);
+        p.setAttribute('stroke-linejoin', 'round');
+        c.parentNode.replaceChild(p, c);
+      });
+      svg.querySelectorAll('path').forEach(function(p){
+        if (p.getAttribute('d') !== DESIRED_D) {
+          p.setAttribute('d', DESIRED_D);
+          p.setAttribute('stroke-linejoin', 'round');
+        }
+      });
+      if (!svg.querySelector('defs > linearGradient#zenBrush')) {
+        var defs = svg.querySelector('defs');
+        if (!defs) {
+          defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+          svg.insertBefore(defs, svg.firstChild);
+        }
+        var grad = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+        grad.setAttribute('id', 'zenBrush');
+        grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+        grad.setAttribute('x1', '226'); grad.setAttribute('y1', '87');
+        grad.setAttribute('x2', '320'); grad.setAttribute('y2', '430');
+        [['0','0.06'],['0.15','0.4'],['0.4','1'],['1','1']].forEach(function(pair){
+          var s = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+          s.setAttribute('offset', pair[0]);
+          s.setAttribute('stop-color', 'currentColor');
+          s.setAttribute('stop-opacity', pair[1]);
+          grad.appendChild(s);
+        });
+        defs.appendChild(grad);
+      }
+      svg.querySelectorAll('path').forEach(function(p){
+        p.setAttribute('stroke', 'url(#zenBrush)');
+      });
+      host.setAttribute('data-brushed','1');
+    });
+  }
+  function start(){ decorate(); setInterval(decorate, 1200); }
+  if (document.readyState !== 'loading') start();
+  else document.addEventListener('DOMContentLoaded', start);
+})();
 </script></body></html>
