@@ -71,7 +71,13 @@ header nav > div > .flex.flex-row.items-center.justify-end {
     document.querySelectorAll('[aria-label="Zen LM"]').forEach(function(host){
       var svg = host.querySelector('svg');
       if (!svg) return;
-      // 1. Replace any <circle> with the open arc <path>.
+      // Strip the inline <style> block that sets stroke-dasharray/animation —
+      // the dasharray (1200 user units) clips the stroke to only a portion
+      // of the path instead of revealing the full arc. We don't want the
+      // draw-in animation anyway; the brush should be visible immediately.
+      var innerStyle = host.querySelector('style');
+      if (innerStyle) innerStyle.remove();
+      // Replace any <circle> with the open arc <path>.
       svg.querySelectorAll('circle').forEach(function(c){
         var p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         ['stroke','stroke-width','stroke-linecap','class','transform'].forEach(function(a){
@@ -81,18 +87,20 @@ header nav > div > .flex.flex-row.items-center.justify-end {
         p.setAttribute('stroke-linejoin', 'round');
         c.parentNode.replaceChild(p, c);
       });
-      // 2. Force d attribute, drop any prior gradient stroke so it stays SOLID.
+      // Force d, drop any animation class, solid stroke, no dash pattern.
       svg.querySelectorAll('path').forEach(function(p){
         if (p.getAttribute('d') !== DESIRED_D) {
           p.setAttribute('d', DESIRED_D);
           p.setAttribute('stroke-linejoin', 'round');
         }
+        if (p.hasAttribute('class')) p.removeAttribute('class');
+        p.style.strokeDasharray = 'none';
+        p.style.strokeDashoffset = '0';
+        p.style.animation = 'none';
         var cur = p.getAttribute('stroke') || '';
-        if (cur.indexOf('url(') === 0) {
-          p.setAttribute('stroke', host.dataset.brushColor || 'currentColor');
-        }
+        if (cur.indexOf('url(') === 0) p.setAttribute('stroke', 'currentColor');
       });
-      // 3. Remove any prior <defs><linearGradient id="zenBrush">.
+      // Drop any prior #zenBrush gradient.
       var oldGrad = svg.querySelector('defs > linearGradient#zenBrush');
       if (oldGrad) oldGrad.parentNode.removeChild(oldGrad);
     });
