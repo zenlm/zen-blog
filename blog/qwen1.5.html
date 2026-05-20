@@ -918,13 +918,13 @@ header nav > div > .flex.flex-row.items-center.justify-end {
     document.querySelectorAll('a').forEach(function(a){
       if (a.dataset.zenLotusSwapped) return;
       var t = (a.textContent || '');
-      if (!/🪷.*Zen LM|Zen LM.*🪷/.test(t)) return;
+      if (!/.*Zen LM|Zen LM.*/.test(t)) return;
       // Find the lotus text node specifically
       var walker = document.createTreeWalker(a, NodeFilter.SHOW_TEXT, null);
       var node;
       while ((node = walker.nextNode())) {
-        if (node.nodeValue && node.nodeValue.indexOf('🪷') !== -1) {
-          node.nodeValue = node.nodeValue.replace(/🪷\s?/g, '');
+        if (node.nodeValue && node.nodeValue.indexOf('') !== -1) {
+          node.nodeValue = node.nodeValue.replace(/\s?/g, '');
         }
       }
       // Inject enso SVG at start
