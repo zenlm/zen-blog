@@ -1,4 +1,4 @@
-<!DOCTYPE html><!--i_dnJM_MIpJSOCQWNJVMq--><html lang="en" class="dark"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/chunks/f2332aac77592f9d.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/e83606e8fa9cc796.js"/><script src="/_next/static/chunks/36d6595f0156cd7e.js" async=""></script><script src="/_next/static/chunks/040e9cea20a8d9c7.js" async=""></script><script src="/_next/static/chunks/d4dffb5a0973d49c.js" async=""></script><script src="/_next/static/chunks/turbopack-967f27a9fd33556d.js" async=""></script><script src="/_next/static/chunks/59d0ad1b64f8544e.js" async=""></script><script src="/_next/static/chunks/4d80e004cf4896dd.js" async=""></script><script src="/_next/static/chunks/350ee4303b732916.js" async=""></script><script src="/_next/static/chunks/8de849ca74fc071f.js" async=""></script><script src="/_next/static/chunks/e62b91212ee7f8ff.js" async=""></script><script src="/_next/static/chunks/f19fe44237e54646.js" async=""></script><script src="/_next/static/chunks/cb0a883bafeb6805.js" async=""></script><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0A0A0A"/><meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff"/><title>7680-Dimensional Embeddings: More Dimensions, Better Retrieval — Zen LM Blog | Zen LM</title><meta name="description" content="Why we trained embedding models with 7680 dimensions and what we learned about the relationship between dimensionality and retrieval quality."/><meta property="og:title" content="Zen LM - Open Foundation Models"/><meta property="og:description" content="Zen AI model family by Hanzo AI. 14 frontier models from 4B to 1T+ parameters for code, reasoning, vision, and multimodal tasks."/><meta property="og:url" content="https://zenlm.org"/><meta property="og:site_name" content="Zen LM"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:site" content="@zenlmorg"/><meta name="twitter:creator" content="@zenlmorg"/><meta name="twitter:title" content="Zen LM - Open Foundation Models"/><meta name="twitter:description" content="Zen AI model family by Hanzo AI. 14 frontier models from 4B to 1T+ parameters for code, reasoning, vision, and multimodal tasks."/><script src="/_next/static/chunks/a6dad97d9634a72d.js" noModule=""></script></head><body class="antialiased"><div hidden=""><!--$--><!--/$--></div><script>((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=["light","dark"];function k(b){var c;(Array.isArray(a)?a:[a]).forEach(a=>{let c="class"===a,d=c&&f?e.map(a=>f[a]||a):e;c?(i.classList.remove(...d),i.classList.add(f&&f[b]?f[b]:b)):i.setAttribute(a,b)}),c=b,h&&j.includes(c)&&(i.style.colorScheme=c)}if(d)k(d);else try{let a=localStorage.getItem(b)||c,d=g&&"system"===a?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":a;k(d)}catch(a){}})("class","theme","system",null,["light","dark"],null,true,true)</script><!--$--><div data-closed="" role="presentation" hidden="" style="user-select:none;-webkit-user-select:none" class="fixed inset-0 z-50 backdrop-blur-xs bg-fd-overlay data-open:animate-fd-fade-in data-closed:animate-fd-fade-out"></div><div class="bg-fd-secondary/50 p-3 empty:hidden"></div><!--/$--><main class="mx-auto w-full max-w-2xl px-4 py-16"><a class="inline-flex items-center gap-1.5 text-sm text-fd-muted-foreground hover:text-fd-foreground mb-10 transition-colors" href="/blog">← Back to Blog</a><div class="mb-8"><time class="text-xs font-mono text-fd-muted-foreground uppercase tracking-wider">December 4, 2022</time><h1 class="text-3xl font-bold mt-2 mb-3">7680-Dimensional Embeddings: More Dimensions, Better Retrieval</h1><p class="text-fd-muted-foreground text-lg mb-4">Why we trained embedding models with 7680 dimensions and what we learned about the relationship between dimensionality and retrieval quality.</p><div class="flex items-center gap-3 pt-4 border-t border-fd-border"><span class="text-sm text-fd-muted-foreground">By <!-- -->Zach Kelling</span><div class="flex gap-1.5 ml-auto"><span class="text-[10px] font-mono uppercase tracking-wider bg-fd-muted text-fd-muted-foreground px-1.5 py-0.5 rounded">Research</span><span class="text-[10px] font-mono uppercase tracking-wider bg-fd-muted text-fd-muted-foreground px-1.5 py-0.5 rounded">Embeddings</span><span class="text-[10px] font-mono uppercase tracking-wider bg-fd-muted text-fd-muted-foreground px-1.5 py-0.5 rounded">Retrieval</span></div></div></div><div class="prose dark:prose-invert max-w-none"><p>Embedding dimensions have standardized around powers of two: 768, 1536, occasionally 4096. We asked a simple question: what happens if we go bigger? The answer surprised us.</p>
+<!DOCTYPE html><!--i_dnJM_MIpJSOCQWNJVMq--><html lang="en" class="dark"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/chunks/f2332aac77592f9d.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/e83606e8fa9cc796.js"/><script src="/_next/static/chunks/36d6595f0156cd7e.js" async=""></script><script src="/_next/static/chunks/040e9cea20a8d9c7.js" async=""></script><script src="/_next/static/chunks/d4dffb5a0973d49c.js" async=""></script><script src="/_next/static/chunks/turbopack-967f27a9fd33556d.js" async=""></script><script src="/_next/static/chunks/59d0ad1b64f8544e.js" async=""></script><script src="/_next/static/chunks/4d80e004cf4896dd.js" async=""></script><script src="/_next/static/chunks/350ee4303b732916.js" async=""></script><script src="/_next/static/chunks/8de849ca74fc071f.js" async=""></script><script src="/_next/static/chunks/e62b91212ee7f8ff.js" async=""></script><script src="/_next/static/chunks/f19fe44237e54646.js" async=""></script><script src="/_next/static/chunks/cb0a883bafeb6805.js" async=""></script><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0A0A0A"/><meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff"/><title>7680-Dimensional Embeddings: More Dimensions, Better Retrieval — Zen LM Blog | Zen LM</title><meta name="description" content="Why we trained embedding models with 7680 dimensions and what we learned about the relationship between dimensionality and retrieval quality."/><meta property="og:title" content="Zen LM - Open Foundation Models"/><meta property="og:description" content="Zen AI model family by Hanzo AI. 14 frontier models from 4B to 1T+ parameters for code, reasoning, vision, and multimodal tasks."/><meta property="og:url" content="https://zenlm.org"/><meta property="og:site_name" content="Zen LM"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:site" content="@zenlmorg"/><meta name="twitter:creator" content="@zenlmorg"/><meta name="twitter:title" content="Zen LM - Open Foundation Models"/><meta name="twitter:description" content="Zen AI model family by Hanzo AI. 14 frontier models from 4B to 1T+ parameters for code, reasoning, vision, and multimodal tasks."/><script src="/_next/static/chunks/a6dad97d9634a72d.js" noModule=""></script><script defer src="/zen-decorate.js"></script></head><body class="antialiased"><div hidden=""><!--$--><!--/$--></div><script>((a,b,c,d,e,f,g,h)=>{let i=document.documentElement,j=["light","dark"];function k(b){var c;(Array.isArray(a)?a:[a]).forEach(a=>{let c="class"===a,d=c&&f?e.map(a=>f[a]||a):e;c?(i.classList.remove(...d),i.classList.add(f&&f[b]?f[b]:b)):i.setAttribute(a,b)}),c=b,h&&j.includes(c)&&(i.style.colorScheme=c)}if(d)k(d);else try{let a=localStorage.getItem(b)||c,d=g&&"system"===a?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":a;k(d)}catch(a){}})("class","theme","system",null,["light","dark"],null,true,true)</script><!--$--><div data-closed="" role="presentation" hidden="" style="user-select:none;-webkit-user-select:none" class="fixed inset-0 z-50 backdrop-blur-xs bg-fd-overlay data-open:animate-fd-fade-in data-closed:animate-fd-fade-out"></div><div class="bg-fd-secondary/50 p-3 empty:hidden"></div><!--/$--><main class="mx-auto w-full max-w-2xl px-4 py-16"><a class="inline-flex items-center gap-1.5 text-sm text-fd-muted-foreground hover:text-fd-foreground mb-10 transition-colors" href="/blog">← Back to Blog</a><div class="mb-8"><time class="text-xs font-mono text-fd-muted-foreground uppercase tracking-wider">December 4, 2022</time><h1 class="text-3xl font-bold mt-2 mb-3">7680-Dimensional Embeddings: More Dimensions, Better Retrieval</h1><p class="text-fd-muted-foreground text-lg mb-4">Why we trained embedding models with 7680 dimensions and what we learned about the relationship between dimensionality and retrieval quality.</p><div class="flex items-center gap-3 pt-4 border-t border-fd-border"><span class="text-sm text-fd-muted-foreground">By <!-- -->Zach Kelling</span><div class="flex gap-1.5 ml-auto"><span class="text-[10px] font-mono uppercase tracking-wider bg-fd-muted text-fd-muted-foreground px-1.5 py-0.5 rounded">Research</span><span class="text-[10px] font-mono uppercase tracking-wider bg-fd-muted text-fd-muted-foreground px-1.5 py-0.5 rounded">Embeddings</span><span class="text-[10px] font-mono uppercase tracking-wider bg-fd-muted text-fd-muted-foreground px-1.5 py-0.5 rounded">Retrieval</span></div></div></div><div class="prose dark:prose-invert max-w-none"><p>Embedding dimensions have standardized around powers of two: 768, 1536, occasionally 4096. We asked a simple question: what happens if we go bigger? The answer surprised us.</p>
 <h2 class="flex scroll-m-28 flex-row items-center gap-2" id="background-why-dimensions-matter"><a data-card="" href="#background-why-dimensions-matter" class="peer">Background: Why Dimensions Matter</a><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link size-3.5 shrink-0 text-fd-muted-foreground opacity-0 transition-opacity peer-hover:opacity-100" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></h2>
 <p>Text embeddings map variable-length sequences to fixed-dimensional vectors. These vectors enable semantic similarity search, clustering, and retrieval. The dimension count determines the vector space’s capacity.</p>
 <p>Lower dimensions mean:</p>
@@ -264,6 +264,7 @@
   else document.addEventListener('DOMContentLoaded', start);
 })();
 </script>
+
 <style id="zenlm-brand-anim">
 @keyframes zenlm-brand-draw { to { stroke-dashoffset: 0; } }
 svg.zenlm-brand-svg .zenlm-brand-path {
@@ -271,117 +272,5 @@ svg.zenlm-brand-svg .zenlm-brand-path {
   stroke-dashoffset: 1100;
   animation: zenlm-brand-draw 1.4s cubic-bezier(.45,0,.2,1) 0.1s 1 forwards;
 }
-.zen-link-icon {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 6px;
-  flex-shrink: 0;
-}
-</style>
-<script>
-(function(){
-  var ns = 'http://www.w3.org/2000/svg';
-  function ensoSvg(){
-    var svg = document.createElementNS(ns, 'svg');
-    svg.setAttribute('viewBox', '0 0 512 512');
-    svg.setAttribute('fill', 'none');
-    svg.setAttribute('width', '22');
-    svg.setAttribute('height', '22');
-    svg.setAttribute('aria-label', 'Zen LM');
-    svg.setAttribute('class', 'zenlm-brand-svg');
-    svg.style.cssText = 'display:inline-block;vertical-align:-3px;margin-right:7px;flex-shrink:0';
-    var p = document.createElementNS(ns, 'path');
-    p.setAttribute('d', 'M 256 84 A 172 172 0 1 0 256 428 A 172 172 0 1 0 256 84 Z');
-    p.setAttribute('stroke', 'currentColor');
-    p.setAttribute('stroke-width', '36');
-    p.setAttribute('stroke-linecap', 'round');
-    p.setAttribute('stroke-linejoin', 'round');
-    p.setAttribute('class', 'zenlm-brand-path');
-    svg.appendChild(p);
-    return svg;
-  }
-  function lucideGithub(){
-    var svg = document.createElementNS(ns, 'svg');
-    svg.setAttribute('viewBox', '0 0 24 24');
-    svg.setAttribute('fill', 'none');
-    svg.setAttribute('stroke', 'currentColor');
-    svg.setAttribute('stroke-width', '2');
-    svg.setAttribute('stroke-linecap', 'round');
-    svg.setAttribute('stroke-linejoin', 'round');
-    svg.setAttribute('width', '16');
-    svg.setAttribute('height', '16');
-    svg.setAttribute('aria-hidden', 'true');
-    svg.setAttribute('class', 'zen-link-icon');
-    var p = document.createElementNS(ns, 'path');
-    p.setAttribute('d', 'M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4');
-    svg.appendChild(p);
-    var p2 = document.createElementNS(ns, 'path');
-    p2.setAttribute('d', 'M9 18c-4.51 2-5-2-7-2');
-    svg.appendChild(p2);
-    return svg;
-  }
-  function hfEmoji(){
-    var s = document.createElement('span');
-    s.className = 'zen-link-icon';
-    s.style.cssText = 'font-size:16px;line-height:1;margin-right:6px;display:inline-block';
-    s.setAttribute('aria-hidden', 'true');
-    s.textContent = '\uD83E\uDD17';   // 🤗
-    return s;
-  }
-  function lucideFolder(){
-    var svg = document.createElementNS(ns, 'svg');
-    svg.setAttribute('viewBox', '0 0 24 24');
-    svg.setAttribute('fill', 'none');
-    svg.setAttribute('stroke', 'currentColor');
-    svg.setAttribute('stroke-width', '2');
-    svg.setAttribute('stroke-linecap', 'round');
-    svg.setAttribute('stroke-linejoin', 'round');
-    svg.setAttribute('width', '14');
-    svg.setAttribute('height', '14');
-    svg.setAttribute('aria-hidden', 'true');
-    svg.setAttribute('class', 'zen-link-icon');
-    var p = document.createElementNS(ns, 'path');
-    p.setAttribute('d', 'M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z');
-    svg.appendChild(p);
-    return svg;
-  }
-  // sections that should get the folder icon
-  var sectionPaths = {
-    '/docs': true,
-    '/docs/api': true,
-    '/docs/models': true,
-    '/docs/datasets': true,
-    '/docs/training': true,
-  };
-  function decorate(){
-    document.querySelectorAll('a').forEach(function(a){
-      if (a.dataset.zenDecorated === '1') return;
-      // Strip any lotus from text nodes anywhere
-      var walker = document.createTreeWalker(a, NodeFilter.SHOW_TEXT, null);
-      var node;
-      while ((node = walker.nextNode())) {
-        if (node.nodeValue && node.nodeValue.indexOf('\uD83E\uDEB7') !== -1) {
-          node.nodeValue = node.nodeValue.replace(/\uD83E\uDEB7\s?/g, '');
-        }
-      }
-      var t = (a.textContent || '').trim();
-      var href = a.getAttribute('href') || '';
-      var ic = null;
-      if (t === 'Zen LM' && !a.querySelector('svg[aria-label="Zen LM"]')) {
-        ic = ensoSvg();
-      } else if (/huggingface\.co/i.test(href) && !a.querySelector('.zen-link-icon')) {
-        ic = hfEmoji();
-      } else if (/github\.com/i.test(href) && !a.querySelector('.zen-link-icon')) {
-        ic = lucideGithub();
-      } else if (sectionPaths[href] && !a.querySelector('svg, .zen-link-icon')) {
-        ic = lucideFolder();
-      }
-      if (ic) a.insertBefore(ic, a.firstChild);
-      a.dataset.zenDecorated = '1';
-    });
-  }
-  window.addEventListener('load', function(){
-    setTimeout(function(){ decorate(); setInterval(decorate, 1000); }, 250);
-  });
-})();
-</script></body></html>
+.zen-link-icon { display: inline-block; vertical-align: middle; flex-shrink: 0; }
+</style></body></html>
