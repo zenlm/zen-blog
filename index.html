@@ -49,28 +49,40 @@ print(r.choices[0].message.content)</code></pre></div><div class="rounded-xl bor
   animation: none !important;
 }
 
-/* Move "Try Zen" to fixed top-right and label it "Try Zen5".
-   Offset to clear the existing right-cluster (search + theme + avatar + github). */
+/* Move "Try Zen" to fixed top-right and re-style as a hanzo.ai-style
+   primary CTA (white pill, black text, arrow). */
 header nav ul li:last-child {
   position: fixed !important;
-  top: 0.4rem !important;
-  right: 0.75rem !important;
+  top: 0.5rem !important;
+  right: 1rem !important;
   z-index: 200;
 }
 header nav ul li:last-child > a {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 6px 16px !important;
   font-size: 0 !important;
   line-height: 1 !important;
-  padding: 6px 12px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+}
+header nav ul li:last-child > a:hover {
+  background: #e6e6e6 !important;
 }
 header nav ul li:last-child > a::after {
-  content: "Try Zen5";
+  content: "Try Zen5 →";
   font-size: 0.8125rem;
   font-weight: 600;
+  letter-spacing: 0.005em;
 }
-/* Push the existing right-cluster left so it doesn't sit under the
-   fixed Try Zen5 button. ~110 px clears 'Try Zen5' + side padding. */
 header nav > div > .flex.flex-row.items-center.justify-end {
-  padding-right: 110px;
+  padding-right: 120px;
 }
 </style><script>
 (function(){
