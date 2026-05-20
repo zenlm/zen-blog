@@ -156,6 +156,32 @@ header nav > div > .flex.flex-row.items-center.justify-end {
       }
     });
   }
+  
+      // Inject the canonical enso SVG into any brand link "Zen LM" that lacks one.
+      document.querySelectorAll('a').forEach(function(a){
+        if (a.dataset.zenBrandInjected) return;
+        var t = (a.textContent || '').trim();
+        if (t !== 'Zen LM') return;
+        if (a.querySelector('svg[aria-label="Zen LM"]')) return;
+        var ns = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('viewBox', '0 0 512 512');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('width', '18');
+        svg.setAttribute('height', '18');
+        svg.setAttribute('aria-label', 'Zen LM');
+        svg.style.cssText = 'display:inline-block;vertical-align:-2px;margin-right:6px';
+        var p = document.createElementNS(ns, 'path');
+        p.setAttribute('d', 'M 256 84 A 172 172 0 1 0 256 428 A 172 172 0 1 0 256 84 Z');
+        p.setAttribute('stroke', 'currentColor');
+        p.setAttribute('stroke-width', '26');
+        p.setAttribute('stroke-linecap', 'round');
+        p.setAttribute('stroke-linejoin', 'round');
+        svg.appendChild(p);
+        a.insertBefore(svg, a.firstChild);
+        a.dataset.zenBrandInjected = '1';
+      });
+
   function start(){ decorate(); setInterval(decorate, 1500); }
   if (document.readyState !== 'loading') start();
   else document.addEventListener('DOMContentLoaded', start);
