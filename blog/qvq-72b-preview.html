@@ -634,4 +634,49 @@ header nav > div > .flex.flex-row.items-center.justify-end {
   if (document.readyState !== 'loading') start();
   else document.addEventListener('DOMContentLoaded', start);
 })();
+</script><script>
+(function(){
+  // After React renders the lotus emoji from RSC payload, walk the DOM
+  // and replace it with the enso SVG. Polls so subsequent React re-renders
+  // also get cleaned up.
+  function swap(){
+    // 1. Replace lotus + ' Zen LM' text inside <a> brand links
+    document.querySelectorAll('a').forEach(function(a){
+      if (a.dataset.zenLotusSwapped) return;
+      var t = (a.textContent || '');
+      if (!/🪷.*Zen LM|Zen LM.*🪷/.test(t)) return;
+      // Find the lotus text node specifically
+      var walker = document.createTreeWalker(a, NodeFilter.SHOW_TEXT, null);
+      var node;
+      while ((node = walker.nextNode())) {
+        if (node.nodeValue && node.nodeValue.indexOf('🪷') !== -1) {
+          node.nodeValue = node.nodeValue.replace(/🪷\s?/g, '');
+        }
+      }
+      // Inject enso SVG at start
+      if (!a.querySelector('svg[aria-label="Zen LM"]')) {
+        var ns = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('viewBox', '0 0 512 512');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('width', '18');
+        svg.setAttribute('height', '18');
+        svg.setAttribute('aria-label', 'Zen LM');
+        svg.style.cssText = 'display:inline-block;vertical-align:-2px;margin-right:6px;flex-shrink:0';
+        var p = document.createElementNS(ns, 'path');
+        p.setAttribute('d', 'M 256 84 A 172 172 0 1 0 256 428 A 172 172 0 1 0 256 84 Z');
+        p.setAttribute('stroke', 'currentColor');
+        p.setAttribute('stroke-width', '26');
+        p.setAttribute('stroke-linecap', 'round');
+        p.setAttribute('stroke-linejoin', 'round');
+        svg.appendChild(p);
+        a.insertBefore(svg, a.firstChild);
+      }
+      a.dataset.zenLotusSwapped = '1';
+    });
+  }
+  function start(){ swap(); setInterval(swap, 600); }
+  if (document.readyState !== 'loading') start();
+  else document.addEventListener('DOMContentLoaded', start);
+})();
 </script></body></html>
