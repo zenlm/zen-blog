@@ -1,3 +1,5 @@
+<p align="center"><img src=".github/hero.svg" alt="zen-blog" width="880"></p>
+
 # Zen LM Blog
 
 Blog for Zen LM -- open-source language models and AI research from Hanzo AI and Zoo Labs Foundation.
