@@ -1,0 +1,26 @@
+---
+title: "zen-nano: The Unsuffixed Alias for zen-nano-0.6b"
+date: "2025-09-26"
+description: "The same Qwen3-0.6B redistribution as zen-nano-0.6b, published without the size suffix."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-nano" label="WEIGHTS" external />
+<LinkButton href="https://huggingface.co/zenlm/zen-nano-0.6b" label="ZEN-NANO-0.6B" external />
+
+`zen-nano` is the same model as [zen-nano-0.6b](https://huggingface.co/zenlm/zen-nano-0.6b), published without the size suffix: identical Qwen3 architecture, identical tensor shapes, GGUF builds in the repository. Read the [zen-nano-0.6b post](/blog/zen-nano-0.6b) for what it is and how to run it.
+
+Like its twin, it is a redistribution of [Qwen/Qwen3-0.6B](https://huggingface.co/Qwen/Qwen3-0.6B) (Apache-2.0) by Alibaba's Qwen team, not a from-scratch model and not a fine-tune we are claiming credit for. Qwen did the work.
+
+Two things worth knowing before you pull it. `zen3-nano` is the canonical name now, so new work should start at [zenlm/zen3-nano](https://huggingface.co/zenlm/zen3-nano). And this repository still has raw training checkpoint state committed alongside the weights, which makes the clone much larger than the model. If you just want to run it, prefer `zen-nano-0.6b`, which is packaged clean and ships the MLX build as well.
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "zenlm/zen-nano-0.6b"  # prefer the clean repo
+tok = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id, dtype="auto", device_map="auto")
+```
+
+Weights and license terms: [huggingface.co/zenlm/zen-nano](https://huggingface.co/zenlm/zen-nano).
