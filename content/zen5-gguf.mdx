@@ -1,0 +1,27 @@
+---
+title: "zen5-gguf: the default Zen5 tier, vision plus text, in one 21.7 GB file"
+date: "2026-05-30"
+description: "A Q4_K GGUF redistribution of Qwen3.6-35B-A3B with its vision projector, sized for a single 24 GB GPU."
+author: "Zen LM Research"
+tags: ["Models", "Zen5"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen5-gguf" label="WEIGHTS" external />
+
+The default Zen5 tier: image and text in, text out, in a Q4_K GGUF that fits a single 24 GB card. Two files ship here, a 21.7 GB main GGUF and a 0.9 GB `mmproj` vision projector. Load both or you get a text-only model. 522 pulls so far.
+
+## Lineage
+
+Repackaged from [Qwen/Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B) (apache-2.0, Alibaba Qwen), quantized from the abliterated [huihui-ai/Huihui-Qwen3.6-35B-A3B-abliterated](https://huggingface.co/huihui-ai/Huihui-Qwen3.6-35B-A3B-abliterated) variant. Not trained from scratch, and not a Hanzo fine-tune. Zen's contribution is the GGUF conversion and redistribution under the upstream license, with LICENSE and NOTICE retained.
+
+## Use it
+
+```sh
+hf download zenlm/zen5-gguf --local-dir zen5-gguf
+llama-mtmd-cli \
+  -m zen5-gguf/Huihui-Qwen3.6-35B-A3B-abliterated-ggml-model-Q4_K.gguf \
+  --mmproj zen5-gguf/mmproj-model-f16.gguf \
+  --image photo.jpg -p "Describe this image."
+```
+
+Weights: [huggingface.co/zenlm/zen5-gguf](https://huggingface.co/zenlm/zen5-gguf)
