@@ -1,0 +1,30 @@
+---
+title: "zen-reranker-0.6B-GGUF: Q8_0 Re-Scoring on CPU"
+date: "2026-01-12"
+description: "An 8-bit GGUF build of the smallest Zen reranker, for rerank endpoints that run without a GPU."
+author: "Zen LM Research"
+tags: ["Models", "Retrieval"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-reranker-0.6B-GGUF" label="GGUF WEIGHTS" external />
+
+A GGUF build of the smallest Zen reranker, quantized to **Q8_0** in a single 0.80 GB file. At this size the model re-scores retrieval candidates on a CPU, which is the case worth optimizing for: reranking sits on the hot path of every RAG query, and the fewer accelerators it needs, the cheaper the pipeline gets. Q8_0 keeps the quantization error small enough that score ordering is the thing you tune, not the thing you fight.
+
+## Lineage
+
+Quantized from [Qwen/Qwen3-Reranker-0.6B](https://huggingface.co/Qwen/Qwen3-Reranker-0.6B) by Alibaba's Qwen team, under the **Apache 2.0** license. This is a format conversion, not a retrain. For full-precision safetensors, see [zenlm/zen-reranker-0.6B](https://huggingface.co/zenlm/zen-reranker-0.6B).
+
+## Use it
+
+```bash
+llama-server --hf-repo zenlm/zen-reranker-0.6B-GGUF \
+             --hf-file zen-reranker-0.6B-Q8_0.gguf \
+             --reranking
+
+curl http://localhost:8080/v1/rerank -H "Content-Type: application/json" -d '{
+  "query": "how do I tune a rerank endpoint",
+  "documents": ["reranking guide", "unrelated doc"]
+}'
+```
+
+Weights: [huggingface.co/zenlm/zen-reranker-0.6B-GGUF](https://huggingface.co/zenlm/zen-reranker-0.6B-GGUF) (182 downloads since publication).
