@@ -1,0 +1,23 @@
+---
+title: "zen-embedding-8B-GGUF: Q4_K_M embeddings for local retrieval"
+date: "2026-01-12"
+description: "A GGUF Q4_K_M build of Qwen3-Embedding-8B for llama.cpp and compatible runtimes."
+author: "Zen LM Research"
+tags: ["Models", "Embedding"]
+---
+
+A GGUF build of the large Zen embedding model, quantized to Q4_K_M so the 8B weights fit comfortably on a workstation. It is for retrieval and RAG indexing where you want the bigger encoder locally and can trade some precision for memory.
+
+## Lineage
+
+Quantized from [Qwen/Qwen3-Embedding-8B](https://huggingface.co/Qwen/Qwen3-Embedding-8B) (Apache-2.0), by Alibaba's Qwen team. Format conversion to GGUF Q4_K_M is the only change we made: no Zen fine-tuning, no identity training, no abliteration. If it is too heavy, take the [zen-embedding-0.6B-GGUF](/blog/zen-embedding-0.6b-gguf/) build.
+
+## Use it
+
+```bash
+hf download zenlm/zen-embedding-8B-GGUF zen-embedding-8B-Q4_K_M.gguf --local-dir .
+
+llama-embedding -m zen-embedding-8B-Q4_K_M.gguf -p "search query"
+```
+
+Weights: [huggingface.co/zenlm/zen-embedding-8B-GGUF](https://huggingface.co/zenlm/zen-embedding-8B-GGUF)
