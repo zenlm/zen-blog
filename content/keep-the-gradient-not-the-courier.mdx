@@ -1,0 +1,103 @@
+---
+title: "Keep the Gradient, Not the Courier"
+date: "2026-07-16"
+description: "Token IDs are the prompt. Embeddings invert. Neither is anonymization. We argue the stronger position — don't retain — and audit our own router against it, including the place it currently fails."
+tags: ["Research", "Privacy", "Routing", "Continual Learning", "Architecture"]
+---
+
+<LinkButton href="https://arxiv.org/abs/2310.06816" label="EMBEDDING INVERSION" external />
+<LinkButton href="https://arxiv.org/abs/1607.00133" label="DP-SGD" external />
+<LinkButton href="https://github.com/hanzoai/muen" label="MUEN" external />
+<LinkButton href="https://github.com/hanzoai/mode" label="MoDE" external />
+
+A router that learns from real traffic has an uncomfortable property: the data that makes it good is the data it has the least right to keep.
+
+You cannot learn what a hard request looks like from synthetic examples. You learn it from the requests people actually send — which ones needed a frontier model, which ones a 0.8B model would have nailed, which ones needed to see an image. That signal is real, it is valuable, and it belongs to the people who sent it.
+
+The industry's answer has mostly been to keep it anyway, under a word doing more work than it can bear: *anonymized*.
+
+## Two things that are not anonymization
+
+**Token IDs are the prompt.** Storing token identifiers instead of strings gets described as a privacy measure with some regularity. It isn't one. Tokenization is a bijection with a published dictionary — `detokenize(tokenize(x)) == x`, exactly, for every input. A token sequence is the prompt in a different alphabet and the key is a free download. There is no threat model where this differs from storing the text, because it doesn't differ from storing the text.
+
+**Embeddings invert.** This one is subtler and it fools people who should know better. The reasoning goes: we store a fixed-width vector from a frozen backbone, it's not the text, it's just numbers. And that's where the thinking usually stops.
+
+An embedding is *trained to preserve meaning*. Preserving meaning is precisely the property that makes it reconstructable. This is not a theoretical concern — [Morris et al.](https://arxiv.org/abs/2310.06816) invert text embeddings back to the original text, recovering the large majority of short inputs **verbatim**, from the vector alone, without access to the encoder's weights.
+
+So "we only store embeddings" has roughly the security posture of "we only store the prompt, lightly encrypted, with a key we published." The vector is smaller and harder to read by eye. It is not private.
+
+The distinction worth internalizing: an embedding is lossy but *semantically faithful*, and faithfulness is exactly what inverts. Purpose-built features — length, task class, modality, observed latency — are lossy in the way that matters. They throw away the content and keep a decision. **Nothing inverts a scalar.**
+
+## The principle
+
+> The gradient is what training wants. The request is only the courier. Don't keep the courier.
+
+Once the update is applied, the request has already given the system everything it had. Retaining it buys no additional learning. It only creates an asset that can be breached, subpoenaed, correlated, or quietly repurposed by a future version of you with different judgment.
+
+Deletion policies *mitigate* that. Never writing *eliminates* it. These are not close, and the gap between them is not technical: **a retention window is a promise, and an absent column is a fact.** One of those survives a change of management.
+
+So the design question inverts. Instead of asking how hard to anonymize what we store, ask: what is the smallest thing that produces the same gradient, and does it need to be stored at all? For a router, the answers are *less than you'd guess* and *no*.
+
+## What this actually costs
+
+Nothing. That's the part that makes it worth arguing rather than merely asserting.
+
+| Decision | Why it's private | Why it's cheap |
+|---|---|---|
+| Features, not embeddings | doesn't invert | smaller model, no backbone pass |
+| Don't retain | nothing to breach | no store, no lifecycle, no cost |
+| Stream the update | no corpus assembled | no offline pipeline |
+| Your own head first | data stays in scope | personalization beats a global fit |
+
+Privacy and efficiency are usually in tension because privacy is usually **bolted on** — bought with encryption, auditing, retention machinery, all of which cost money and complexity. Here the private choice and the cheap choice are the same choice, because both fall out of asking what the system actually needs and then declining to acquire more.
+
+That alignment isn't luck. Minimality is a single property. It just happens to be legible from two directions.
+
+## Consent is two questions, not one
+
+The thing that gets conflated — and the conflation is how "we train on your data" becomes technically true in a way nobody agreed to:
+
+- **Your own head**, trained on your own traffic → **opt-out**. This is the service working as described. Your router gets better at your work. Default on, with an obvious way off.
+- **The shared base**, which ships to everyone → **opt-in**. This is a different act with a different risk, and it stays off until you ask for it.
+
+Two scopes, two defaults, two predicates. If they read the same flag the same way, one of them is wrong.
+
+## Where we fail this today
+
+Here's the part that makes this a position and not a press release.
+
+We audited our own router against the standard above. Some of it holds: prompt bodies are opt-in and redacted by default. Consent is genuinely two-tiered. An unscored request stores a *null* reward rather than a fake zero, and a dismissed prompt records nothing at all rather than a `reward=0` training label. We log the counterfactual arm the router *didn't* pick, which makes off-policy learning possible.
+
+And then it fails, in the exact way this post is about.
+
+Our routing ledger carries a feature column. Its contract, in our own code, reads:
+
+> *the optional frozen-backbone embedding … passed through to the routing ledger for training (**never prompt text**)*
+
+Every word of that is accurate. And the parenthetical — the part a reader relies on — is false comfort. By the argument above, a frozen-backbone embedding **is** the prompt, in a form that inverts. We are persisting it. We are exporting it. Orgs are contributing to it by default.
+
+The comment isn't a lie. It's a true statement doing a false job, which is the more common failure and the much harder one to catch. We only caught it by asking *what the vector was* instead of reading the assurance sitting next to it.
+
+The fix follows from the principle: the column stops being an embedding, **and** stops being persisted. Both, not either. That's scheduled work, and this post will be wrong about our own status the day it lands — which is the correct direction for a post like this to age.
+
+We're publishing the failure because a company claiming a trustworthy substrate, having never checked its own, would be evidence of nothing. **The check is the contribution.**
+
+## Why this makes the next model better, not worse
+
+There's a second argument hiding here, and it's the one we're most interested in.
+
+A routed architecture spanning model families needs a shared representation for its experts to interoperate through — a latent space between models and modalities. Our own architecture papers specify a projection into that space, and in doing so quietly assume four things nobody measured: which layers to tap, which models are worth fusing, what the shared dimension is, and whether a projection suffices at all.
+
+Continual training turns those assumptions into **measurements**. A system that routes across every modality and records where performance actually comes from is an instrument, and what it measures is exactly which models and which layers carry signal worth aligning.
+
+The latent space gets *discovered* rather than designed. And it gets discovered from **aggregates** — which is precisely the form we're allowed to keep.
+
+That's the whole thesis arriving for the third time: the privacy-preserving artifact and the architecturally informative artifact are the same object.
+
+## What we haven't done
+
+The streaming substrate is specified, not deployed — the audit above says so plainly. That features suffice for *expert*-granularity routing is a hypothesis; what we have is a production router doing *model*-granularity routing on features, which is a weaker claim than the one we need. Non-retention is an architectural guarantee, not a formal one: it defeats breach and subpoena because the data is absent, but it doesn't by itself bound what a trained model memorizes — that's [DP-SGD's](https://arxiv.org/abs/1607.00133) job, and a different question.
+
+And we publish no numbers, because there's nothing measured yet to publish.
+
+Next: make the seam produce features instead of representations, stream the update instead of writing it, and let the performance data pick the layers. We'll report what we measure — including if it doesn't work.
