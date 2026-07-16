@@ -1,0 +1,27 @@
+---
+title: "zen5-mini-gguf: MiniMax-M2.5 in Q4_K_M for agentic tool-use loops"
+date: "2026-05-30"
+description: "A Q4_K_M GGUF redistribution of MiniMax-M2.5, the agentic tier of the Zen5 ladder."
+author: "Zen LM Research"
+tags: ["Models", "Zen5"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen5-mini-gguf" label="WEIGHTS" external />
+
+The agentic tier of the Zen5 ladder. One Q4_K_M file, measured at 138.3 GB. Reach for it when the workload is tool calling, code, and multi-step reasoning rather than open-ended chat. 243 pulls so far.
+
+## Lineage
+
+Repackaged from [MiniMaxAI/MiniMax-M2.5](https://huggingface.co/MiniMaxAI/MiniMax-M2.5), quantized from the abliterated variant by [huihui-ai](https://huggingface.co/huihui-ai). Not trained from scratch, and not a Hanzo fine-tune. Zen's contribution is the GGUF conversion and redistribution.
+
+Note the license on this one: MiniMax-M2.5 ships under a [modified MIT license](https://github.com/MiniMax-AI/MiniMax-M2.5/blob/main/LICENSE), not plain MIT and not Apache-2.0. Those upstream terms carry through to this repo. Read them before you ship it in a product.
+
+## Use it
+
+```sh
+hf download zenlm/zen5-mini-gguf --local-dir zen5-mini-gguf
+llama-cli -m zen5-mini-gguf/MiniMax-M2.5-abliterated-Q4_K_M.gguf \
+  -p "List the files you would read first to debug a failing CI job."
+```
+
+Weights: [huggingface.co/zenlm/zen5-mini-gguf](https://huggingface.co/zenlm/zen5-mini-gguf)
