@@ -1,0 +1,49 @@
+---
+title: "zen3-asr-aligner: Timestamps for Subtitles and Editing"
+date: "2026-05-30"
+description: "A forced aligner that attaches timings to a transcript, for subtitles, transcript-driven editing, and dubbing."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Audio"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-asr-aligner" label="HUGGING FACE" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-ForcedAligner-0.6B" label="BASE MODEL" external />
+
+Knowing what was said is half the problem. Subtitles, transcript-driven video editing, dubbing, and karaoke all need to know *when* it was said. zen3-asr-aligner is the forced aligner in the Zen3 audio line: it takes speech and its transcript and attaches timings to the text.
+
+It is a small model, roughly 918M parameters in a single bf16 file, and it is not a general recognizer. The config identifies it as `qwen3_forced_aligner`, declares a dedicated timestamp token, and works over 80-second segments. It declares 11 languages: Chinese, Cantonese, English, German, Spanish, French, Italian, Portuguese, Russian, Korean, and Japanese. That is a narrower list than [zen3-asr](/blog/zen3-asr/) covers, which is worth checking before you wire it into a pipeline that transcribes more.
+
+## Lineage
+
+Redistributed from [`Qwen/Qwen3-ForcedAligner-0.6B`](https://huggingface.co/Qwen/Qwen3-ForcedAligner-0.6B), released by Alibaba's Qwen team under **Apache-2.0**. The weights are unmodified and match upstream by sha256, byte for byte. We did not train this model. It is mirrored into the Zen3 line so the audio stack has one packaging and license path. Apache-2.0 travels with the weights, and credit belongs to Qwen.
+
+## Use it
+
+The aligner is not called on its own. Pass it to the recognizer and ask for timestamps:
+
+```bash
+pip install -U qwen-asr
+```
+
+```python
+import torch
+from qwen_asr import Qwen3ASRModel
+
+model = Qwen3ASRModel.from_pretrained(
+    "zenlm/zen3-asr",
+    dtype=torch.bfloat16,
+    device_map="cuda:0",
+    forced_aligner="zenlm/zen3-asr-aligner",
+    forced_aligner_kwargs=dict(dtype=torch.bfloat16, device_map="cuda:0"),
+)
+
+results = model.transcribe(
+    audio="episode.wav",
+    language="English",
+    return_time_stamps=True,
+)
+
+print(results[0].text, results[0].time_stamps[0])
+```
+
+Weights: [huggingface.co/zenlm/zen3-asr-aligner](https://huggingface.co/zenlm/zen3-asr-aligner).
