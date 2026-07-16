@@ -1,0 +1,33 @@
+---
+title: "zen-3d: one image in, Gaussian splats, radiance fields, and meshes out"
+date: "2026-06-16"
+description: "A byte-for-byte re-host of Microsoft's TRELLIS-image-large for single-image 3D asset generation."
+author: "Zen LM Research"
+tags: ["Models", "3D"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-3d" label="WEIGHTS" external />
+
+Single-image 3D generation: hand it one picture, get back a 3D asset. It decodes to three representations, Gaussian splats, radiance fields, and meshes, so you can pick the one your renderer or DCC tool actually wants instead of converting after the fact. This is for people building asset pipelines who do not want to stand up a multi-view capture rig.
+
+## Lineage
+
+A faithful re-host of [microsoft/TRELLIS-image-large](https://huggingface.co/microsoft/TRELLIS-image-large) (MIT, Microsoft TRELLIS authors). Every encoder, decoder, and flow-transformer checkpoint is byte-for-byte the upstream release. No fine-tuning, no abliteration, no modification of any kind was performed, and the MIT license is inherited unchanged. Credit for this model belongs to the TRELLIS authors; we host it so the Zen line has a clean, permissively-licensed 3D tier that resolves from the same namespace as the rest.
+
+## Use it
+
+Native TRELLIS layout (`pipeline.json` plus `ckpts/`), so drive it with the upstream pipeline.
+
+```python
+# pip install git+https://github.com/microsoft/TRELLIS
+from trellis.pipelines import TrellisImageTo3DPipeline
+from PIL import Image
+
+pipe = TrellisImageTo3DPipeline.from_pretrained("zenlm/zen-3d")
+pipe.cuda()
+
+out = pipe.run(Image.open("chair.png"))
+out["mesh"][0]  # also: out["gaussian"], out["radiance_field"]
+```
+
+Weights: [huggingface.co/zenlm/zen-3d](https://huggingface.co/zenlm/zen-3d)
