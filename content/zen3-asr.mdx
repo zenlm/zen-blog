@@ -1,0 +1,45 @@
+---
+title: "zen3-asr: Multilingual Speech Recognition for Voice Agents"
+date: "2026-05-30"
+description: "The workhorse recognizer in the Zen3 audio line: 30 declared languages, optional language forcing, Apache-2.0 weights."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Audio"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-asr" label="HUGGING FACE" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-ASR-1.7B" label="BASE MODEL" external />
+
+zen3-asr is the general transcription model in the Zen3 audio line. It is for people building voice agents, meeting capture, and batch transcription who would rather deploy one recognizer than route between a dozen per-language ones.
+
+The config declares 30 languages, including Chinese, English, Cantonese, Arabic, German, French, Spanish, Portuguese, Japanese, Korean, Russian, Hindi, Thai, Vietnamese, Turkish, Polish, Greek, and Macedonian. You can force the language at call time or leave it unset and let the model decide. The architecture is `Qwen3ASRForConditionalGeneration`: an audio front end over 128-bin log-mel features in 30-second chunks, feeding a Qwen3 text decoder. Weights are bf16, roughly 2.3B parameters across two shards.
+
+## Lineage
+
+Redistributed from [`Qwen/Qwen3-ASR-1.7B`](https://huggingface.co/Qwen/Qwen3-ASR-1.7B), released by Alibaba's Qwen team under **Apache-2.0**. The weights here are unmodified. Every safetensors file matches upstream by sha256, byte for byte. We did not train this model, and the Zen name on the repository does not imply otherwise. It is mirrored into the Zen3 line so the audio stack has one packaging convention, one license path, and one place to pull from. Apache-2.0 travels with the weights. Credit for the model belongs to Qwen.
+
+## Use it
+
+```bash
+pip install -U qwen-asr
+```
+
+```python
+import torch
+from qwen_asr import Qwen3ASRModel
+
+model = Qwen3ASRModel.from_pretrained(
+    "zenlm/zen3-asr",
+    dtype=torch.bfloat16,
+    device_map="cuda:0",
+    max_new_tokens=256,
+)
+
+results = model.transcribe(
+    audio="meeting.wav",
+    language=None,  # or "English" to force it
+)
+
+print(results[0].language, results[0].text)
+```
+
+Weights: [huggingface.co/zenlm/zen3-asr](https://huggingface.co/zenlm/zen3-asr). For word timestamps, pair it with [zen3-asr-aligner](/blog/zen3-asr-aligner/).
