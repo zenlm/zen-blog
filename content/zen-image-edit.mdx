@@ -1,0 +1,42 @@
+---
+title: "zen-image-edit: Instruction-Driven Image Editing With Open Weights"
+date: "2025-09-25"
+description: "A Qwen-Image-Edit-2509 fine-tune that edits an existing image from a written instruction, rather than generating from scratch."
+author: "Zen LM Research"
+tags: ["Models", "Vision"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-image-edit" label="WEIGHTS" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen-Image-Edit-2509" label="UPSTREAM" external />
+
+`zen-image-edit` edits an image you already have. You give it a picture and a written instruction, and it returns the picture with that change made. This is a different job from text-to-image generation: the input image is the constraint, and the value is in what stays the same as much as in what changes.
+
+It suits asset pipelines where an image already exists and a specific edit is needed on it, at volume, under your control: swapping a background, removing an element, adjusting text in a mockup, or applying one treatment across a set. It is a diffusion pipeline, so it loads through `diffusers` rather than `transformers`.
+
+## Lineage
+
+Fine-tuned from [Qwen/Qwen-Image-Edit-2509](https://huggingface.co/Qwen/Qwen-Image-Edit-2509) (Apache-2.0) by Alibaba's Qwen team. The editing model, its text encoder, and the training that made it work are Qwen's, and the credit is theirs.
+
+Hanzo adds identity training, agentic-data fine-tuning, and abliteration. That is all. There is no from-scratch Zen diffusion model here.
+
+## Use it
+
+```python
+import torch
+from diffusers import QwenImageEditPlusPipeline
+from PIL import Image
+
+pipe = QwenImageEditPlusPipeline.from_pretrained(
+    "zenlm/zen-image-edit", torch_dtype=torch.bfloat16
+).to("cuda")
+
+out = pipe(
+    image=Image.open("input.png").convert("RGB"),
+    prompt="replace the background with a plain studio backdrop, keep the subject untouched",
+    num_inference_steps=40,
+).images[0]
+
+out.save("edited.png")
+```
+
+Weights and license terms: [huggingface.co/zenlm/zen-image-edit](https://huggingface.co/zenlm/zen-image-edit).
