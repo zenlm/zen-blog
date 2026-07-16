@@ -1,0 +1,42 @@
+---
+title: "zen-reranker-8B: Cross-Encoder Reranking for Retrieval"
+date: "2026-05-30"
+description: "The large cross-encoder in the Zen reranker line: rescore candidate passages before they reach the model's context."
+author: "Zen LM Research"
+tags: ["Models", "Reranker"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-reranker-8B" label="HUGGING FACE" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-Reranker-8B" label="BASE MODEL" external />
+
+Retrieval quality usually fails at the last step. Your vector search returns fifty plausible passages, the top ten go into the prompt, and the one that actually answered the question was ranked fourteenth. An embedding model scores a query and a document separately and compares the results. A cross-encoder reads them together, which costs more and is why you run it over a shortlist rather than a corpus.
+
+zen-reranker-8B is the large cross-encoder in the Zen reranker line: hand it a query and a list of candidates and it scores each pair, so the passages that survive into the context window are the ones that earned it. It is `Qwen3ForCausalLM` under the hood, 36 layers at hidden size 4096, bf16, roughly 8.19B parameters across five shards, with positions to 40960. The repository ships the sentence-transformers module files, so it loads directly as a `CrossEncoder` with no adapter code.
+
+## Lineage
+
+Redistributed from [`Qwen/Qwen3-Reranker-8B`](https://huggingface.co/Qwen/Qwen3-Reranker-8B), released by Alibaba's Qwen team under **Apache-2.0**. The weights are unmodified: every shard matches upstream by sha256, byte for byte. We did not train this model. It is mirrored into the Zen line so retrieval has one packaging and license path alongside the rest of the stack. Apache-2.0 travels with the weights, and credit belongs to Qwen.
+
+## Use it
+
+```bash
+pip install -U sentence_transformers
+```
+
+```python
+from sentence_transformers import CrossEncoder
+
+model = CrossEncoder("zenlm/zen-reranker-8B")
+
+query = "How do I rotate a signing key without downtime?"
+documents = [
+    "Publish the new public key, wait one propagation interval, then start signing with it.",
+    "Rotate the log files nightly with logrotate to keep disk usage bounded.",
+]
+
+print(model.rank(query, documents))
+```
+
+`rank` returns candidates ordered by score with their original indices, which is usually what you want; `predict` gives raw pair scores if you are wiring your own ordering. Scores are logits, so compare them within a query rather than across queries.
+
+Weights: [huggingface.co/zenlm/zen-reranker-8B](https://huggingface.co/zenlm/zen-reranker-8B).
