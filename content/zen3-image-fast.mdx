@@ -1,0 +1,38 @@
+---
+title: "zen3-image-fast: Four-Step Text-to-Image Generation"
+date: "2026-02-24"
+description: "The few-step image model in the Zen3 line, repackaged from FLUX.1-schnell under Apache 2.0."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Vision"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-image-fast" label="WEIGHTS" external />
+
+`zen3-image-fast` is the low-latency image model in the Zen3 line. It is a `FluxPipeline` with dual text encoders (CLIP and T5) that produces an image in four denoising steps at guidance 0, rather than the twenty-to-fifty steps a standard diffusion sampler wants. That step count is the entire point: it moves text-to-image from something you batch overnight to something you can put behind an interactive request.
+
+Use it where latency is the binding constraint, such as UI previews, thumbnails, drafts, and any loop where a person is waiting. When you want more control over composition through classifier-free guidance, reach for a guidance-distilled model instead; schnell's four-step schedule trades that knob away for speed.
+
+## Lineage
+
+`zen3-image-fast` repackages [black-forest-labs/FLUX.1-schnell](https://huggingface.co/black-forest-labs/FLUX.1-schnell), released by Black Forest Labs under the **Apache 2.0** license. No weights were trained by Zen. The autoencoder still carries Black Forest Labs' own `modelspec` metadata internally, which is exactly as it should be: this is their model, redistributed under the license they chose.
+
+What this repository adds is packaging. It carries the upstream LICENSE and NOTICE, it uses one consistent name in the Zen catalog, and it is served through Hanzo's stack. FLUX.1-schnell is upstream-gated on Hugging Face; the Zen mirror is not, which is a meaningful part of what the repackage is for.
+
+## Use it
+
+```python
+from diffusers import FluxPipeline
+import torch
+
+pipe = FluxPipeline.from_pretrained("zenlm/zen3-image-fast", torch_dtype=torch.bfloat16)
+pipe = pipe.to("cuda")
+
+image = pipe(
+    "A serene mountain landscape at sunset",
+    num_inference_steps=4,
+    guidance_scale=0.0,
+).images[0]
+image.save("output.png")
+```
+
+Weights: [huggingface.co/zenlm/zen3-image-fast](https://huggingface.co/zenlm/zen3-image-fast) (34 downloads since publication).
