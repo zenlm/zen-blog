@@ -1,0 +1,34 @@
+---
+title: "zen3-nano: An 8B Dense Model for Local and Single-GPU Inference"
+date: "2026-02-24"
+description: "The compact text-generation entry in the Zen3 line, redistributed from Qwen3-8B under Apache 2.0."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-nano" label="WEIGHTS" external />
+
+`zen3-nano` is the compact text model in the Zen3 line. It is a dense 8B decoder with a 40K context window (`max_position_embeddings: 40960` in its config), sized to run on a single consumer GPU or a workstation. It is the model we reach for when a request needs a real language model but does not justify sending tokens to a 30B-plus system: classification, rewriting, short agent steps, and local development against the Hanzo API without a network hop.
+
+## Lineage
+
+`zen3-nano` is a redistribution of [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B), released by Alibaba's Qwen team under the **Apache 2.0** license. The weights are byte-for-byte identical to upstream: same tensors, same tokenizer, same chat template. Zen did not train, distill, or abliterate this model.
+
+What this repository adds is packaging, not capability. It carries the upstream LICENSE and NOTICE, it sits under one consistent name in the Zen catalog, and it is wired into Hanzo's serving stack so `zen3-nano` resolves the same way from the API as it does from disk. The Zen3 line is curated to permissively licensed weights, which is the reason Qwen3-8B is here and the reason we can redistribute it at all. Credit for the model itself belongs to the Qwen team.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model = AutoModelForCausalLM.from_pretrained("zenlm/zen3-nano", torch_dtype="auto", device_map="auto")
+tokenizer = AutoTokenizer.from_pretrained("zenlm/zen3-nano")
+
+messages = [{"role": "user", "content": "Explain quantum computing in simple terms."}]
+text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+inputs = tokenizer([text], return_tensors="pt").to(model.device)
+outputs = model.generate(**inputs, max_new_tokens=512)
+print(tokenizer.decode(outputs[0][inputs.input_ids.shape[1]:], skip_special_tokens=True))
+```
+
+Weights: [huggingface.co/zenlm/zen3-nano](https://huggingface.co/zenlm/zen3-nano) (113 downloads since publication).
