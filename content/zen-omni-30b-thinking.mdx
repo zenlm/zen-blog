@@ -1,0 +1,41 @@
+---
+title: "zen-omni-30b-thinking: A Qwen3-32B-Class Dense Reasoning Model"
+date: "2025-09-29"
+description: "A permissively-licensed redistribution of Qwen3-32B, kept available for reproducibility and superseded by zen3-omni."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-omni-30b-thinking" label="MODEL WEIGHTS" external />
+<LinkButton href="https://huggingface.co/zenlm/zen3-omni" label="SUPERSEDED BY ZEN3-OMNI" external />
+
+Read the name with care, because it oversells what is in the repo. Despite the "omni" in the name, these weights are a dense, text-only causal language model. There is no vision tower and no audio encoder in the config. The name is a holdover from an early naming scheme we have since dropped, and the model is superseded by [zenlm/zen3-omni](https://huggingface.co/zenlm/zen3-omni), which is the canonical name for that slot. We keep this repo published so existing references and reproductions do not break.
+
+## Lineage
+
+Repackaged from [Qwen/Qwen3-32B](https://huggingface.co/Qwen/Qwen3-32B) (Apache-2.0), built by Qwen at Alibaba Cloud. This is a redistribution for the OSS-clean Zen line. We did not train it from scratch and we did not fine-tune it, so the reasoning behavior here is Qwen3-32B's, and the credit is Qwen's.
+
+From this repo's `config.json`: `Qwen3ForCausalLM`, 64 layers, hidden size 5120, 32,768 maximum position embeddings. Note that "30b" in the name does not agree with the 32B-class base it was built from. Treat the config as the source of truth, not the name.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "zenlm/zen-omni-30b-thinking"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id, torch_dtype="auto", device_map="auto"
+)
+
+messages = [{"role": "user", "content": "Explain why merge sort is stable."}]
+text = tokenizer.apply_chat_template(
+    messages, tokenize=False, add_generation_prompt=True
+)
+inputs = tokenizer([text], return_tensors="pt").to(model.device)
+print(tokenizer.decode(model.generate(**inputs, max_new_tokens=1024)[0]))
+```
+
+For new work, start at [zen3-omni](https://huggingface.co/zenlm/zen3-omni). 139 downloads so far.
+
+Weights: [huggingface.co/zenlm/zen-omni-30b-thinking](https://huggingface.co/zenlm/zen-omni-30b-thinking)
