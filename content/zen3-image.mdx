@@ -1,0 +1,36 @@
+---
+title: "zen3-image: text-to-image on a Qwen-Image MMDiT with a VL text encoder"
+date: "2026-06-16"
+description: "A redistribution of Qwen-Image, the text-to-image tier of the Zen3 line, loadable straight from diffusers."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-image" label="WEIGHTS" external />
+
+The text-to-image tier of the Zen3 line. Prompt in, picture out. The interesting structural choice here is upstream's: the text encoder is a full vision-language model (`Qwen2_5_VLForConditionalGeneration`) rather than a CLIP or T5 tower, feeding a `QwenImageTransformer2DModel` on a flow-matching Euler schedule. That pairing is a large part of why the family handles long, compositional prompts and rendered text as well as it does.
+
+It ships in standard diffusers layout, so it loads with one call and no vendor SDK. If you are generating UI mockups, diagrams, or anything with legible words in the frame, start here rather than with a CLIP-conditioned model.
+
+## Lineage
+
+Repackaged from [Qwen/Qwen-Image](https://huggingface.co/Qwen/Qwen-Image) (apache-2.0, Alibaba Qwen). Not trained from scratch, and not a Hanzo fine-tune. This is a redistribution under the same license with the upstream LICENSE and NOTICE retained in-repo. Credit for the model belongs to Alibaba Qwen.
+
+## Use it
+
+```python
+import torch
+from diffusers import DiffusionPipeline
+
+pipe = DiffusionPipeline.from_pretrained(
+    "zenlm/zen3-image", torch_dtype=torch.bfloat16
+).to("cuda")
+
+image = pipe(
+    prompt="A chalkboard in an empty lecture hall, 'orthogonal' written on it",
+    num_inference_steps=50,
+).images[0]
+image.save("out.png")
+```
+
+Weights: [huggingface.co/zenlm/zen3-image](https://huggingface.co/zenlm/zen3-image)
