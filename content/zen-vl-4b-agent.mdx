@@ -1,0 +1,47 @@
+---
+title: "zen-vl-4b-agent: the 4B vision-language slot for agent and GUI workloads"
+date: "2025-11-04"
+description: "The agent-slot 4B vision-language checkpoint in the Zen line: an unmodified Apache-2.0 redistribution of Qwen3-VL-4B-Instruct."
+author: "Zen LM Research"
+tags: ["Models", "Vision"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-vl-4b-agent" label="HUGGING FACE" external />
+
+zen-vl-4b-agent is the small end of the Zen vision line: screenshots and photos in, text out, at a size that leaves room for the rest of your stack on the same card. Use it for tight agent loops where latency per step matters more than headroom. Its `config.json` declares 36 text layers at hidden size 2560, a 24-layer vision encoder, and a 262,144-token position limit.
+
+## Lineage
+
+This repository redistributes [Qwen/Qwen3-VL-4B-Instruct](https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct) (Apache-2.0), trained and released by Alibaba's Qwen team. The weights are their work and the credit is theirs.
+
+Be clear about what the name means. The `-agent` suffix marks the slot this checkpoint fills in our catalog, not a separate training run. Both safetensors shards are byte-identical to the Qwen release, same SHA-256, so there is no agent fine-tune, no merge, and no abliteration in these weights. It is Qwen3-VL-4B-Instruct under a Zen name, published so our catalog and serving stack have one stable identifier with explicit provenance, and so the Zen line stays permissively licensed end to end. Apache-2.0 upstream, Apache-2.0 here. A name is not a capability claim, and we would rather say so than let you infer otherwise.
+
+## Use it
+
+```python
+from transformers import AutoProcessor, AutoModelForImageTextToText
+
+model_id = "zenlm/zen-vl-4b-agent"
+processor = AutoProcessor.from_pretrained(model_id)
+model = AutoModelForImageTextToText.from_pretrained(
+    model_id, dtype="auto", device_map="auto"
+)
+
+messages = [{
+    "role": "user",
+    "content": [
+        {"type": "image", "url": "https://example.com/app-window.png"},
+        {"type": "text", "text": "What is the next step to submit this form?"},
+    ],
+}]
+
+inputs = processor.apply_chat_template(
+    messages, add_generation_prompt=True, tokenize=True,
+    return_dict=True, return_tensors="pt",
+).to(model.device)
+
+out = model.generate(**inputs, max_new_tokens=256)
+print(processor.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True))
+```
+
+Weights: [huggingface.co/zenlm/zen-vl-4b-agent](https://huggingface.co/zenlm/zen-vl-4b-agent)
