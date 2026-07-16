@@ -1,0 +1,50 @@
+---
+title: "zen-omni-30b-instruct: One Model for Text, Images, and Audio"
+date: "2025-09-25"
+description: "A Qwen3-Omni-30B-A3B-Instruct fine-tune that takes text, images, and audio in the same conversation, without a transcription hop."
+author: "Zen LM Research"
+tags: ["Models", "Vision", "Audio"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-omni-30b-instruct" label="WEIGHTS" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct" label="UPSTREAM" external />
+
+`zen-omni-30b-instruct` takes text, images, and audio in the same conversation. The usual way to build this is a pipeline: speech-to-text in front, a vision model beside it, a language model behind. Every hop in that chain loses something. Tone, hesitation, overlapping speakers, and whatever the transcript decided to drop never reach the model that has to reason about them.
+
+An omni model reads the audio itself. That matters when the signal is in how something was said, or when the image and the audio only make sense together. It is a sparse mixture-of-experts model, so the active parameter count per token stays well under the total, which is what makes running it on your own hardware reasonable.
+
+## Lineage
+
+Fine-tuned from [Qwen/Qwen3-Omni-30B-A3B-Instruct](https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct), published under Apache-2.0 per its model card, by Alibaba's Qwen team. The omni architecture, the audio and vision encoders, and the pretraining are Qwen's work and the credit belongs to them.
+
+Hanzo adds identity training, agentic-data fine-tuning, and abliteration. Nothing more, and nothing trained from scratch.
+
+## Use it
+
+```python
+from transformers import Qwen3OmniMoeForConditionalGeneration, Qwen3OmniMoeProcessor
+
+model_id = "zenlm/zen-omni-30b-instruct"
+model = Qwen3OmniMoeForConditionalGeneration.from_pretrained(
+    model_id, dtype="auto", device_map="auto"
+)
+processor = Qwen3OmniMoeProcessor.from_pretrained(model_id)
+
+messages = [{
+    "role": "user",
+    "content": [
+        {"type": "audio", "audio": "standup.wav"},
+        {"type": "text", "text": "Who sounded unsure about the deadline, and what did they say?"},
+    ],
+}]
+
+inputs = processor.apply_chat_template(
+    messages, add_generation_prompt=True, tokenize=True,
+    return_dict=True, return_tensors="pt",
+).to(model.device)
+
+out = model.generate(**inputs, max_new_tokens=512)
+print(processor.batch_decode(out[:, inputs["input_ids"].shape[-1]:], skip_special_tokens=True)[0])
+```
+
+Weights and license terms: [huggingface.co/zenlm/zen-omni-30b-instruct](https://huggingface.co/zenlm/zen-omni-30b-instruct).
