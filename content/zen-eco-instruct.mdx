@@ -1,0 +1,41 @@
+---
+title: "zen-eco-instruct: Qwen3-4B Instruct Weights in the Zen Eco Line"
+date: "2025-09-30"
+description: "A permissively-licensed redistribution of Qwen3-4B, published as the general instruct entry of the Zen Eco line."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-eco-instruct" label="MODEL WEIGHTS" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-4B" label="BASE MODEL" external />
+
+zen-eco-instruct is the plain instruct entry in the Zen Eco line: a 4B-class model for the ordinary work of summarizing, rewriting, extracting, and answering, where a larger model is a waste of budget. Eco is the tier we point at when someone asks what to run on one modest GPU.
+
+## Lineage
+
+Repackaged from [Qwen/Qwen3-4B](https://huggingface.co/Qwen/Qwen3-4B) (Apache-2.0), built by Qwen at Alibaba Cloud. This is a redistribution, not a model we trained from scratch and not one we fine-tuned. The instruction-following you get is Qwen3-4B's, and the credit belongs to Qwen.
+
+It carries a Zen name because the line is permissive-license-only with a stated origin for every entry, which is what makes the catalog adoptable in one legal review. From this repo's `config.json`: dense Qwen3, 36 layers, hidden size 2560, 40,960 maximum position embeddings. That context window is the one real difference from the other Eco 4B repos, which are configured for 262,144. Check the config before you plan around a long-context workload.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "zenlm/zen-eco-instruct"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id, torch_dtype="auto", device_map="auto"
+)
+
+messages = [{"role": "user", "content": "Summarize this changelog in three bullets."}]
+text = tokenizer.apply_chat_template(
+    messages, tokenize=False, add_generation_prompt=True
+)
+inputs = tokenizer([text], return_tensors="pt").to(model.device)
+print(tokenizer.decode(model.generate(**inputs, max_new_tokens=512)[0]))
+```
+
+124 downloads so far. For the tool-calling variant of this tier, see [zen-agent-4b](/blog/zen-agent-4b/).
+
+Weights: [huggingface.co/zenlm/zen-eco-instruct](https://huggingface.co/zenlm/zen-eco-instruct)
