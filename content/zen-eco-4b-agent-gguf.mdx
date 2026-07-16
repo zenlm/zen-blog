@@ -1,0 +1,25 @@
+---
+title: "zen-eco-4b-agent-gguf: GGUF Builds of the Eco 4B Agent"
+date: "2025-09-29"
+description: "Quantized GGUF conversions of the Eco 4B agent model for llama.cpp and LM Studio."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-eco-4b-agent-gguf" label="GGUF WEIGHTS" external />
+<LinkButton href="https://huggingface.co/zenlm/zen-agent-4b" label="PARENT MODEL" external />
+
+GGUF conversions of the Eco 4B agent, for llama.cpp and LM Studio. Quantizations range from `Q2_K` through `Q8_0` and `f16`.
+
+This is a build artifact, not a new model. The parent is [zenlm/zen-agent-4b](https://huggingface.co/zenlm/zen-agent-4b), which the older `zen-eco-4b-agent` name still resolves to, and which the filenames here still carry. For what the model is and how it was trained, read the parent's post: [zen-agent-4b](/blog/zen-agent-4b/). The lineage runs back to Qwen's [Qwen3-4B](https://huggingface.co/Qwen/Qwen3-4B) family (Apache-2.0).
+
+## Use it
+
+```bash
+llama-cli -hf zenlm/zen-eco-4b-agent-gguf \
+  --hf-file zen-eco-4b-agent-Q4_K_M.gguf -cnv
+```
+
+One thing to watch when browsing the files: the repo also carries a set of `zen-eco-3b-agent-*.gguf` files under a different name. Take the `zen-eco-4b-agent-*` files for this model, and match the quantization suffix to the memory you have.
+
+1176 downloads so far, the most-pulled repo in the Eco agent line. Weights: [huggingface.co/zenlm/zen-eco-4b-agent-gguf](https://huggingface.co/zenlm/zen-eco-4b-agent-gguf)
