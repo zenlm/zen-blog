@@ -1,0 +1,46 @@
+---
+title: "zen3-tts: Voice Cloning from a Short Reference Clip"
+date: "2026-05-30"
+description: "The base speech synthesis model in the Zen3 audio line: clone a voice from reference audio over a 12 Hz codec."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Audio"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-tts" label="HUGGING FACE" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base" label="BASE MODEL" external />
+
+zen3-tts is the base speech synthesis model in the Zen3 audio line. Give it a short clip of a voice and it will read new text in that voice. It is the right starting point if you are building narration, a character voice, or an agent that should sound like a specific person who consented to it, and it is the checkpoint to fine-tune from if you want your own speaker.
+
+The repository ships two pieces: a talker of 28 layers at hidden size 2048, and a `speech_tokenizer/` module holding the 12 Hz codec. The talker predicts over a 3072-code acoustic vocabulary rather than raw samples, which is what makes the sequence short enough to generate quickly. Total weights are about 1.93B parameters in bf16. A speaker encoder is included, which is the part that reads your reference clip. For preset speakers instead of reference audio see [zen3-tts-custom-voice](/blog/zen3-tts-custom-voice/), and to invent a voice from a written description see [zen3-tts-voice-design](/blog/zen3-tts-voice-design/).
+
+## Lineage
+
+Redistributed from [`Qwen/Qwen3-TTS-12Hz-1.7B-Base`](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base), released by Alibaba's Qwen team under **Apache-2.0**. The weights are unmodified, including the codec: every file matches upstream by sha256, byte for byte. We did not train this model. It is mirrored into the Zen3 line for one packaging and license path across the audio stack. Apache-2.0 travels with the weights, and credit belongs to Qwen.
+
+## Use it
+
+```bash
+pip install -U qwen-tts
+```
+
+```python
+import torch
+import soundfile as sf
+from qwen_tts import Qwen3TTSModel
+
+model = Qwen3TTSModel.from_pretrained(
+    "zenlm/zen3-tts",
+    device_map="cuda:0",
+    dtype=torch.bfloat16,
+)
+
+wavs, sr = model.generate_voice_clone(
+    text="The build finished in four minutes.",
+    language="English",
+    ref_audio="reference.wav",
+    ref_text="This is the reference recording.",
+)
+sf.write("out.wav", wavs[0], sr)
+```
+
+Clone a voice only with the speaker's consent. Weights: [huggingface.co/zenlm/zen3-tts](https://huggingface.co/zenlm/zen3-tts).
