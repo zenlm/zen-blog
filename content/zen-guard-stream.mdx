@@ -1,0 +1,44 @@
+---
+title: "zen-guard-stream: token-by-token moderation for streamed output"
+date: "2026-06-17"
+description: "A 0.6B guardrail with classifier heads instead of generation, built to score every token as it streams out of a model."
+author: "Zen LM Research"
+tags: ["Models", "Guard"]
+---
+
+`zen-guard-stream` moderates output while it is still being produced. The generative guards in the Zen line judge a finished turn; this one carries risk and category heads on top of the backbone, so each new token gives you an updated verdict for the price of one incremental forward pass. That is the difference between cutting a stream off mid-sentence and discovering after the fact that you shipped the whole thing to a user.
+
+At 0.6B it is the small end of the line — meant to sit in the hot path of every request, on a CPU if that is what you have.
+
+## Lineage
+
+**A redistribution, not a fine-tune.** The weights are [Qwen/Qwen3Guard-Stream-0.6B](https://huggingface.co/Qwen/Qwen3Guard-Stream-0.6B) (Apache-2.0, Alibaba Qwen), unmodified, down to the custom modeling code the architecture needs. The model and its streaming design are Alibaba's work.
+
+Hanzo's contribution is the rebase: the Zen guard line moved off a Qwen2.5-3B base under the non-commercial Qwen Research License onto Apache-2.0 Qwen3Guard, so the guardrail is commercially shippable. No identity training, no abliteration — neither belongs on a safety classifier.
+
+## Use it
+
+The architecture ships as custom code, so `trust_remote_code=True` is required. Pass the full prompt on the first call, then one new token id per call, threading the returned state through.
+
+```python
+from transformers import AutoModel, AutoTokenizer
+
+tok = AutoTokenizer.from_pretrained("zenlm/zen-guard-stream")
+model = AutoModel.from_pretrained(
+    "zenlm/zen-guard-stream", trust_remote_code=True, dtype="auto", device_map="auto"
+).eval()
+
+ids = tok("How do I pick a lock?", return_tensors="pt").input_ids[0]
+result, state = model.stream_moderate_from_ids(ids, role="user", stream_state=None)
+print(result)
+
+for tid in tok("Sure, the first step is", return_tensors="pt").input_ids[0]:
+    result, state = model.stream_moderate_from_ids(tid.unsqueeze(0), role="assistant", stream_state=state)
+    print(result)
+```
+
+## Status
+
+Superseded by [zenlm/zen3-guard](https://huggingface.co/zenlm/zen3-guard). These weights stay published and loadable for reproducibility.
+
+Weights: [huggingface.co/zenlm/zen-guard-stream](https://huggingface.co/zenlm/zen-guard-stream)
