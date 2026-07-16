@@ -1,0 +1,30 @@
+---
+title: "zen-reranker-8B-GGUF: Q4_K_M Re-Scoring in 5 GB"
+date: "2026-01-12"
+description: "A 4-bit GGUF build of the largest Zen reranker, for pipelines that pay for ordering quality."
+author: "Zen LM Research"
+tags: ["Models", "Retrieval"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-reranker-8B-GGUF" label="GGUF WEIGHTS" external />
+
+A GGUF build of the largest Zen reranker, quantized to **Q4_K_M** in a single 5.03 GB file. This is the top of the Zen reranker line, for stacks where the ordering of the retrieved set is what limits answer quality. Reranking every candidate costs real latency at this size, so the usual shape is a cheap first-stage retriever pulling a wide set and this model re-scoring only the top slice of it.
+
+## Lineage
+
+Quantized from [Qwen/Qwen3-Reranker-8B](https://huggingface.co/Qwen/Qwen3-Reranker-8B) by Alibaba's Qwen team, under the **Apache 2.0** license. This is a format conversion, not a retrain. For full-precision safetensors, see [zenlm/zen-reranker-8B](https://huggingface.co/zenlm/zen-reranker-8B).
+
+## Use it
+
+```bash
+llama-server --hf-repo zenlm/zen-reranker-8B-GGUF \
+             --hf-file zen-reranker-8B-Q4_K_M.gguf \
+             --reranking
+
+curl http://localhost:8080/v1/rerank -H "Content-Type: application/json" -d '{
+  "query": "how do I tune a rerank endpoint",
+  "documents": ["reranking guide", "unrelated doc"]
+}'
+```
+
+Weights: [huggingface.co/zenlm/zen-reranker-8B-GGUF](https://huggingface.co/zenlm/zen-reranker-8B-GGUF) (259 downloads since publication).
