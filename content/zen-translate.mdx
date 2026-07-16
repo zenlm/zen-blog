@@ -1,0 +1,40 @@
+---
+title: "zen-translate: Document and Long-Form Translation on Qwen3-8B"
+date: "2026-03-02"
+description: "A translation model fine-tuned from Qwen3-8B, tuned for document translation, technical content, and long-form multilingual text."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+
+<LinkButton href="https://huggingface.co/zenlm/zen-translate" label="ZEN-TRANSLATE WEIGHTS" external />
+
+zen-translate is built for translation work that runs longer than a sentence. The target cases are documents, technical content, and long-form text where consistency across paragraphs matters more than a clever rendering of any single line. If you are translating a manual, a docs site, or a support corpus and you need terminology to stay stable from page one to page forty, that is what this model is tuned for.
+
+It is a specialist. For general chat, use a general model.
+
+## Lineage
+
+Fine-tuned from [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) (Apache-2.0), published by the Qwen team at Alibaba. The multilingual capability underneath this model is theirs, and the architecture is theirs unmodified: Qwen3, 36 layers, 4096 hidden width.
+
+Hanzo adds three things and nothing else: identity training, agentic-data fine-tuning, and abliteration. No new architecture, and we claim none. Redistributed under Apache-2.0, matching the base.
+
+No benchmark tables here. Translation quality is domain-bound and language-pair-bound, and a single averaged score would tell you nothing useful about your pairs. The weights are public with 46 downloads to date. Run it against your own corpus and your own reviewers.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model = AutoModelForCausalLM.from_pretrained("zenlm/zen-translate", torch_dtype="auto", device_map="auto")
+tokenizer = AutoTokenizer.from_pretrained("zenlm/zen-translate")
+
+messages = [{"role": "user", "content": "Translate to Japanese, keeping technical terms consistent:\n\nThe connection pool exhausts under sustained write load."}]
+text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+inputs = tokenizer(text, return_tensors="pt").to(model.device)
+
+output = model.generate(**inputs, max_new_tokens=1024)
+print(tokenizer.decode(output[0][inputs.input_ids.shape[-1]:], skip_special_tokens=True))
+```
+
+Weights: [huggingface.co/zenlm/zen-translate](https://huggingface.co/zenlm/zen-translate)
