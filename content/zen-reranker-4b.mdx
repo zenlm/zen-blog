@@ -1,0 +1,46 @@
+---
+title: "zen-reranker-4B: A Larger Cross-Encoder for Search Relevance"
+date: "2026-05-30"
+description: "The large tier of the Zen reranker line: a cross-encoder that re-scores candidate passages for RAG and search relevance."
+author: "Zen LM Research"
+tags: ["Models", "Reranker"]
+---
+
+
+<LinkButton href="https://huggingface.co/zenlm/zen-reranker-4B" label="ZEN-RERANKER-4B WEIGHTS" external />
+
+zen-reranker-4B is the large tier of the Zen reranker line. Like the 0.6B, it is a cross-encoder: query and passage go through the model together and come out as one relevance score, which is what makes it better at ordering than a bi-encoder and what stops you from precomputing it into an index.
+
+Cost scales with candidates, not with corpus size. Every rerank is a forward pass, so the 4B is the tier you choose when the shortlist is short and the ordering matters more than the milliseconds: high-value search, legal or technical corpora, anything where the wrong passage at rank one is expensive. If you are reranking 100 candidates per query at interactive latency, start at 0.6B and measure before moving up.
+
+## Lineage
+
+A redistribution, not a fine-tune. The weights are [Qwen/Qwen3-Reranker-4B](https://huggingface.co/Qwen/Qwen3-Reranker-4B) (Apache-2.0) by the Qwen team at Alibaba, re-hosted under the Zen line and republished under the same license. Not trained from scratch, no Hanzo training on top, and the ranking quality is Qwen's work. What we add is packaging: a stable name in the Zen catalog, served through the Hanzo gateway as `zen-reranker-4b`.
+
+## Use it
+
+Scoring follows the upstream yes/no token recipe.
+
+```python
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+tok = AutoTokenizer.from_pretrained("zenlm/zen-reranker-4B", padding_side="left")
+model = AutoModelForCausalLM.from_pretrained("zenlm/zen-reranker-4B", torch_dtype="auto", device_map="auto").eval()
+yes_id, no_id = tok.convert_tokens_to_ids("yes"), tok.convert_tokens_to_ids("no")
+
+def score(query: str, doc: str) -> float:
+    messages = [
+        {"role": "system", "content": 'Judge whether the Document meets the requirements based on the Query. Note that the answer can only be "yes" or "no".'},
+        {"role": "user", "content": f"<Query>: {query}\n<Document>: {doc}"},
+    ]
+    text = tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    inputs = tok(text, return_tensors="pt").to(model.device)
+    with torch.no_grad():
+        logits = model(**inputs).logits[0, -1]
+    return torch.softmax(torch.stack([logits[no_id], logits[yes_id]]), dim=0)[1].item()
+
+print(score("how do I speed up a slow query?", "Add a covering index on the filtered columns."))
+```
+
+Weights: [huggingface.co/zenlm/zen-reranker-4B](https://huggingface.co/zenlm/zen-reranker-4B)
