@@ -1,0 +1,35 @@
+---
+title: "zen-video-i2v: image-to-video on the Wan2.2 A14B dual-expert stack"
+date: "2026-06-16"
+description: "A redistribution of Wan2.2-I2V-A14B for animating a still image. Experimental, and superseded by zen-director."
+author: "Zen LM Research"
+tags: ["Models", "Video"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-video-i2v" label="WEIGHTS" external />
+
+Image-to-video: give it a still and a prompt, get motion. The repo carries the Wan2.2 dual-expert layout, a `high_noise_model` and a `low_noise_model` that split the denoising trajectory between them, alongside the Wan2.1 VAE and a UMT5-XXL text encoder.
+
+Treat this one as experimental. It is superseded by [zenlm/zen-director](https://huggingface.co/zenlm/zen-director), which does text-and-image to video. These weights stay up for reproducibility, so use them if you are reproducing something and reach for zen-director if you are starting fresh.
+
+## Lineage
+
+Repackaged from [Wan-AI/Wan2.2-I2V-A14B](https://huggingface.co/Wan-AI/Wan2.2-I2V-A14B) (apache-2.0, Alibaba Wan). Not trained from scratch, and not a Hanzo fine-tune. It is a redistribution under the upstream license, with the upstream LICENSE and NOTICE retained in-repo.
+
+## Use it
+
+The `diffusers` tag on this repo is misleading: there is no `model_index.json`, so `DiffusionPipeline.from_pretrained` will not resolve it. The layout is native Wan, so drive it with the upstream generator.
+
+```sh
+hf download zenlm/zen-video-i2v --local-dir zen-video-i2v
+
+git clone https://github.com/Wan-Video/Wan2.2 && cd Wan2.2
+pip install -r requirements.txt
+
+python generate.py --task i2v-A14B --size 1280*720 \
+  --ckpt_dir ../zen-video-i2v \
+  --image ../zen-video-i2v/examples/i2v_input.JPG \
+  --prompt "The camera pushes in slowly as the subject turns to face it."
+```
+
+Weights: [huggingface.co/zenlm/zen-video-i2v](https://huggingface.co/zenlm/zen-video-i2v)
