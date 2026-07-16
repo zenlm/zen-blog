@@ -1,0 +1,54 @@
+---
+title: "zen-reranker: cross-encoder reranking for RAG and search"
+date: "2026-02-28"
+description: "The Zen retrieval reranker: an unmodified redistribution of Qwen3-Reranker-4B that rescores query and passage pairs for RAG and search relevance."
+author: "Zen LM Research"
+tags: ["Models", "Retrieval"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-reranker" label="WEIGHTS" external />
+
+zen-reranker is the second stage of a retrieval pipeline. Your vector store or BM25 index returns the top 50 candidates fast and approximately; zen-reranker reads each query and passage together and scores how well they actually match. That joint read is what an embedding dot product cannot do, because embeddings compress the query and the document separately before they ever meet. If your RAG answers are wrong because the right chunk was sitting at rank 20, this is the model that moves it to rank 1.
+
+It is a cross-encoder, so cost scales with the number of candidates you score. Retrieve wide, rerank narrow, feed the top few to the generator.
+
+## Lineage
+
+zen-reranker is a redistribution of [Qwen/Qwen3-Reranker-4B](https://huggingface.co/Qwen/Qwen3-Reranker-4B) (Apache-2.0), trained and released by the Alibaba Qwen team. The weights are unmodified: both safetensors shards are byte-identical to upstream, which you can confirm by comparing SHA-256 against the upstream repo. It is not trained from scratch and it is not a Hanzo fine-tune. We re-host it so the Zen catalog carries one license-clean reranker with one name and one download path.
+
+Because the weights are upstream's, the scoring recipe is upstream's too. The model is a causal LM that answers a relevance question with a single token, so you score by comparing the logits of `yes` and `no` at the final position rather than reading a classification head.
+
+## Use it
+
+```python
+import torch
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+tok = AutoTokenizer.from_pretrained("zenlm/zen-reranker")
+model = AutoModelForCausalLM.from_pretrained(
+    "zenlm/zen-reranker", torch_dtype="auto", device_map="auto"
+).eval()
+
+YES, NO = tok.convert_tokens_to_ids("yes"), tok.convert_tokens_to_ids("no")
+
+def score(query: str, doc: str) -> float:
+    messages = [
+        {"role": "system", "content": 'Judge whether the Document meets the requirements based on the Query. Answer only "yes" or "no".'},
+        {"role": "user", "content": f"<Query>: {query}\n<Document>: {doc}"},
+    ]
+    text = tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    inputs = tok(text, return_tensors="pt").to(model.device)
+    with torch.no_grad():
+        logits = model(**inputs).logits[0, -1]
+    return torch.softmax(torch.stack([logits[NO], logits[YES]]), dim=0)[1].item()
+
+candidates = ["The giant panda is a bear species endemic to China.", "Pandas is a Python data analysis library."]
+ranked = sorted(candidates, key=lambda d: score("what is a panda?", d), reverse=True)
+print(ranked[0])
+```
+
+## Credit
+
+Qwen3-Reranker-4B is the work of the Alibaba Qwen team, released under Apache-2.0. The prompt format and yes/no scoring convention are theirs; follow their repo as the reference. This redistribution keeps the license unchanged.
+
+Weights: [huggingface.co/zenlm/zen-reranker](https://huggingface.co/zenlm/zen-reranker)
