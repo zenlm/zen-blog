@@ -1,0 +1,46 @@
+---
+title: "zen-reranker-0.6B: A Cross-Encoder for Re-Scoring Retrieval Candidates"
+date: "2026-05-30"
+description: "The small tier of the Zen reranker line: a cross-encoder that re-scores candidate passages for RAG and search relevance."
+author: "Zen LM Research"
+tags: ["Models", "Reranker"]
+---
+
+
+<LinkButton href="https://huggingface.co/zenlm/zen-reranker-0.6B" label="ZEN-RERANKER-0.6B WEIGHTS" external />
+
+zen-reranker-0.6B is the small tier of the Zen reranker line. It is a cross-encoder: it reads the query and the passage together and scores the pair, which is why it beats a bi-encoder on ordering and why you cannot precompute it into an index. The normal shape is two stages. An embedding model pulls the top 50 or 100 candidates out of a large index, then this model re-scores just those and you keep the top handful for the context window.
+
+A reranker is often the cheapest real win in a RAG pipeline. If retrieval is pulling the right document into the candidate set but burying it at rank 30, no amount of prompt work fixes that, and a reranker does.
+
+## Lineage
+
+A redistribution, not a fine-tune. The weights are [Qwen/Qwen3-Reranker-0.6B](https://huggingface.co/Qwen/Qwen3-Reranker-0.6B) (Apache-2.0) by the Qwen team at Alibaba, re-hosted under the Zen line and republished under the same license. Not trained from scratch, no Hanzo training on top, and the ranking quality is Qwen's work. What we add is packaging: a stable name in the Zen catalog, served through the Hanzo gateway as `zen-reranker-0.6b`.
+
+## Use it
+
+Scoring follows the upstream yes/no token recipe.
+
+```python
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+tok = AutoTokenizer.from_pretrained("zenlm/zen-reranker-0.6B", padding_side="left")
+model = AutoModelForCausalLM.from_pretrained("zenlm/zen-reranker-0.6B", torch_dtype="auto").eval()
+yes_id, no_id = tok.convert_tokens_to_ids("yes"), tok.convert_tokens_to_ids("no")
+
+def score(query: str, doc: str) -> float:
+    messages = [
+        {"role": "system", "content": 'Judge whether the Document meets the requirements based on the Query. Note that the answer can only be "yes" or "no".'},
+        {"role": "user", "content": f"<Query>: {query}\n<Document>: {doc}"},
+    ]
+    text = tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    inputs = tok(text, return_tensors="pt").to(model.device)
+    with torch.no_grad():
+        logits = model(**inputs).logits[0, -1]
+    return torch.softmax(torch.stack([logits[no_id], logits[yes_id]]), dim=0)[1].item()
+
+print(score("how do I speed up a slow query?", "Add a covering index on the filtered columns."))
+```
+
+Weights: [huggingface.co/zenlm/zen-reranker-0.6B](https://huggingface.co/zenlm/zen-reranker-0.6B)
