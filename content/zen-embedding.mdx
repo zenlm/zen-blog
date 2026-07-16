@@ -1,0 +1,35 @@
+---
+title: "zen-embedding: 4096-dimensional text embeddings for retrieval"
+date: "2025-11-13"
+description: "The Zen line's retrieval embedding model: an unmodified Apache-2.0 redistribution of Qwen3-Embedding-8B."
+author: "Zen LM Research"
+tags: ["Models", "Embedding"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-embedding" label="HUGGING FACE" external />
+
+zen-embedding turns text into vectors for retrieval, semantic search, clustering, and deduplication. It ships as a sentence-transformers model: a transformer trunk, last-token pooling, and an L2 normalize head, emitting 4096-dimensional unit vectors, so cosine similarity is a dot product. It carries an asymmetric query prompt, meaning queries are encoded with an instruction prefix and documents are encoded bare. Use `prompt_name="query"` on the query side and nothing on the document side, or retrieval quality suffers for reasons that look like a model problem and are not.
+
+## Lineage
+
+This repository redistributes [Qwen/Qwen3-Embedding-8B](https://huggingface.co/Qwen/Qwen3-Embedding-8B) (Apache-2.0), trained and released by Alibaba's Qwen team. The weights are their work and the credit is theirs.
+
+All four safetensors shards are byte-identical to upstream, same SHA-256: no additional training, no merge, no abliteration. We publish it under the Zen name so our catalog and serving stack have one stable identifier with explicit provenance, and so the Zen line stays permissively licensed end to end. Apache-2.0 upstream, Apache-2.0 here.
+
+## Use it
+
+```python
+from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer("zenlm/zen-embedding")
+
+queries = model.encode(["what is a merkle tree"], prompt_name="query")
+docs = model.encode([
+    "A Merkle tree is a hash tree in which every leaf is the hash of a data block.",
+    "A sourdough starter is a culture of wild yeast and lactobacilli.",
+])
+
+print(model.similarity(queries, docs))
+```
+
+Weights: [huggingface.co/zenlm/zen-embedding](https://huggingface.co/zenlm/zen-embedding)
