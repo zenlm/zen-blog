@@ -1,0 +1,47 @@
+---
+title: "zen-eco-4b-thinking: Qwen3-4B Reasoning Weights with GGUF and MLX in One Repo"
+date: "2025-09-28"
+description: "A permissively-licensed redistribution of Qwen3-4B for the Zen Eco line, packaged with GGUF and MLX conversions alongside the safetensors."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-eco-4b-thinking" label="MODEL WEIGHTS" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-4B" label="BASE MODEL" external />
+
+zen-eco-4b-thinking is the reasoning-capable 4B entry in the Zen Eco line. The practical value of this repo is packaging: the safetensors, a GGUF conversion, and an MLX conversion all live at one address, under one name, under one license. If you prototype with transformers on a workstation, ship to llama.cpp on a server, and test on a MacBook, you pull three formats from one place instead of hunting three community conversions of varying vintage.
+
+## Lineage
+
+Repackaged from [Qwen/Qwen3-4B](https://huggingface.co/Qwen/Qwen3-4B) (Apache-2.0), built by Qwen at Alibaba Cloud. This is a redistribution, not a model we trained from scratch, and not one we fine-tuned. The reasoning behavior you get is Qwen3-4B's reasoning behavior, and the credit for it belongs to Qwen.
+
+We publish it because the Zen line is OSS-clean by construction: every model in it carries a permissive license and a stated origin. From this repo's `config.json`: dense Qwen3, 36 layers, hidden size 2560, 262,144 maximum position embeddings.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "zenlm/zen-eco-4b-thinking"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id, torch_dtype="auto", device_map="auto"
+)
+
+messages = [{"role": "user", "content": "A rope burns unevenly in 60 minutes. Time 45."}]
+text = tokenizer.apply_chat_template(
+    messages, tokenize=False, add_generation_prompt=True
+)
+inputs = tokenizer([text], return_tensors="pt").to(model.device)
+print(tokenizer.decode(model.generate(**inputs, max_new_tokens=1024)[0]))
+```
+
+The `gguf/` and `mlx/` subdirectories hold the converted weights. For llama.cpp:
+
+```bash
+hf download zenlm/zen-eco-4b-thinking gguf/zen-eco-4b-thinking-f16.gguf --local-dir .
+```
+
+358 downloads so far.
+
+Weights: [huggingface.co/zenlm/zen-eco-4b-thinking](https://huggingface.co/zenlm/zen-eco-4b-thinking)
