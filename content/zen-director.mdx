@@ -1,0 +1,37 @@
+---
+title: "zen-director: Text and Image to Video in the Zen Line"
+date: "2025-09-29"
+description: "A permissively-licensed redistribution of Wan2.2-TI2V-5B, packaged as the text-and-image-to-video model of the Zen line."
+author: "Zen LM Research"
+tags: ["Models", "Video"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-director" label="MODEL WEIGHTS" external />
+<LinkButton href="https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B" label="BASE MODEL" external />
+
+zen-director is the video model in the Zen line. It takes text, or text plus a starting image, and produces video. It is for teams who want a video generator they can run on their own hardware, with weights they can inspect and a license that does not complicate shipping.
+
+## Lineage
+
+Repackaged from [Wan-AI/Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) (Apache-2.0), built by the Wan team at Alibaba. This is a redistribution. We did not train it from scratch, we did not fine-tune it, and the quality of what comes out is their work.
+
+The reason it exists under a Zen name is consistency: the Zen catalog is permissive-license-only, with a stated origin for every entry, so a team can adopt the whole line under one legal review instead of eight. From this repo's `config.json`, the transformer is a `WanModel` with 30 layers, dim 3072, and 24 heads.
+
+## Use it
+
+The checkpoint keeps the Wan native layout, not a diffusers pipeline layout: the transformer shards ship next to `Wan2.2_VAE.pth`, the UMT5-XXL text encoder, and its tokenizer. Use it with the Wan reference sampler.
+
+```bash
+hf download zenlm/zen-director --local-dir ./zen-director
+
+# reference sampler: github.com/Wan-Video/Wan2.2
+python generate.py --task ti2v-5B --size 1280*704 \
+  --ckpt_dir ./zen-director \
+  --prompt "a paper plane banking between towers at dusk"
+```
+
+The `ti2v-5B` task accepts `1280*704` or `704*1280`. Pass `--image` alongside the prompt for the image-to-video path; the repo ships `examples/i2v_input.JPG` to test against.
+
+117 downloads so far.
+
+Weights: [huggingface.co/zenlm/zen-director](https://huggingface.co/zenlm/zen-director)
