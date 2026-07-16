@@ -1,0 +1,45 @@
+---
+title: "zen3-tts-voice-design: Speakers from a Written Description"
+date: "2026-05-30"
+description: "The Zen3 synthesis variant that invents a voice from a description of it, with no reference audio required."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Audio"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-tts-voice-design" label="HUGGING FACE" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign" label="BASE MODEL" external />
+
+zen3-tts-voice-design starts from a sentence about a voice rather than a recording of one. Describe the speaker you want, in words, and it synthesizes someone who fits: an older man with a gravelly voice and a slight drawl, a bright young narrator, a tired night-shift dispatcher. Nobody has to be recorded, which makes it the honest option for game characters, audio drama, and prototypes where cloning a real person would be the wrong move.
+
+The description is the interface, so it carries the detail: timbre, age, accent, pace, and mood all belong in the instruction. The config marks this variant `voice_design`, and like [zen3-tts-custom-voice](/blog/zen3-tts-custom-voice/) it carries no speaker encoder, since there is no reference clip. Weights are about 1.92B parameters in bf16 over the same 12 Hz codec as the rest of the line. One practical note: a designed voice is generated fresh each call. When you need one character to stay consistent across many lines, synthesize a short clip you like, then feed that clip to [zen3-tts](/blog/zen3-tts/) as a reference and generate the rest from there.
+
+## Lineage
+
+Redistributed from [`Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign`](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign), released by Alibaba's Qwen team under **Apache-2.0**. The weights are unmodified and match upstream by sha256, byte for byte. We did not train this model. It is mirrored into the Zen3 line for one packaging and license path across the audio stack. Apache-2.0 travels with the weights, and credit belongs to Qwen.
+
+## Use it
+
+```bash
+pip install -U qwen-tts
+```
+
+```python
+import torch
+import soundfile as sf
+from qwen_tts import Qwen3TTSModel
+
+model = Qwen3TTSModel.from_pretrained(
+    "zenlm/zen3-tts-voice-design",
+    device_map="cuda:0",
+    dtype=torch.bfloat16,
+)
+
+wavs, sr = model.generate_voice_design(
+    text="Storm's coming in off the water. Best tie that down.",
+    instruct="An older fisherman, gravelly low voice, unhurried, slight coastal accent.",
+    language="English",
+)
+sf.write("out.wav", wavs[0], sr)
+```
+
+Weights: [huggingface.co/zenlm/zen3-tts-voice-design](https://huggingface.co/zenlm/zen3-tts-voice-design).
