@@ -1,0 +1,55 @@
+---
+title: "zen3-vl: 8B vision-language model for OCR, documents, and video"
+date: "2026-02-24"
+description: "The Zen3 vision-language model: a license-clean, unmodified redistribution of Qwen3-VL-8B-Instruct for image, video, and document understanding."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Vision"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-vl" label="WEIGHTS" external />
+
+zen3-vl is the vision-language entry in the Zen3 line. Text, images, and video go in; text comes out. It is built for the ordinary hard work of visual understanding: pulling line items off a scanned invoice, reading a chart, describing a screenshot, answering questions about a short clip. At 8B it fits on a single consumer GPU, which is the whole point. Run it on your own hardware instead of shipping your documents to someone else's vision endpoint.
+
+## Lineage
+
+zen3-vl is a redistribution of [Qwen/Qwen3-VL-8B-Instruct](https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct) (Apache-2.0), trained and released by the Alibaba Qwen team. The weights are unmodified. Every safetensors shard here is byte-identical to the matching shard upstream, and you can verify that yourself by comparing the SHA-256 of any file against the upstream repo.
+
+We state that plainly because the alternative is worse. zen3-vl exists so the Zen catalog carries one license-clean vision model with one name, one download path, and one set of Apache-2.0 terms across the Hanzo gateway. It is not a Hanzo fine-tune. There is no identity training, no agentic-data tuning, and no abliteration layered on top. If you would rather pull the upstream repo directly, do that; you get the same tensors, and the credit lands where the training happened.
+
+The config declares the Qwen3-VL architecture (`Qwen3VLForConditionalGeneration`) with 36 text layers, and ships both image and video preprocessors.
+
+## Use it
+
+```python
+from transformers import Qwen3VLForConditionalGeneration, AutoProcessor
+
+model = Qwen3VLForConditionalGeneration.from_pretrained(
+    "zenlm/zen3-vl", torch_dtype="auto", device_map="auto"
+)
+processor = AutoProcessor.from_pretrained("zenlm/zen3-vl")
+
+messages = [{
+    "role": "user",
+    "content": [
+        {"type": "image", "url": "https://example.com/invoice.png"},
+        {"type": "text", "text": "Extract the line items and totals as JSON."},
+    ],
+}]
+
+inputs = processor.apply_chat_template(
+    messages,
+    add_generation_prompt=True,
+    tokenize=True,
+    return_dict=True,
+    return_tensors="pt",
+).to(model.device)
+
+out = model.generate(**inputs, max_new_tokens=512)
+print(processor.decode(out[0][inputs["input_ids"].shape[-1]:], skip_special_tokens=True))
+```
+
+## Credit
+
+Qwen3-VL-8B-Instruct is the work of the Alibaba Qwen team, released under Apache-2.0. This redistribution keeps that license unchanged.
+
+Weights: [huggingface.co/zenlm/zen3-vl](https://huggingface.co/zenlm/zen3-vl)
