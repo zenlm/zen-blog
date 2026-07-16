@@ -1,0 +1,40 @@
+---
+title: "zen-router: 1.2 MB of routing heads on a frozen backbone"
+date: "2026-07-07"
+description: "An experimental router that reads a prompt and picks the model to answer it — trained heads only, with an honest negative result on RouterBench."
+author: "Zen LM Research"
+tags: ["Models", "Router"]
+---
+
+`zen-router` reads a prompt and picks which model should answer it. One forward pass emits three things: a task class, a distribution over a 28-model catalog priced from the gateway's live config, and a feature embedding for per-user online adaptation. It is meant to run in front of every request, which is why it is small.
+
+## Lineage
+
+The backbone is [Qwen/Qwen3-0.6B](https://huggingface.co/Qwen/Qwen3-0.6B) (Apache-2.0, Alibaba Qwen), served through the public [zen-nano-0.6b](https://huggingface.co/zenlm/zen-nano-0.6b) — and it stays **frozen**. What we trained, and all this repo publishes, is 1.2 MB of linear heads over the pooled last hidden state: task, route, feature. Labels come from real agentic sessions, pairing each prompt with the model that actually served it, then reward-tuned on `quality − λ·cost − μ·latency`. Freezing the backbone is what makes the release safe to publish: heads cannot reconstruct the corpus they were fit on.
+
+## Where it stands
+
+Honest, because the alternative is worse. On our 1,941-prompt holdout the route head hits 0.791 against a 53.3% majority baseline — real multi-model discrimination. On the full RouterBench suite it scores below the interpolation hull: it does not beat statically picking one model. Our training corpus is overwhelmingly Opus-labeled and 20 of 28 catalog models never appear in it. Genuine routing needs balanced counterfactual labels. This model is experimental and is published as a checkpoint on the way there.
+
+## Use it
+
+There is no `config.json` here — the heads are the artifact, the backbone is a separate public model.
+
+```python
+import json, torch
+from huggingface_hub import hf_hub_download
+from transformers import AutoModel, AutoTokenizer
+
+cfg = json.load(open(hf_hub_download("zenlm/zen-router", "router_config.json")))
+heads = torch.load(hf_hub_download("zenlm/zen-router", "zen-router.pt"), map_location="cpu")
+
+tok = AutoTokenizer.from_pretrained("zenlm/zen-router")
+backbone = AutoModel.from_pretrained(cfg["base"]).eval()   # frozen zen-nano-0.6b
+
+x = tok("port this rust trait impl to zig", return_tensors="pt")
+h = backbone(**x).last_hidden_state[:, -1]                 # raw pooled last token, not normalized
+route = h @ heads["route_head.weight"].T + heads["route_head.bias"]
+print(cfg["catalog"][int(route.argmax())])
+```
+
+Weights: [huggingface.co/zenlm/zen-router](https://huggingface.co/zenlm/zen-router)
