@@ -1,0 +1,38 @@
+---
+title: "zen-sql: An 8B SQL Specialist for Query Generation and Schema Work"
+date: "2026-03-02"
+description: "A SQL specialist fine-tuned from Qwen3-8B for query generation, schema design, optimization, and database documentation."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+
+<LinkButton href="https://huggingface.co/zenlm/zen-sql" label="ZEN-SQL WEIGHTS" external />
+
+zen-sql writes and reviews SQL. It is aimed at query generation from natural language, schema design, query optimization, and documenting databases that nobody documented the first time. It handles the dialects people actually ship on: PostgreSQL, MySQL, SQLite, BigQuery, Snowflake. If you are building a text-to-SQL path, a migration assistant, or a review step in front of a production database, point it at this model instead of a general chat model.
+
+## Lineage
+
+Fine-tuned from [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) (Apache-2.0), published by the Qwen team at Alibaba. The architecture is theirs, unmodified: Qwen3, 36 layers, 4096 hidden width. We did not build it and do not claim it.
+
+Hanzo adds exactly three things on top of that base: identity training, agentic-data fine-tuning, and abliteration. That is the whole delta. There is no new architecture in this release. Weights are redistributed under Apache-2.0, the same license as the base.
+
+We are not shipping benchmark tables with this post. The model is public and has 49 downloads to date. Your schemas are not our eval set, so measure it on yours.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model = AutoModelForCausalLM.from_pretrained("zenlm/zen-sql", torch_dtype="auto", device_map="auto")
+tokenizer = AutoTokenizer.from_pretrained("zenlm/zen-sql")
+
+messages = [{"role": "user", "content": "Given orders(id, user_id, total, created_at), write a query for monthly revenue per user for 2026."}]
+text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+inputs = tokenizer(text, return_tensors="pt").to(model.device)
+
+output = model.generate(**inputs, max_new_tokens=512)
+print(tokenizer.decode(output[0][inputs.input_ids.shape[-1]:], skip_special_tokens=True))
+```
+
+Weights: [huggingface.co/zenlm/zen-sql](https://huggingface.co/zenlm/zen-sql)
