@@ -1,0 +1,23 @@
+---
+title: "zen-embedding-0.6B-GGUF: Q8_0 embeddings for CPU inference"
+date: "2026-01-12"
+description: "A GGUF Q8_0 build of Qwen3-Embedding-0.6B for llama.cpp and compatible runtimes."
+author: "Zen LM Research"
+tags: ["Models", "Embedding"]
+---
+
+A GGUF build of the small Zen embedding model, quantized to Q8_0 for CPU and mixed CPU/GPU retrieval. Reach for it when you want local embeddings without a GPU budget.
+
+## Lineage
+
+Quantized from [Qwen/Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B) (Apache-2.0), by Alibaba's Qwen team. Format conversion to GGUF Q8_0 is the only change we made: no Zen fine-tuning, no identity training, no abliteration. The larger sibling is [zen-embedding-8B-GGUF](/blog/zen-embedding-8b-gguf/).
+
+## Use it
+
+```bash
+hf download zenlm/zen-embedding-0.6B-GGUF zen-embedding-0.6B-Q8_0.gguf --local-dir .
+
+llama-embedding -m zen-embedding-0.6B-Q8_0.gguf -p "search query"
+```
+
+Weights: [huggingface.co/zenlm/zen-embedding-0.6B-GGUF](https://huggingface.co/zenlm/zen-embedding-0.6B-GGUF)
