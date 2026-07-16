@@ -1,0 +1,36 @@
+---
+title: "zen-eco: a 0.6B dense model for on-device and high-volume work"
+date: "2025-11-13"
+description: "The small end of the Zen text line: an unmodified Apache-2.0 redistribution of Qwen3-0.6B."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-eco" label="HUGGING FACE" external />
+
+zen-eco is the smallest text model in the Zen line. It exists for the jobs where a frontier model is the wrong tool: classification, routing, extraction, rewriting, and anything you run a million times a day or on a device with no network. Its `config.json` declares 28 layers, hidden size 1024, 16 attention heads, tied embeddings, and a 40,960-token position limit. The weights are a single 1.5 GB safetensors file, and it will run on a CPU if it has to.
+
+## Lineage
+
+This repository redistributes [Qwen/Qwen3-0.6B](https://huggingface.co/Qwen/Qwen3-0.6B) (Apache-2.0), trained and released by Alibaba's Qwen team. The weights are their work and the credit is theirs.
+
+The single safetensors file is byte-identical to upstream, same SHA-256: no additional training, no merge, no abliteration. We publish it under the Zen name so our catalog and serving stack have one stable identifier with explicit provenance, and so the Zen line stays permissively licensed end to end. Apache-2.0 upstream, Apache-2.0 here.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "zenlm/zen-eco"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id, dtype="auto", device_map="auto")
+
+messages = [{"role": "user", "content": "Classify this ticket as bug, feature, or question: 'the export button does nothing on Safari'"}]
+text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+inputs = tokenizer([text], return_tensors="pt").to(model.device)
+
+out = model.generate(**inputs, max_new_tokens=64)
+print(tokenizer.decode(out[0][inputs.input_ids.shape[1]:], skip_special_tokens=True))
+```
+
+Weights: [huggingface.co/zenlm/zen-eco](https://huggingface.co/zenlm/zen-eco)
