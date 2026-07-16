@@ -1,0 +1,32 @@
+---
+title: "zen-guard-stream-4b: the 4B streaming guardrail"
+date: "2026-06-17"
+description: "The larger streaming guard — same token-by-token moderation as zen-guard-stream, with a 4B backbone."
+author: "Zen LM Research"
+tags: ["Models", "Guard"]
+---
+
+`zen-guard-stream-4b` is the larger sibling of [zen-guard-stream](https://huggingface.co/zenlm/zen-guard-stream). Same shape of job — risk and category heads scoring each token as it streams, rather than judging a finished turn — with a 4B backbone instead of 0.6B. Take it when you have the headroom in the hot path and want the bigger model reading the ambiguous cases. The [zen-guard-stream post](/zen-guard-stream) covers how the streaming interface works; it is identical here.
+
+## Lineage
+
+**A redistribution, not a fine-tune.** The weights are [Qwen/Qwen3Guard-Stream-4B](https://huggingface.co/Qwen/Qwen3Guard-Stream-4B) (Apache-2.0, Alibaba Qwen), unmodified and matching upstream shard for shard. Hanzo's contribution to the guard line is the rebase onto an Apache-2.0 base for clean commercial use, not training.
+
+## Use it
+
+```python
+from transformers import AutoModel, AutoTokenizer
+
+tok = AutoTokenizer.from_pretrained("zenlm/zen-guard-stream-4b")
+model = AutoModel.from_pretrained(
+    "zenlm/zen-guard-stream-4b", trust_remote_code=True, dtype="auto", device_map="auto"
+).eval()
+
+ids = tok("How do I pick a lock?", return_tensors="pt").input_ids[0]
+result, state = model.stream_moderate_from_ids(ids, role="user", stream_state=None)
+print(result)
+```
+
+Superseded by [zenlm/zen3-guard](https://huggingface.co/zenlm/zen3-guard); kept loadable for reproducibility.
+
+Weights: [huggingface.co/zenlm/zen-guard-stream-4b](https://huggingface.co/zenlm/zen-guard-stream-4b)
