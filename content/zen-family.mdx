@@ -1,0 +1,40 @@
+---
+title: "zen-family: The v1.0.1 Family Checkpoint, and What Zen Actually Is"
+date: "2025-09-25"
+description: "The v1.0.1 Zen family overview checkpoint, whose weights are a Qwen3-8B fine-tune, and a plain statement of what we add and what we do not."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-family" label="WEIGHTS" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-8B" label="UPSTREAM" external />
+
+`zen-family` is the v1.0.1 family overview repository. It carries real weights, an 8B dense fine-tune, and it doubles as the place we write down what the Zen line is. It has since been superseded by the named per-model repositories at [huggingface.co/zenlm](https://huggingface.co/zenlm); the weights stay published for reproducibility.
+
+It is worth reading for the statement of method more than for the checkpoint.
+
+## Lineage
+
+Fine-tuned from [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) (Apache-2.0) by Alibaba's Qwen team. Hanzo adds identity training, agentic-data fine-tuning, and abliteration.
+
+That list is exhaustive, and it holds across the family. Zen fine-tunes the best open-weight model of each era rather than pretraining its own. For this generation that is the Qwen3 line from Alibaba Cloud, spanning base, VL, Omni, and the rest, with media models built on other permissive bases. **There is no from-scratch Zen model.** We say so on every card because a reader deserves to know whose pretraining compute is under the weights they are downloading, and it is Qwen's.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "zenlm/zen-family"
+tok = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id, dtype="auto", device_map="auto")
+
+messages = [{"role": "user", "content": "Explain what a mixture-of-experts router does."}]
+ids = tok.apply_chat_template(
+    messages, add_generation_prompt=True, return_tensors="pt"
+).to(model.device)
+
+out = model.generate(ids, max_new_tokens=256)
+print(tok.decode(out[0][ids.shape[-1]:], skip_special_tokens=True))
+```
+
+For current work, start from the named model repositories instead. Weights and license terms: [huggingface.co/zenlm/zen-family](https://huggingface.co/zenlm/zen-family).
