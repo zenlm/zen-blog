@@ -1,0 +1,31 @@
+---
+title: "zen-embedding-4B: A 2560-Dim Retrieval Embedding for the Zen Line"
+date: "2026-05-30"
+description: "The middle tier of the Zen embedding line: a 2560-dimensional text embedding model for RAG, semantic search, and dense retrieval."
+author: "Zen LM Research"
+tags: ["Models", "Embedding"]
+---
+
+
+<LinkButton href="https://huggingface.co/zenlm/zen-embedding-4B" label="ZEN-EMBEDDING-4B WEIGHTS" external />
+
+zen-embedding-4B is the middle tier of the Zen embedding line. It produces 2560-dimensional vectors with last-token pooling, for retrieval-augmented generation, semantic search, and dense retrieval. This is the default pick when 0.6B is leaving retrieval quality on the table but 8B does not fit the serving budget. Note the vector width before you commit: 2560 dimensions cost real money per million documents in index storage, and the tiers are not interchangeable once an index is built.
+
+## Lineage
+
+A redistribution, not a fine-tune. The weights are [Qwen/Qwen3-Embedding-4B](https://huggingface.co/Qwen/Qwen3-Embedding-4B) (Apache-2.0) by the Qwen team at Alibaba, re-hosted under the Zen line and republished under that same license. Not trained from scratch, and no Hanzo training on top. The retrieval quality is Qwen's work and we credit it as theirs.
+
+What the repo adds is packaging: a stable, permissively-licensed name in the Zen catalog, served through the Hanzo gateway as `zen-embedding-4b`, native safetensors, one embedding interface across the 0.6B, 4B, and 8B tiers. That is a serving story, not a modeling claim. Where Hanzo does fine-tune, we say so; here we did not.
+
+## Use it
+
+```python
+from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer("zenlm/zen-embedding-4B")
+emb = model.encode(["Postgres index tuning", "How do I speed up a slow query?"])
+print(emb.shape)                      # (2, 2560)
+print(model.similarity(emb, emb))
+```
+
+Weights: [huggingface.co/zenlm/zen-embedding-4B](https://huggingface.co/zenlm/zen-embedding-4B)
