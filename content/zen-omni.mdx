@@ -1,0 +1,30 @@
+---
+title: "zen-omni: one model for text, image, audio, and video understanding"
+date: "2025-11-13"
+description: "A verbatim Apache-2.0 redistribution of Qwen3-Omni-30B-A3B-Instruct in the Zen line, with weights bit-identical to upstream."
+author: "Zen LM Research"
+tags: ["Models", "Omni"]
+---
+
+zen-omni is the any-to-any entry in the Zen catalog: one checkpoint that accepts text, images, audio, and video and answers in text. It is for teams who want a single model behind a mixed-media endpoint instead of stitching together a captioner, an ASR model, and a chat model.
+
+## Lineage
+
+Redistributed from [Qwen/Qwen3-Omni-30B-A3B-Instruct](https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct), which the Qwen team ships under Apache-2.0 as declared on their model card. The architecture, the training, and the capability are Alibaba's work.
+
+We are exact about our part, because provenance is checkable: we changed nothing. All fifteen safetensors shards in this repo are byte-for-byte identical to the corresponding shards upstream, with matching SHA-256. There is no Zen fine-tuning in this checkpoint, no identity training, and no abliteration. What we added is packaging: an attribution-complete, license-clean redistribution inside the Zen catalog so Zen users get one consistent surface and one set of conventions.
+
+If you are choosing between this repo and upstream on capability, they are the same weights. Pull whichever fits your infrastructure.
+
+## Use it
+
+```python
+from transformers import Qwen3OmniMoeForConditionalGeneration, AutoProcessor
+
+model = Qwen3OmniMoeForConditionalGeneration.from_pretrained(
+    "zenlm/zen-omni", dtype="auto", device_map="auto"
+)
+processor = AutoProcessor.from_pretrained("zenlm/zen-omni")
+```
+
+Weights: [huggingface.co/zenlm/zen-omni](https://huggingface.co/zenlm/zen-omni)
