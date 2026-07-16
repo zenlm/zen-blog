@@ -1,0 +1,48 @@
+---
+title: "zen3-tts-custom-voice: Preset Speakers with Instruction Control"
+date: "2026-05-30"
+description: "The Zen3 synthesis variant that speaks as a named preset voice, with delivery steered by a written instruction."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Audio"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-tts-custom-voice" label="HUGGING FACE" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice" label="BASE MODEL" external />
+
+Most products that need a voice do not need *your* voice. They need a good one, the same one every time, with no reference audio to collect and no consent question to answer. zen3-tts-custom-voice is the Zen3 synthesis variant for that: pick a named speaker, pass the text, and optionally steer the delivery with a written instruction such as "sound apologetic" or "read this slowly".
+
+It is the instruction channel that makes this more than a fixed voice. The same speaker can be calm in a confirmation and urgent in an alert without you maintaining two voices. The config marks it `custom_voice`, and unlike [zen3-tts](/blog/zen3-tts/) it carries no speaker encoder, because there is no reference clip to read. Weights are about 1.92B parameters in bf16 over the same 12 Hz codec as the rest of the line. Speaker names are validated on call, so ask the model rather than guessing.
+
+## Lineage
+
+Redistributed from [`Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice`](https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice), released by Alibaba's Qwen team under **Apache-2.0**. The weights are unmodified and match upstream by sha256, byte for byte. We did not train this model. It is mirrored into the Zen3 line for one packaging and license path across the audio stack. Apache-2.0 travels with the weights, and credit belongs to Qwen.
+
+## Use it
+
+```bash
+pip install -U qwen-tts
+```
+
+```python
+import torch
+import soundfile as sf
+from qwen_tts import Qwen3TTSModel
+
+model = Qwen3TTSModel.from_pretrained(
+    "zenlm/zen3-tts-custom-voice",
+    device_map="cuda:0",
+    dtype=torch.bfloat16,
+)
+
+print(model.get_supported_speakers())
+
+wavs, sr = model.generate_custom_voice(
+    text="Your package was delayed. We are sorry about that.",
+    speaker="Vivian",
+    language="English",
+    instruct="Say it apologetically.",
+)
+sf.write("out.wav", wavs[0], sr)
+```
+
+Weights: [huggingface.co/zenlm/zen3-tts-custom-voice](https://huggingface.co/zenlm/zen3-tts-custom-voice).
