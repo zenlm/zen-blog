@@ -1,0 +1,26 @@
+---
+title: "zen5-max-gguf: DeepSeek-V4-Pro asymmetrically quantized to 464 GB"
+date: "2026-05-30"
+description: "The top Zen5 tier: an imatrix-tuned GGUF of DeepSeek-V4-Pro that keeps the parts that hurt when quantized at higher precision."
+author: "Zen LM Research"
+tags: ["Models", "Zen5"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen5-max-gguf" label="WEIGHTS" external />
+
+The top of the Zen5 ladder, for people with a 512 GB Mac Studio or an 8x H100 pool. One file, measured at 464.6 GB. The quantization is deliberately asymmetric: routed experts go down to `IQ2_XXS` on up/gate and `Q2_K` on down, while the shared experts, attention projections, routing logits, and LM head stay at `Q8_0`. Those are the tensors where low-bit error compounds, so they keep their bits. It is imatrix-tuned. 190 pulls so far.
+
+## Lineage
+
+Repackaged from [deepseek-ai/DeepSeek-V4-Pro](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro) (MIT, DeepSeek), quantized from the abliterated variant by [huihui-ai](https://huggingface.co/huihui-ai). Not trained from scratch, and not a Hanzo fine-tune. What Zen contributes is the quantization recipe above and redistribution under the upstream MIT terms.
+
+## Use it
+
+```sh
+hf download zenlm/zen5-max-gguf --local-dir zen5-max-gguf
+llama-cli \
+  -m zen5-max-gguf/DeepSeek-V4-Pro-IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8-Instruct-imatrix.gguf \
+  -p "Explain MoE inference."
+```
+
+Weights: [huggingface.co/zenlm/zen5-max-gguf](https://huggingface.co/zenlm/zen5-max-gguf)
