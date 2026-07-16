@@ -1,0 +1,26 @@
+---
+title: "zen5-pro-gguf: DeepSeek-V4-Flash in GGUF, Sized for One 128 GB Box"
+date: "2026-05-29"
+description: "GGUF quantizations of DeepSeek-V4-Flash with imatrix calibration, built to fit the Zen5 Pro tier on a single 128 GB unified-memory machine."
+author: "Zen LM Research"
+tags: ["Models", "Zen5"]
+---
+
+
+<LinkButton href="https://huggingface.co/zenlm/zen5-pro-gguf" label="ZEN5-PRO-GGUF WEIGHTS" external />
+
+The Zen5 Pro tier is the sparse MoE that fits on one 128 GB machine: an M3/M4 Max or a DGX Spark. Upstream config gives 43 layers, 256 routed experts plus one shared, six active per token, and a 1M position limit.
+
+The recommended build is the IQ2_XXS routed-MoE file at 86.7 GB, imatrix-calibrated, with attention projections, shared experts, and the LM head held at higher precision. A 97.6 GB mixed-quant and a 164.6 GB Q4 build suit machines with more headroom, plus a 3.8 GB MTP draft-head file for speculative decoding.
+
+## Lineage
+
+A quantized redistribution, not a Hanzo fine-tune. The weights are [deepseek-ai/DeepSeek-V4-Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash) (MIT), quantized to GGUF from the abliterated variant by huihui-ai. That abliteration is theirs; we did the quantization and the packaging. There is no separate zen5-pro fine-tune, so the upstream repo above is the parent.
+
+## Use it
+
+```bash
+llama-cli -hf zenlm/zen5-pro-gguf:DeepSeek-V4-Flash-IQ2XXS-w2Q2K-AProjQ8-SExpQ8-OutQ8-chat-v2-imatrix.gguf -p "Explain MTP speculative decoding."
+```
+
+Weights: [huggingface.co/zenlm/zen5-pro-gguf](https://huggingface.co/zenlm/zen5-pro-gguf) (792 downloads)
