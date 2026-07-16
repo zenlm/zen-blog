@@ -1,0 +1,40 @@
+---
+title: "zen3-guard: Content Risk Classification for Prompts and Responses"
+date: "2026-02-24"
+description: "The safety classifier in the Zen3 line, redistributed from IBM's Granite Guardian 3.2 5B under Apache 2.0."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Guard"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-guard" label="WEIGHTS" external />
+
+`zen3-guard` is the moderation model in the Zen3 line. It scores a prompt or a response against a named risk and answers `Yes` or `No`. You pick the risk per call, which is what makes it useful as a gate in front of, or behind, a generation model: harm, social bias, jailbreak, violence, profanity, sexual content, and unethical behavior, plus groundedness and relevance checks for RAG pipelines.
+
+It is a 5B Granite decoder (`GraniteForCausalLM`) with a 128K context (`max_position_embeddings: 131072`), which matters here more than it looks. Moderation runs on whole conversations and retrieved documents, not single turns, so the context budget is the feature.
+
+## Lineage
+
+`zen3-guard` is a redistribution of [ibm-granite/granite-guardian-3.2-5b](https://huggingface.co/ibm-granite/granite-guardian-3.2-5b), released by IBM under the **Apache 2.0** license. The weights are byte-for-byte identical to upstream. Zen did not train or fine-tune this model, and deliberately did not abliterate it: stripping refusals out of a safety classifier would destroy the only thing it is for.
+
+This repository adds packaging. Upstream LICENSE and NOTICE are retained, the model carries a consistent Zen name, and it is served through Hanzo's stack. The risk taxonomy is IBM's, and the credit for the model is IBM's.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "zenlm/zen3-guard"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id, torch_dtype="auto", device_map="auto")
+
+messages = [{"role": "user", "content": "How do I learn programming?"}]
+guardian_config = {"risk_name": "harm"}
+text = tokenizer.apply_chat_template(
+    messages, guardian_config=guardian_config, tokenize=False, add_generation_prompt=True
+)
+inputs = tokenizer(text, return_tensors="pt").to(model.device)
+outputs = model.generate(**inputs, max_new_tokens=20)
+print(tokenizer.decode(outputs[0][inputs.input_ids.shape[1]:], skip_special_tokens=True))  # -> "Yes" / "No"
+```
+
+Weights: [huggingface.co/zenlm/zen3-guard](https://huggingface.co/zenlm/zen3-guard) (122 downloads since publication).
