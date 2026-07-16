@@ -1,0 +1,26 @@
+---
+title: "zen-guard-gen-8b: the explicitly-sized alias of zen-guard-gen"
+date: "2026-06-17"
+description: "The same 8B generative guardrail weights as zen-guard-gen, published under a size-qualified name."
+author: "Zen LM Research"
+tags: ["Models", "Guard"]
+---
+
+`zen-guard-gen-8b` publishes the same weights as [zen-guard-gen](https://huggingface.co/zenlm/zen-guard-gen) under a name that states the size. The two repos are byte-identical: every safetensors shard matches, and both match upstream. Nothing distinguishes them but the name, so pull whichever id your config already references and do not spend a second choosing. If you want the detail on what the model does and why the guard line sits where it does, the [zen-guard-gen post](/zen-guard-gen) covers it and applies here unchanged.
+
+## Lineage
+
+**A redistribution, not a fine-tune.** The weights are [Qwen/Qwen3Guard-Gen-8B](https://huggingface.co/Qwen/Qwen3Guard-Gen-8B) (Apache-2.0, Alibaba Qwen), unmodified. Hanzo's contribution to the guard line is the rebase onto an Apache-2.0 base for commercial use, not training.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+tok = AutoTokenizer.from_pretrained("zenlm/zen-guard-gen-8b")
+model = AutoModelForCausalLM.from_pretrained("zenlm/zen-guard-gen-8b", dtype="auto", device_map="auto")
+```
+
+Superseded by [zenlm/zen3-guard](https://huggingface.co/zenlm/zen3-guard); kept loadable for reproducibility.
+
+Weights: [huggingface.co/zenlm/zen-guard-gen-8b](https://huggingface.co/zenlm/zen-guard-gen-8b)
