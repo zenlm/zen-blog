@@ -1,0 +1,31 @@
+---
+title: "zen5-nano-9B-gguf: a 9B vision-language model for laptops and consumer GPUs"
+date: "2026-05-30"
+description: "The edge tier of the Zen5 ladder: a redistribution of Qwen3.5-9B that takes images and video frames in and text out."
+author: "Zen LM Research"
+tags: ["Models", "Zen5"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen5-nano-9B-gguf" label="WEIGHTS" external />
+
+The edge tier of the Zen5 ladder. A dense 9B vision-language model, image and text in, text out, meant for laptops and consumer GPUs rather than a cluster. It ships an image preprocessor and a video preprocessor config, so frames work as well as stills. 138 pulls so far.
+
+## Lineage
+
+Repackaged from [Qwen/Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B) (apache-2.0, Alibaba Qwen). Not trained from scratch, and not a Hanzo fine-tune. This is a straight re-host of the upstream weights under the same license, with LICENSE and NOTICE retained, plus a hosted `zen5-nano-9B` endpoint on the Hanzo gateway. Unlike the larger Zen5 tiers, no abliterated variant is involved here. The `config.json` declares `Qwen3_5ForConditionalGeneration` on the `qwen3_5` architecture.
+
+## Use it
+
+The repo name ends in `-gguf`, but there is no GGUF in it. The weights are native `safetensors` across 4 shards, so load it with `transformers`.
+
+```python
+from transformers import AutoProcessor, AutoModelForImageTextToText
+
+model_id = "zenlm/zen5-nano-9B-gguf"
+proc = AutoProcessor.from_pretrained(model_id)
+model = AutoModelForImageTextToText.from_pretrained(
+    model_id, dtype="auto", device_map="auto"
+)
+```
+
+Weights: [huggingface.co/zenlm/zen5-nano-9B-gguf](https://huggingface.co/zenlm/zen5-nano-9B-gguf)
