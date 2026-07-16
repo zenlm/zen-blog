@@ -1,0 +1,30 @@
+---
+title: "zen-reranker-4B-GGUF: Q4_K_M Re-Scoring in 2.7 GB"
+date: "2026-01-12"
+description: "A 4-bit GGUF build of the mid-size Zen reranker, sized to fit alongside a generation model."
+author: "Zen LM Research"
+tags: ["Models", "Retrieval"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-reranker-4B-GGUF" label="GGUF WEIGHTS" external />
+
+A GGUF build of the mid-size Zen reranker, quantized to **Q4_K_M** in a single 2.72 GB file. This is the middle of the Zen reranker line and the most downloaded of the three, which tracks: at under 3 GB it co-resides with a generation model on one card instead of competing with it for memory. In a RAG stack the reranker and the generator are both on the critical path, so what usually decides the build is whether both fit at once.
+
+## Lineage
+
+Quantized from [Qwen/Qwen3-Reranker-4B](https://huggingface.co/Qwen/Qwen3-Reranker-4B) by Alibaba's Qwen team, under the **Apache 2.0** license. This is a format conversion, not a retrain. For full-precision safetensors, see [zenlm/zen-reranker-4B](https://huggingface.co/zenlm/zen-reranker-4B).
+
+## Use it
+
+```bash
+llama-server --hf-repo zenlm/zen-reranker-4B-GGUF \
+             --hf-file zen-reranker-4B-Q4_K_M.gguf \
+             --reranking
+
+curl http://localhost:8080/v1/rerank -H "Content-Type: application/json" -d '{
+  "query": "how do I tune a rerank endpoint",
+  "documents": ["reranking guide", "unrelated doc"]
+}'
+```
+
+Weights: [huggingface.co/zenlm/zen-reranker-4B-GGUF](https://huggingface.co/zenlm/zen-reranker-4B-GGUF) (393 downloads since publication).
