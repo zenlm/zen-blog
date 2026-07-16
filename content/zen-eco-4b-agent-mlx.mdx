@@ -1,0 +1,27 @@
+---
+title: "zen-eco-4b-agent-mlx: 4-bit MLX Build of the Eco 4B Agent"
+date: "2025-09-29"
+description: "A 4-bit MLX conversion of the Eco 4B agent model, for running the tool-calling loop locally on Apple Silicon."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-eco-4b-agent-mlx" label="MLX WEIGHTS" external />
+<LinkButton href="https://huggingface.co/zenlm/zen-agent-4b" label="PARENT MODEL" external />
+
+An MLX conversion of the Eco 4B agent for Apple Silicon, quantized to 4 bits with a group size of 64 (per the repo's `config.json`). It exists so the agent loop runs on a laptop, without a server in the path.
+
+This is a build artifact, not a new model. The parent is [zenlm/zen-agent-4b](https://huggingface.co/zenlm/zen-agent-4b), which the older `zen-eco-4b-agent` name still resolves to. For what the model is and how it was trained, read the parent's post: [zen-agent-4b](/blog/zen-agent-4b/). The lineage runs back to Qwen's [Qwen3-4B](https://huggingface.co/Qwen/Qwen3-4B) family (Apache-2.0).
+
+## Use it
+
+```bash
+pip install mlx-lm
+
+mlx_lm.generate --model zenlm/zen-eco-4b-agent-mlx \
+  --prompt "List the files in the current directory."
+```
+
+Four-bit weights keep the model resident in unified memory, which is the point for an agent: the loop turns over locally, with no network hop between a tool result and the next call.
+
+160 downloads so far. Weights: [huggingface.co/zenlm/zen-eco-4b-agent-mlx](https://huggingface.co/zenlm/zen-eco-4b-agent-mlx)
