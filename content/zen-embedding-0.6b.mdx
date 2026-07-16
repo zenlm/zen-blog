@@ -1,0 +1,31 @@
+---
+title: "zen-embedding-0.6B: A 1024-Dim Retrieval Embedding for the Zen Line"
+date: "2026-05-30"
+description: "The small tier of the Zen embedding line: a 1024-dimensional text embedding model for RAG, semantic search, and dense retrieval."
+author: "Zen LM Research"
+tags: ["Models", "Embedding"]
+---
+
+
+<LinkButton href="https://huggingface.co/zenlm/zen-embedding-0.6B" label="ZEN-EMBEDDING-0.6B WEIGHTS" external />
+
+zen-embedding-0.6B is the small tier of the Zen embedding line. It produces 1024-dimensional vectors with last-token pooling, for retrieval-augmented generation, semantic search, and dense retrieval. It is the tier you pick when the index is large, the latency budget is tight, or the whole thing has to run on CPU. The 4B and 8B tiers trade size for headroom.
+
+## Lineage
+
+Be clear about what this is: a redistribution, not a fine-tune. The weights are [Qwen/Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B) (Apache-2.0) by the Qwen team at Alibaba, re-hosted under the Zen line and republished under that same license. It is not trained from scratch and carries no Hanzo training. The retrieval quality is Qwen's work, and we credit it as theirs.
+
+What this repo buys you is a stable, permissively-licensed name in the Zen catalog, addressable through the Hanzo gateway as `zen-embedding-0.6b`, packaged as native safetensors so the Zen retrieval stack has one embedding interface across all three tiers. That is a packaging and serving story, not a modeling claim. Where we do fine-tune, we say so plainly; here we did not.
+
+## Use it
+
+```python
+from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer("zenlm/zen-embedding-0.6B")
+emb = model.encode(["Postgres index tuning", "How do I speed up a slow query?"])
+print(emb.shape)                      # (2, 1024)
+print(model.similarity(emb, emb))
+```
+
+Weights: [huggingface.co/zenlm/zen-embedding-0.6B](https://huggingface.co/zenlm/zen-embedding-0.6B)
