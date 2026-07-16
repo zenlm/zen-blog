@@ -1,0 +1,32 @@
+---
+title: "zen-world: text-to-video generation from the Wan2.1 checkpoint"
+date: "2025-11-13"
+description: "A verbatim Apache-2.0 redistribution of Wan2.1-T2V-14B in the Zen line, with weights bit-identical to upstream."
+author: "Zen LM Research"
+tags: ["Models", "Video"]
+---
+
+zen-world generates video from a text prompt. It is the text-to-video entry in the Zen catalog, for teams who want the Wan2.1 T2V weights with Zen packaging and complete attribution.
+
+## Lineage
+
+Redistributed from [Wan-AI/Wan2.1-T2V-14B](https://huggingface.co/Wan-AI/Wan2.1-T2V-14B) (Apache-2.0), by Alibaba's Wan team. The diffusion transformer, the VAE, and the training behind them are their work.
+
+We changed nothing. All six diffusion shards, the Wan2.1 VAE, and the umt5-xxl text encoder are byte-for-byte identical to upstream, with matching SHA-256. There is no Zen fine-tuning in this checkpoint, no identity training, and no abliteration.
+
+## Use it
+
+The checkpoint keeps Wan's native layout: `Wan2.1_VAE.pth`, `models_t5_umt5-xxl-enc-bf16.pth`, and `google/umt5-xxl/` alongside the sharded DiT. That is not a diffusers pipeline root, so there is no `model_index.json` and `WanPipeline.from_pretrained` will not resolve it. Run it with Wan2.1's reference code:
+
+```bash
+hf download zenlm/zen-world --local-dir ./zen-world
+
+# github.com/Wan-Video/Wan2.1
+python generate.py \
+  --task t2v-14B \
+  --size 1280*720 \
+  --ckpt_dir ./zen-world \
+  --prompt "a paper airplane banking over a canyon at sunset"
+```
+
+Weights: [huggingface.co/zenlm/zen-world](https://huggingface.co/zenlm/zen-world)
