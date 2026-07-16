@@ -1,0 +1,41 @@
+---
+title: "zen3-asr-0.6B: Speech Recognition That Fits on the Edge"
+date: "2026-05-30"
+description: "The small recognizer in the Zen3 audio line: same 30 declared languages, under a gigabyte of bf16 weights."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Audio"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-asr-0.6B" label="HUGGING FACE" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-ASR-0.6B" label="BASE MODEL" external />
+
+zen3-asr-0.6B is the small end of the Zen3 recognizer line. It is for the cases where the audio never leaves the device: laptop dictation, in-car and handset voice input, an on-premises transcription box, or a first-pass filter that decides what is worth sending to a larger model.
+
+It carries about 938M parameters in a single bf16 safetensors file. That is the entire difference from [zen3-asr](/blog/zen3-asr/) worth caring about. The architecture is the same `Qwen3ASRForConditionalGeneration` stack over 128-bin log-mel features in 30-second chunks, and the config declares the same 30 languages, so a pipeline written against one runs against the other. Size is the only variable you are trading.
+
+## Lineage
+
+Redistributed from [`Qwen/Qwen3-ASR-0.6B`](https://huggingface.co/Qwen/Qwen3-ASR-0.6B), released by Alibaba's Qwen team under **Apache-2.0**. The weights are unmodified and match upstream by sha256, byte for byte. We did not train this model. It is mirrored into the Zen3 line for one packaging and license path across the audio stack. Apache-2.0 travels with the weights, and credit belongs to Qwen.
+
+## Use it
+
+```bash
+pip install -U qwen-asr
+```
+
+```python
+import torch
+from qwen_asr import Qwen3ASRModel
+
+model = Qwen3ASRModel.from_pretrained(
+    "zenlm/zen3-asr-0.6B",
+    dtype=torch.bfloat16,
+    device_map="cuda:0",
+    max_new_tokens=256,
+)
+
+results = model.transcribe(audio="note.wav", language=None)
+print(results[0].text)
+```
+
+Weights: [huggingface.co/zenlm/zen3-asr-0.6B](https://huggingface.co/zenlm/zen3-asr-0.6B).
