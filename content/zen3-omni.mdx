@@ -1,0 +1,45 @@
+---
+title: "zen3-omni: Text, Image, Audio, and Video Into One Model"
+date: "2026-02-24"
+description: "The multimodal entry in the Zen3 line, redistributed from Qwen3-Omni-30B-A3B-Instruct."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Multimodal"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-omni" label="WEIGHTS" external />
+
+`zen3-omni` is the multimodal model in the Zen3 line. It takes text, images, audio, and video in a single conversation and returns text, with a speech path available on top. It is a Mixture-of-Experts model (`Qwen3OmniMoeForConditionalGeneration`), which is the reason it is in the catalog: the active parameter count per token is a fraction of the total, so an omni-modal model stays affordable to actually serve.
+
+Structurally it is a thinker/talker design. The thinker handles understanding across modalities, the talker drives speech output, and the audio path runs through a Whisper feature extractor with a Qwen2-VL image processor for vision. If you only need understanding, you can ignore the talker entirely and treat it as a text-out model.
+
+## Lineage
+
+`zen3-omni` is a redistribution of [Qwen/Qwen3-Omni-30B-A3B-Instruct](https://huggingface.co/Qwen/Qwen3-Omni-30B-A3B-Instruct) by Alibaba's Qwen team, whose model card names **Apache 2.0** as the license. All fifteen weight shards are byte-for-byte identical to upstream, as is the chat template. Zen did not train, distill, or abliterate this model.
+
+What this repository adds is packaging: upstream LICENSE and NOTICE retained, one consistent name in the Zen catalog, and integration into Hanzo's serving stack. The architecture and the training are Qwen's work, and the credit is theirs.
+
+## Use it
+
+```python
+from transformers import Qwen3OmniMoeForConditionalGeneration, Qwen3OmniMoeProcessor
+
+model_id = "zenlm/zen3-omni"
+processor = Qwen3OmniMoeProcessor.from_pretrained(model_id)
+model = Qwen3OmniMoeForConditionalGeneration.from_pretrained(
+    model_id, torch_dtype="auto", device_map="auto"
+)
+
+conversation = [{"role": "user", "content": [
+    {"type": "image", "image": "https://example.com/photo.jpg"},
+    {"type": "text",  "text": "What is happening in this image?"},
+]}]
+
+inputs = processor.apply_chat_template(
+    conversation, add_generation_prompt=True, tokenize=True,
+    return_dict=True, return_tensors="pt"
+).to(model.device)
+outputs = model.generate(**inputs, max_new_tokens=256)
+print(processor.batch_decode(outputs[:, inputs["input_ids"].shape[1]:], skip_special_tokens=True)[0])
+```
+
+Weights: [huggingface.co/zenlm/zen3-omni](https://huggingface.co/zenlm/zen3-omni) (131 downloads since publication).
