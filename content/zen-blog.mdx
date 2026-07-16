@@ -1,0 +1,36 @@
+---
+title: "zen-blog: the 8B text slot for long-form drafting and structured writing"
+date: "2025-11-13"
+description: "The Zen line's writing slot: an unmodified Apache-2.0 redistribution of Qwen3-8B."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-blog" label="HUGGING FACE" external />
+
+zen-blog is the checkpoint we point at long-form drafting: posts, changelogs, release notes, documentation, and the structured writing that sits around a product. Its `config.json` declares 36 layers, hidden size 4096, 32 attention heads, and a 40,960-token position limit, which is enough context to hold a spec and a style guide while it drafts against them.
+
+## Lineage
+
+This repository redistributes [Qwen/Qwen3-8B](https://huggingface.co/Qwen/Qwen3-8B) (Apache-2.0), trained and released by Alibaba's Qwen team. The weights are their work and the credit is theirs.
+
+The name describes the slot this checkpoint fills in our catalog, not a training run. All five safetensors shards are byte-identical to upstream, same SHA-256, so there is no writing fine-tune, no merge, and no abliteration in these weights. Anyone can verify that in about a minute by comparing the shard hashes against the Qwen repo, which is precisely why the claim has to match the artifact. We publish it under the Zen name so our catalog and serving stack have one stable identifier with explicit provenance, and so the Zen line stays permissively licensed end to end. Apache-2.0 upstream, Apache-2.0 here.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "zenlm/zen-blog"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(model_id, dtype="auto", device_map="auto")
+
+messages = [{"role": "user", "content": "Draft release notes for a change that adds byte-identical weight verification to our model publishing pipeline."}]
+text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+inputs = tokenizer([text], return_tensors="pt").to(model.device)
+
+out = model.generate(**inputs, max_new_tokens=512)
+print(tokenizer.decode(out[0][inputs.input_ids.shape[1]:], skip_special_tokens=True))
+```
+
+Weights: [huggingface.co/zenlm/zen-blog](https://huggingface.co/zenlm/zen-blog)
