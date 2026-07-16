@@ -1,0 +1,34 @@
+---
+title: "zen-musician: lyrics-to-song generation, stage 1 of the YuE pipeline"
+date: "2025-11-13"
+description: "A verbatim Apache-2.0 redistribution of YuE-s1-7B-anneal-en-cot in the Zen line. Stage 2 comes from upstream."
+author: "Zen LM Research"
+tags: ["Models", "Audio"]
+---
+
+zen-musician turns lyrics and a genre prompt into sung audio. It is the stage-1 model of the YuE pipeline, the part that produces the coarse audio-token track from text. It is for people building music tooling who want the YuE line packaged inside the Zen catalog.
+
+Stage 1 on its own does not produce a finished song. Full generation also needs the stage-2 refiner, which we do not redistribute. Get it from [m-a-p/YuE-s2-1B-general](https://huggingface.co/m-a-p/YuE-s2-1B-general).
+
+## Lineage
+
+Redistributed from [m-a-p/YuE-s1-7B-anneal-en-cot](https://huggingface.co/m-a-p/YuE-s1-7B-anneal-en-cot) (Apache-2.0), by the M-A-P team. The model and its training are theirs.
+
+We changed nothing. All three safetensors shards and the tokenizer are byte-for-byte identical to upstream, with matching SHA-256. There is no Zen fine-tuning in this checkpoint, no identity training, and no abliteration. It is a license-clean redistribution and nothing more.
+
+## Use it
+
+The repo ships YuE's raw `tokenizer.model` and no `tokenizer_config.json`, so it loads through YuE's reference pipeline rather than `AutoTokenizer`:
+
+```bash
+hf download zenlm/zen-musician --local-dir ./zen-musician
+
+# github.com/multimodal-art-projection/YuE
+python infer.py \
+  --stage1_model ./zen-musician \
+  --stage2_model m-a-p/YuE-s2-1B-general \
+  --genre_txt genre.txt \
+  --lyrics_txt lyrics.txt
+```
+
+Weights: [huggingface.co/zenlm/zen-musician](https://huggingface.co/zenlm/zen-musician)
