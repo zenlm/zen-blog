@@ -1,0 +1,33 @@
+---
+title: "zen-designer-gguf: Q4_K_M build of zen-designer for llama.cpp"
+date: "2026-02-27"
+description: "Quantized GGUF build of zen-designer-235b-a22b-instruct, with the vision projector, for local inference in llama.cpp."
+author: "Zen LM Research"
+tags: ["Models", "Vision", "GGUF"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-designer-gguf" label="WEIGHTS" external />
+
+This is the llama.cpp build of zen-designer, not a new model. It carries a Q4_K_M quantization split across three shards, plus the `mmproj` vision projector in f16 so image input keeps working outside of transformers.
+
+## Lineage
+
+Quantized from [zenlm/zen-designer-235b-a22b-instruct](https://huggingface.co/zenlm/zen-designer-235b-a22b-instruct), which is derived from [Qwen/Qwen3-VL-235B-A22B-Instruct](https://huggingface.co/Qwen/Qwen3-VL-235B-A22B-Instruct) (Apache-2.0) by the Alibaba Qwen team. Nothing is trained in this repo. The only work here is format and precision conversion, and the Apache-2.0 terms carry through unchanged. For what the model does and how it was built, read the parent repo.
+
+## Use it
+
+```bash
+hf download zenlm/zen-designer-gguf \
+  --include "GGUF/Q4_K_M/*" "GGUF/mmproj-ggml-model-f16.gguf" \
+  --local-dir zen-designer
+
+llama-mtmd-cli \
+  -m zen-designer/GGUF/Q4_K_M/Q4_K_M-00001-of-00003.gguf \
+  --mmproj zen-designer/GGUF/mmproj-ggml-model-f16.gguf \
+  --image screenshot.png \
+  -p "List the UI components in this screenshot."
+```
+
+Point `-m` at the first shard; llama.cpp finds the other two beside it.
+
+Weights: [huggingface.co/zenlm/zen-designer-gguf](https://huggingface.co/zenlm/zen-designer-gguf)
