@@ -1,0 +1,37 @@
+---
+title: "zen5-coder-gguf: repo-scale coding weights on a 512-expert Qwen3-Next MoE"
+date: "2026-05-30"
+description: "The Zen5 coding tier: a permissively-licensed redistribution of Qwen3-Next-80B-A3B-Instruct, served as zen5-coder on the Hanzo gateway."
+author: "Zen LM Research"
+tags: ["Models", "Zen5"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen5-coder-gguf" label="WEIGHTS" external />
+
+This is the coding tier of the Zen5 ladder. It targets the loop a working engineer actually runs: read a repo, propose an edit, call a tool, check the result, try again. If you want one Zen5 model pointed at code and agentic tool use rather than general chat, this is it. It has been pulled 984 times.
+
+## Lineage
+
+Repackaged from [Qwen/Qwen3-Next-80B-A3B-Instruct](https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct) (apache-2.0, Alibaba Qwen), by way of the abliterated variant published by [huihui-ai](https://huggingface.co/huihui-ai). It is not trained from scratch and it is not a Hanzo fine-tune. What Zen adds here is packaging and distribution: a permissively-licensed redistribution with LICENSE and NOTICE retained, plus the tool-parser shims (`qwen3coder_tool_parser_vllm.py`, `qwen3_coder_detector_sgl.py`) and a hosted `zen5-coder` endpoint on the Hanzo gateway. The credit for the model belongs upstream.
+
+Its `config.json` declares `Qwen3NextForCausalLM`, 48 layers, 512 experts, bfloat16, and a 262,144-token position space.
+
+## Use it
+
+Note the repo name: it ends in `-gguf`, but the weights inside are `safetensors` across 40 shards. Load it with `transformers`, not `llama.cpp`.
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "zenlm/zen5-coder-gguf"
+tok = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id, dtype="auto", device_map="auto"
+)
+
+msgs = [{"role": "user", "content": "Refactor this function to use async/await."}]
+ids = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt")
+print(tok.decode(model.generate(ids.to(model.device), max_new_tokens=256)[0]))
+```
+
+Weights: [huggingface.co/zenlm/zen5-coder-gguf](https://huggingface.co/zenlm/zen5-coder-gguf)
