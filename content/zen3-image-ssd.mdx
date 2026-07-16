@@ -1,0 +1,39 @@
+---
+title: "zen3-image-ssd: A Distilled SDXL for Cheaper Image Generation"
+date: "2026-02-24"
+description: "The SDXL-class image model in the Zen3 line, repackaged from Segmind SSD-1B under Apache 2.0."
+author: "Zen LM Research"
+tags: ["Models", "Zen3", "Vision"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen3-image-ssd" label="WEIGHTS" external />
+
+`zen3-image-ssd` is the SDXL-class image model in the Zen3 line. It is a `StableDiffusionXLPipeline` with the usual dual CLIP text encoders, running a distilled UNet: layers were pruned out of SDXL and the result retrained against the original as a teacher, so the pipeline stays SDXL-compatible while carrying less weight per step.
+
+Practically, this is the model to use when you want the SDXL ecosystem and its prompt behavior, plus classifier-free guidance you can actually turn, at a lower cost per image. It sits opposite `zen3-image-fast` in the line: schnell wins on raw latency with a four-step schedule, SSD keeps the standard guidance knob and the SDXL tooling.
+
+## Lineage
+
+`zen3-image-ssd` repackages [segmind/SSD-1B](https://huggingface.co/segmind/SSD-1B), released by Segmind under the **Apache 2.0** license. Every weight file is byte-for-byte identical to upstream, fp16 variants included. No weights were trained or distilled by Zen. The distillation that makes this model interesting is Segmind's work, and the credit is theirs.
+
+What this repository adds is packaging: upstream LICENSE and NOTICE retained, one consistent name in the Zen catalog, and integration into Hanzo's serving stack.
+
+## Use it
+
+```python
+from diffusers import StableDiffusionXLPipeline
+import torch
+
+pipe = StableDiffusionXLPipeline.from_pretrained(
+    "zenlm/zen3-image-ssd", torch_dtype=torch.float16, variant="fp16"
+)
+pipe = pipe.to("cuda")
+
+image = pipe(
+    "A serene mountain landscape at sunset",
+    negative_prompt="blurry, low quality",
+).images[0]
+image.save("output.png")
+```
+
+Weights: [huggingface.co/zenlm/zen3-image-ssd](https://huggingface.co/zenlm/zen3-image-ssd) (48 downloads since publication).
