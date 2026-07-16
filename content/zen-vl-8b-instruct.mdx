@@ -1,0 +1,47 @@
+---
+title: "zen-vl-8b-instruct: dense 8B vision-language model for single-GPU deployment"
+date: "2025-11-04"
+description: "The Zen line's mid-size vision-language checkpoint: an unmodified Apache-2.0 redistribution of Qwen3-VL-8B-Instruct."
+author: "Zen LM Research"
+tags: ["Models", "Vision"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-vl-8b-instruct" label="HUGGING FACE" external />
+
+zen-vl-8b-instruct handles images and video frames in, text out: captioning, document and screenshot OCR, chart reading, visual question answering. Dense 8B is the size most teams actually deploy, because it fits on one GPU in bf16 without sharding or offload. Its `config.json` declares 36 text layers at hidden size 4096, a 27-layer vision encoder, and a 262,144-token position limit.
+
+## Lineage
+
+This repository redistributes [Qwen/Qwen3-VL-8B-Instruct](https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct) (Apache-2.0), trained and released by Alibaba's Qwen team. The weights are their work and the credit is theirs.
+
+The safetensors are byte-identical to upstream. All four shards carry the same SHA-256 as the Qwen release: no additional training, no merge, no abliteration. We publish it under the Zen name so our catalog and serving stack have one stable identifier with explicit provenance, and so the Zen line stays permissively licensed end to end. Apache-2.0 upstream, Apache-2.0 here. Nothing here differs from the Qwen repo except the name over the door.
+
+## Use it
+
+```python
+from transformers import AutoProcessor, AutoModelForImageTextToText
+
+model_id = "zenlm/zen-vl-8b-instruct"
+processor = AutoProcessor.from_pretrained(model_id)
+model = AutoModelForImageTextToText.from_pretrained(
+    model_id, dtype="auto", device_map="auto"
+)
+
+messages = [{
+    "role": "user",
+    "content": [
+        {"type": "image", "url": "https://example.com/screenshot.png"},
+        {"type": "text", "text": "Transcribe the text in this screenshot."},
+    ],
+}]
+
+inputs = processor.apply_chat_template(
+    messages, add_generation_prompt=True, tokenize=True,
+    return_dict=True, return_tensors="pt",
+).to(model.device)
+
+out = model.generate(**inputs, max_new_tokens=256)
+print(processor.decode(out[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True))
+```
+
+Weights: [huggingface.co/zenlm/zen-vl-8b-instruct](https://huggingface.co/zenlm/zen-vl-8b-instruct)
