@@ -1,0 +1,45 @@
+---
+title: "zen-agent-4b: A Compact Agent Model for Function Calling and Tool Use"
+date: "2025-09-28"
+description: "A 4B dense agent model fine-tuned from Qwen3-4B-Instruct-2507 for structured function calling, with a 262,144-token context window."
+author: "Zen LM Research"
+tags: ["Models", "Zen3"]
+---
+
+<LinkButton href="https://huggingface.co/zenlm/zen-agent-4b" label="MODEL WEIGHTS" external />
+<LinkButton href="https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507" label="BASE MODEL" external />
+
+zen-agent-4b is the agent model in the Zen Eco line. It is small enough to sit inside a tool-calling loop without a dedicated GPU budget, and tuned to emit structured calls rather than prose describing what it would call. If you are running an agent that iterates several times per user action, the cost of the loop matters more than the score of any single turn. That is the case this model is built for.
+
+## Lineage
+
+Fine-tuned from [Qwen/Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507) (Apache-2.0), built by Qwen at Alibaba Cloud. The base capability is theirs, and the credit for it is theirs.
+
+Hanzo adds three things and nothing more: identity training, agentic-data fine-tuning, and abliteration. The architecture is the base architecture, unchanged. From this model's own `config.json`: dense Qwen3, 36 layers, hidden size 2560, and 262,144 maximum position embeddings. We did not design that architecture and do not claim it.
+
+This repo was previously published as `zen-eco-4b-agent`. The old name still resolves here, which is why the GGUF and MLX builds carry it in their filenames.
+
+## Use it
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_id = "zenlm/zen-agent-4b"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
+model = AutoModelForCausalLM.from_pretrained(
+    model_id, torch_dtype="auto", device_map="auto"
+)
+
+messages = [{"role": "user", "content": "What is the weather in Osaka?"}]
+text = tokenizer.apply_chat_template(
+    messages, tokenize=False, add_generation_prompt=True
+)
+inputs = tokenizer([text], return_tensors="pt").to(model.device)
+print(tokenizer.decode(model.generate(**inputs, max_new_tokens=512)[0]))
+```
+
+The chat template takes a `tools` list and emits `<tool_call>` blocks, so it drops into an existing function-calling harness without a custom parser.
+
+972 downloads so far. Quantized builds: [GGUF](https://huggingface.co/zenlm/zen-eco-4b-agent-gguf) for llama.cpp, [MLX](https://huggingface.co/zenlm/zen-eco-4b-agent-mlx) for Apple Silicon.
+
+Weights: [huggingface.co/zenlm/zen-agent-4b](https://huggingface.co/zenlm/zen-agent-4b)
