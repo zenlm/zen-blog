@@ -8,6 +8,7 @@
     "build": "fumadocs-mdx && next build",
     "start": "next start",
     "lint": "next lint",
+    "typecheck": "node_modules/tsgo/bin/tsc --noEmit --incremental false",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
@@ -50,6 +51,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.5",
-    "typescript": "^5"
+    "tsgo": "npm:typescript@7.0.2",
+    "typescript": "6.0.3"
   }
 }
