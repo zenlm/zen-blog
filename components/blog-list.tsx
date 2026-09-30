@@ -11,6 +11,7 @@ interface BlogItem {
   date: string;
   tags: string[];
   thumbnail: string | null;
+  upstream: boolean;
   formattedDate: string;
 }
 
@@ -64,6 +65,7 @@ export function BlogList({ blogs, allTags, tagCounts }: BlogListProps) {
               description={blog.description}
               date={blog.formattedDate}
               thumbnail={blog.thumbnail ?? undefined}
+              upstream={blog.upstream}
               showRightBorder={false}
             />
           ))}

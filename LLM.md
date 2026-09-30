@@ -8,7 +8,7 @@
 
 ## Overview
 
-zen-blog is the Zen LM blog, built with fumadocs + Next.js (static export). Deployed to Cloudflare Pages.
+zen-blog is the Zen LM blog, built with fumadocs + Next.js (static export). Zen LM is the open model family of Zoo Labs Foundation, a 501(c)(3) non-profit.
 
 ## Architecture
 
@@ -30,8 +30,16 @@ date: "YYYY-MM-DD"
 description: "Post description"
 author: "Author Name"
 tags: ["tag1", "tag2"]
+upstream: true   # only on a post whose subject is another lab's release
 ---
 ```
+
+44 posts came from the QwenLM blog this repository forked. They carry
+`upstream: true`: their page gets `<meta name="data-upstream">` and their
+article and cards carry `data-upstream`. They name the releases they are about,
+by the names those releases had. A find-and-replace in b3b6eb0 once rewrote
+"Qwen2"/"Qwen2.5" to "zen" in them (Qwen2-57B-A14B read "zen7B-A14B"); every
+such token was restored on 2026-09-30. Never rename another lab's model in them.
 
 MDX posts can use custom components: `<Figure />`, `<LinkButton />`, `<Video />`, `<Fullwidth>`.
 Markdown posts use standard markdown only (no JSX).
@@ -42,15 +50,28 @@ Posts with bare `<` in text or complex math use `.md` extension (not `.mdx`) to 
 
 ```bash
 npm run dev    # Development server
-npm run build  # Production build (static export to out/)
+npm run build  # fumadocs-mdx → next build → scripts/check-zen.mjs out
 npm start      # Serve built site
 ```
 
+## Zen copy names Zen
+
+`scripts/check-zen.mjs` reads every built page and fails the build on a name
+from `zen.upstream` outside a `data-upstream` element. Upstream names belong in
+two marked places only: an Architecture value (a loader string) and a License &
+attribution section — plus the upstream-subject posts above.
+
+Remote images are not probed at build time (`remarkImageOptions: { external:
+false }`): one image host answering 403 used to fail the whole build.
+
 ## Deploy
 
-```bash
-wrangler pages deploy out --project-name zen-blog --branch main
-```
+blog.zenlm.org is served by the edge's `staticFiles` middleware from
+`s3://hanzo-sites/zen/blog` (universe `infra/aws/routes/sites.yaml`, route
+`blog-zenlm-org`), a copy of the Cloudflare Pages deployment it replaced. A build
+reaches the site only when `out/` is published into that prefix. The
+`gh-pages` branch and `.github/workflows/gh-pages.yml` (a Hugo build) are
+leftovers from before the migration and serve nothing.
 
 ## Migration History
 
@@ -66,7 +87,6 @@ wrangler pages deploy out --project-name zen-blog --branch main
 2. **NEVER** commit model weights (*.safetensors, *.bin, *.gguf, *.pt)
 3. **NEVER** commit symlinked files (CLAUDE.md, AGENTS.md, GEMINI.md, QWEN.md)
 4. **NEVER** create random summary files -- update THIS file only
-5. Zen models are based on **Qwen3** architecture
 
 ## Context
 

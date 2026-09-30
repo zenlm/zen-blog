@@ -12,7 +12,7 @@ export default function Footer() {
             height={16}
             className="opacity-50"
           />
-          <span>&copy; 2025 Zoo Labs Foundation &amp; Hanzo AI</span>
+          <span>Zen LM is from Zoo Labs Foundation, a 501(c)(3) non-profit</span>
         </div>
         <div className="flex items-center gap-4">
           <a href="https://zenlm.org" className="hover:text-foreground transition-colors">zenlm.org</a>

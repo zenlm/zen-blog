@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Zen LM Blog",
   url: "https://blog.zenlm.org",
   description:
-    "Open-source language models and AI research from Hanzo AI and Zoo Labs Foundation.",
+    "Research notes and releases from Zen LM, the open model family of Zoo Labs Foundation, a 501(c)(3) non-profit.",
 };
 
 export type SiteConfig = typeof siteConfig;

@@ -7,13 +7,15 @@ interface BlogCardProps {
   description: string;
   date: string;
   thumbnail?: string;
+  upstream?: boolean;
   showRightBorder?: boolean;
 }
 
-export function BlogCard({ url, title, description, date, thumbnail }: BlogCardProps) {
+export function BlogCard({ url, title, description, date, thumbnail, upstream }: BlogCardProps) {
   return (
     <Link
       href={url}
+      data-upstream={upstream ? "" : undefined}
       className="group flex flex-col rounded-xl border border-border/50 bg-neutral-900/30 hover:bg-neutral-800/40 hover:border-border transition-all overflow-hidden"
     >
       {thumbnail && (

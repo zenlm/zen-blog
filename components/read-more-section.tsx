@@ -27,6 +27,7 @@ interface BlogData {
   author?: string;
   authorImage?: string;
   thumbnail?: string;
+  upstream?: boolean;
 }
 
 interface BlogPage {
@@ -85,6 +86,7 @@ export function ReadMoreSection({
               <Link
                 key={post.url}
                 href={post.url}
+                data-upstream={post.data.upstream ? "" : undefined}
                 className="group grid grid-cols-1 lg:grid-cols-12 items-center gap-4 cursor-pointer"
               >
                 {post.data.thumbnail && (

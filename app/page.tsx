@@ -27,6 +27,7 @@ export default function HomePage() {
         date: string;
         tags?: string[];
         thumbnail?: string;
+        upstream?: boolean;
       };
       return {
         url: page.url,
@@ -35,6 +36,7 @@ export default function HomePage() {
         date: d.date,
         tags: d.tags ?? [],
         thumbnail: d.thumbnail ?? null,
+        upstream: d.upstream ?? false,
         formattedDate: formatDate(new Date(d.date)),
       };
     })
@@ -61,9 +63,22 @@ export default function HomePage() {
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-3">
             Zen LM Blog
           </h1>
-          <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-            Open-source language models and AI research from Hanzo AI and Zoo Labs Foundation.
+          <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            Research notes and releases from Zen LM, the open model family of Zoo Labs Foundation, a 501(c)(3)
+            non-profit, chosen for two jobs: agentic coding that runs on your own machine, and marketing work.
           </p>
+          <p className="text-base text-muted-foreground max-w-2xl leading-relaxed mt-3">
+            Zen 6 and Zen 6 Flash are available now, as open weights and as <code>zen6</code> and{" "}
+            <code>zen6-flash</code> on api.hanzo.ai. Zen 7 is in research preview.
+          </p>
+          <div className="flex flex-wrap gap-3 mt-5 text-sm">
+            <a href="https://zenlm.org/models/#zen6" className="px-3 py-1.5 rounded-full border border-border text-foreground hover:bg-accent transition-all font-medium">
+              Zen 6
+            </a>
+            <a href="https://hanzo.ai/research-access" className="px-3 py-1.5 rounded-full border border-border text-foreground hover:bg-accent transition-all font-medium">
+              Request access
+            </a>
+          </div>
         </div>
       </section>
 

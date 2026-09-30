@@ -9,11 +9,10 @@ export const metadataKeywords = [
     "Language Models",
     "Machine Learning",
     "AI Research",
-    "Qwen",
     "Zoo Labs Foundation",
     "Hanzo AI",
     "Open Weights",
-    "Frontier Models",
+    "Agentic Coding",
     "MoE",
     "Multimodal AI",
 ]

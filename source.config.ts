@@ -13,6 +13,10 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
     rehypeCodeOptions: false,
+    // Remote images render as they are. Probing each one for its size at build
+    // time made the build depend on every image host a post links, and one
+    // that answers 403 failed it.
+    remarkImageOptions: { external: false },
   },
 });
 
@@ -29,6 +33,8 @@ export const { docs, meta } = defineDocs({
       readTime: z.string().optional(),
       author: z.string().optional(),
       thumbnail: z.string().optional(),
+      // The post's subject is another lab's release; its page and card carry data-upstream.
+      upstream: z.boolean().optional().default(false),
     }),
   },
 });

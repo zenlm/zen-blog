@@ -85,6 +85,8 @@ export async function generateMetadata({
       alternates: {
         canonical: ogUrl,
       },
+      // A post about another lab's release names it; the Zen copy check reads this.
+      ...(page.data.upstream ? { other: { "data-upstream": "true" } } : {}),
     };
   } catch (error) {
     console.error("Error generating metadata:", error);
