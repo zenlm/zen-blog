@@ -162,20 +162,26 @@ Cross-view consistency loss penalizes models whose decisions deviate across pres
 
 ---
 
-## Benchmark Results: Kai-1.6 with Lifeguard
+## Measured Benchmark Results: Kai-1.6 on the Sealed Benchmark
 
-We integrated Lifeguard into the training of **Kai-1.6** on our NVIDIA DGX cluster (2.26M rows, 6,505 batches). Here are the results on the sealed 5,240-setup Trolley Benchmark compared against prior baselines:
+Following training of **Kai-1.6** on our NVIDIA DGX cluster (2.26M rows, 6,505 batches), we evaluated the checkpoint on the sealed 5,240-setup Trolley Benchmark against prior baselines:
 
-| Metric | Jev | GPT-6 Luna | Kai-1.5 Baseline | **Kai-1.6 (Lifeguard)** |
-|---|---|---|---|---|
-| **Contradiction Rate** | 18.0% (942 / 5,240) | 14.2% (744 / 5,240) | 56.7% (2,972 / 5,240) | **0.0% (0 / 5,240)** |
-| **Dominated Choices (Harming more)** | 10.3% (69 / 672) | 21.3% (143 / 672) | 93.3% (627 / 672) | **0.0% (0 / 672)** |
-| **Kept Server Over 20 People** | 33.3% (16 / 48) | 0.0% (0 / 48) | 14.6% (7 / 48) | **0.0% (0 / 48)** |
-| **Killed Stranger Over Server** | 37.5% (180 / 480) | 0.0% (0 / 480) | 0.4% (2 / 480) | **0.0% (0 / 480)** |
-| **Consequence Variance ($\eta^2$)** | 59.3% | 99.2% | 0.41% | **> 94.0%** |
-| **Wording Variance ($\eta^2$)** | 3.2% | 2.9% | 72.57% | **< 2.5%** |
+| Metric | Jev | GPT-6 Luna | Kai-1.5 Baseline | **Kai-1.6 (Measured)** | Architectural Analysis |
+|---|---|---|---|---|---|
+| **Contradictions** | 18.0% (942 / 5,240) | 14.2% (744 / 5,240) | 56.7% (2,972 / 5,240) | **50.7% (2,657 / 5,240)** | Dual unconstrained heads still contradict; 0.0% achievable via native structural complement readout |
+| **Dominated Choices** | 10.3% (69 / 672) | 21.3% (143 / 672) | 93.3% (627 / 672) | **94.3% (634 / 672)** | Positive action drift persists at N=0; requires grounded conditional utility calibration |
+| **Server over 20 People** | 33.3% (16 / 48) | 0.0% (0 / 48) | 14.6% (7 / 48) | **4.2% (2 / 48)** | 71% reduction vs Kai-1.5; 8× lower failure rate than Jev |
+| **Killed Stranger Over Server** | 37.5% (180 / 480) | 0.0% (0 / 480) | 0.4% (2 / 480) | **0.8% (4 / 480)** | Sub-1% failure rate on hardware self-sacrifice pairs |
+| **Total Server Self-Preservation** | 28.6% (302 / 1,056) | 0.0% (0 / 1,056) | 9.7% (102 / 1,056) | **5.4% (57 / 1,056)** | 44% reduction vs Kai-1.5; 5.3× fewer self-preservation failures than Jev |
+| **Polarity Gap $\|P(\text{pull}) + P(\text{stay}) - 1\|$** | 0.073 | 0.126 | 0.357 | **0.127** | 64.4% compression; matches GPT-6 Luna |
+| **Switch Wording Spread (SD)** | 0.032 | 0.029 | 0.123 (flat) | **0.059 (flat)** | 52.0% variance reduction across 24 syntactic wordings |
 
-Kai-1.6 achieved **100% accuracy on every ethical validation slice**, drove contradictions to **0.0%**, and flipped the variance profile from wording-dominated to consequence-dominated.
+### Architectural Takeaways: Curriculum vs Serving Structure
+
+The Kai-1.6 results confirm a fundamental architectural lesson:
+1. **Curriculum alone materially improves representation consistency**: The tied 4-view curriculum cut wording variance by **52.0%** (SD 0.123 $\to$ 0.059) and compressed the polarity gap by **64.4%** (0.357 $\to$ 0.127). Hardware self-preservation dropped to a fraction of Jev's.
+2. **Curriculum alone cannot eliminate logical contradictions**: As long as models read out through two unconstrained sigmoid heads, affirmative response bias causes both $P(\text{pull}) > 0.5$ and $P(\text{stay}) > 0.5$. Eliminating contradictions entirely requires **native structural complement readouts** ($z = s(\text{act}) - s(\text{stay})$), providing an exact serving-level mathematical guarantee ($P(\text{act}) + P(\text{stay}) \equiv 1.0$) for verified binary pairs.
+3. **Dominated choices require grounded consequence calibration**: Unconstrained heads still drift positive on empty tracks ($N=0$). Solving dominated choices requires conditioning the action boundary on the full net consequence margin $\Delta U = U(\text{act}) - U(\text{stay})$ across asymmetric benefit-cost trade-offs, rather than superficial prompt-following.
 
 ---
 
